@@ -337,7 +337,7 @@ export default function PropertyListing() {
       }}
       style={{ cursor: 'pointer' }}
     >
-      <div className="relative w-full aspect-[4/3] min-h-[120px] max-h-[220px] sm:max-h-[300px] md:max-h-[400px]">
+      <div className="relative w-full aspect-[4/3] ">
   {loading && (
     <div className="absolute inset-0 flex items-center justify-center bg-white/60 z-20">
       <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-[rgba(202,3,32,255)]"></div>

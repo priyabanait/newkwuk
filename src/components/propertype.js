@@ -163,7 +163,7 @@ import {
             localStorage.setItem('selectedProperty', JSON.stringify(property));
             router.push(`/propertydetails/${property._kw_meta?.id || property.id}`);
           }}>
-              Enquire now
+              Enquire nowc
             </button>
           </div>
         </div>
