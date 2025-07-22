@@ -9,7 +9,7 @@ import { BsInstagram, BsTwitterX, BsLinkedin } from "react-icons/bs";
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaUser, FaShoppingBag, FaMapMarkerAlt } from 'react-icons/fa';
-
+import { FiChevronDown } from 'react-icons/fi';
 const Footer = dynamic(() => import('@/components/footer'), { ssr: false });
 
 const Agent = () => {
@@ -106,8 +106,10 @@ const Agent = () => {
         src="/find_an_agent.jpeg"
         image="https://static.wixstatic.com/media/36a881_81438044a1d045b894b318b12b06aa24~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3-removebg-preview.png"
       />
-<main className="px-2 md:py-6 mt-4 md:mt-10 md:mx-10">
-  <div className="bg-gray-100 shadow-sm p-4 rounded-xl  border border-gray-100">
+
+
+<main className="px-2 md:py-6 mt-4 md:mt-10 ">
+  <div className="bg-gray-100 shadow-sm p-4 rounded-xl flex items-center justify-center border border-gray-100">
     {/* Search Filters */}
     <div className="flex flex-col md:flex-row gap-4 w-full">
       
@@ -131,9 +133,12 @@ const Agent = () => {
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <FaShoppingBag className="text-gray-500" />
         </div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+          <FiChevronDown className="text-gray-500" />
+        </div>
         <select 
           id="market" 
-          className="w-full appearance-none min-w-[180px] pl-10 pr-3 py-2 rounded-lg bg-white text-sm text-gray-500 border border-gray-300"
+          className="w-full appearance-none min-w-[180px] pl-10 pr-10 py-2 rounded-lg bg-white text-sm text-gray-500 border border-gray-300"
           value={filterMarket}
           onChange={e => setFilterMarket(e.target.value)}
         >
@@ -148,9 +153,12 @@ const Agent = () => {
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <FaMapMarkerAlt className="text-gray-500" />
         </div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+          <FiChevronDown className="text-gray-500" />
+        </div>
         <select
           id="city"
-          className="w-full appearance-none min-w-[180px] pl-10 pr-3 py-2 rounded-lg bg-white text-sm text-gray-500 border border-gray-300"
+          className="w-full appearance-none min-w-[180px] pl-10 pr-10 py-2 rounded-lg bg-white text-sm text-gray-500 border border-gray-300"
           value={filterCity}
           onChange={e => setFilterCity(e.target.value)}
         >
