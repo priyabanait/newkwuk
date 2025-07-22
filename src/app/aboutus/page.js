@@ -38,7 +38,7 @@ export default function Aboutus() {
 
       <Box
       
-        src="/ourculturebg.jpg"
+        src="/About_us_banner.jpg"
         h3='About Us'
         image="https://static.wixstatic.com/media/36a881_a82aacde83a9442dae07d99a846cadf4~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8-removebg-preview%20(1).png"
       />

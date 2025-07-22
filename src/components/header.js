@@ -55,7 +55,7 @@ const Header = () => {
   const menuItems = [
     { label: 'Sell', key: 'sell',  submenu: [
       { label: 'INSTANT VALUATION', href: '/instantvaluation' },
-      { label: 'SELLER GUIDE', href: 'seller/sellerguid' },
+      { label: 'SELLER GUIDE', href: '/seller/sellerguid' },
       { label: 'Book/Search KW Agent', href: '/agent' },
       { label: 'Five Steps To Sell', href: '/seller' },
     ]},

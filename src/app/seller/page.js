@@ -74,7 +74,7 @@ Your KW Agent will guide you with a few suggestions such as  +`,
     <div className="relative">
       <Header />
     <Box
-        src='/agentbg.jpg'
+        src='/steps_to_sell_your_home.jpg'
           h3="Steps for Sell Your Home"
           image="https://static.wixstatic.com/media/36a881_0ed2d4fa08bb4022acbbb9e48b783092~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4-removebg-preview.png"
         />

@@ -123,7 +123,7 @@ What's Next? +`,
       
 
         <Box
-        src='/agentbg.jpg'
+        src='/Buyer_guide_page.jpg'
           h3="Buyer Guide"
           image="/buyer2.jpg"
         />

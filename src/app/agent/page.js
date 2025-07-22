@@ -101,86 +101,82 @@ const Agent = () => {
 
       <Box
         h3="Find an Agent"
-        src="/agentbg.jpg"
+        src="/find_an_agent.jpeg"
         image="https://static.wixstatic.com/media/36a881_81438044a1d045b894b318b12b06aa24~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3-removebg-preview.png"
       />
-
-    <main className="px-2 md:py-6 mt-4 md:mt-10 md:mx-10">
-  <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-2">
+<main className="px-2 md:py-6 mt-4 md:mt-10 md:mx-10 ">
+  <div className="bg-gray-100 shadow-sm p-4 rounded-xl flex items-center justify-center border border-gray-100">
     {/* Search Filters */}
-    <div className="flex flex-col md:flex-row items-start md:items-end justify-start gap-4 mb-8 w-full">
+    <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full max-w-5xl">
       
       {/* Agent Name Input */}
-      <div className="flex-1 w-full md:ml-2 md:mr-70">
-        <label htmlFor="name" className="block mb-2 md:text-base md:font-normal text-base font-normal">Agent Name</label>
+      <div className="flex-1 w-full min-w-[150px]">
         <input 
           type="text" 
           id="name"
           placeholder="Type Name.." 
-          className="w-full px-4 py-2 border rounded md:text-sm text-black text-[0.7rem]"
+          className="w-full px-4 py-2 border border-gray-300 rounded md:text-sm text-black text-[0.7rem]"
           value={filterName}
           onChange={e => setFilterName(e.target.value)}
         />
       </div>
 
       {/* Market Center Dropdown */}
-      <div className="flex-1 w-full">
-     
-        <select id="market" 
-        className="w-full px-4 py-2 border border-black rounded md:text-[0.8rem] md:font-normal text-[0.8rem] hover:border-gray-500 focus:border-gray-500 focus:outline-none"
-        value={filterMarket}
-        onChange={e => setFilterMarket(e.target.value)}
+      <div className="flex-1 w-full min-w-[150px]">
+        <select 
+          id="market" 
+          className="w-full px-4 py-2 border border-gray-300 text-gray-500 rounded md:text-[0.8rem] md:font-normal text-[0.8rem] hover:border-gray-500 focus:border-gray-500 focus:outline-none"
+          value={filterMarket}
+          onChange={e => setFilterMarket(e.target.value)}
         >
-          <option>MARKET CENTER</option>
+          <option>Market Center</option>
           <option>Jasmin</option>
           <option>Jeddah</option>
         </select>
       </div>
 
       {/* City Dropdown */}
-      <div className="flex-1 w-full">
-      
-      <select
-  id="city"
-  className="w-full px-4 py-2 md:text-[0.8rem] md:font-normal border border-black rounded text-[0.8rem] hover:border-gray-500 focus:border-gray-500 focus:outline-none"
-  value={filterCity}
-  onChange={e => setFilterCity(e.target.value)}
->
-  <option value="CITY">CITY</option>
-  <option value="RESET_ALL">All</option>
-  <option value="ALRIYADH">ALRIYADH</option>
-  <option value="Al Khobar">Al Khobar</option>
-  <option value="Al_khobar">Al khobar</option>
-  <option value="Al-badaya, Qassim">Al-badaya, Qassim</option>
-  <option value="AlRiyadh">AlRiyadh</option>
-  <option value="ArRiyadh">ArRiyadh</option>
-  <option value="Riyadh">Riyadh</option>
-  <option value="Buraydah">Buraydah</option>
-  <option value="JED">JED</option>
-  <option value="JEDDAH">JEDDAH</option>
-  <option value="Jeddah">Jeddah</option>
-  <option value="jeddah">jeddah</option>
-  <option value="Jeddah city">Jeddah city</option>
-  <option value="KSA">KSA</option>
-  <option value="Saudi Arabia">Saudi Arabia</option>
-  <option value="West of Riyadh">West of Riyadh</option>
-  <option value="alriyadh">alriyadh</option>
-  <option value="jed">jed</option>
-  <option value="jeddah">jeddah</option>
-  <option value="jeedah">jeedah</option>
-  <option value="ksa">ksa</option>
-  <option value="qaseem">qaseem</option>
-  <option value="riyad">riyad</option>
-  <option value="riyadh">riyadh</option>
-  <option value="riyadh/Najm Al-Din Al-Ayoubi Road">riyadh/Najm Al-Din Al-Ayoubi Road</option>
-  <option value="ryadh">ryadh</option>
-  <option value="25,000">25,000</option>
-  <option value="الرياض">الرياض</option>
-  <option value="جدة">جدة</option>
-  <option value="جازان">جازان</option>
-  <option value="دمام">دمام</option>
-</select>
-
+      <div className="flex-1 w-full min-w-[150px]">
+        <select
+          id="city"
+          className="w-full px-4 py-2 text-gray-500 md:text-[0.8rem] md:font-normal border border-gray-300 rounded text-[0.8rem] hover:border-gray-500 focus:border-gray-500 focus:outline-none"
+          value={filterCity}
+          onChange={e => setFilterCity(e.target.value)}
+        >
+          <option value="CITY">City</option>
+          <option value="RESET_ALL">All</option>
+          <option value="ALRIYADH">ALRIYADH</option>
+          <option value="Al Khobar">Al Khobar</option>
+          <option value="Al_khobar">Al khobar</option>
+          <option value="Al-badaya, Qassim">Al-badaya, Qassim</option>
+          <option value="AlRiyadh">AlRiyadh</option>
+          <option value="ArRiyadh">ArRiyadh</option>
+          <option value="Riyadh">Riyadh</option>
+          <option value="Buraydah">Buraydah</option>
+          <option value="JED">JED</option>
+          <option value="JEDDAH">JEDDAH</option>
+          <option value="Jeddah">Jeddah</option>
+          <option value="jeddah">jeddah</option>
+          <option value="Jeddah city">Jeddah city</option>
+          <option value="KSA">KSA</option>
+          <option value="Saudi Arabia">Saudi Arabia</option>
+          <option value="West of Riyadh">West of Riyadh</option>
+          <option value="alriyadh">alriyadh</option>
+          <option value="jed">jed</option>
+          <option value="jeddah">jeddah</option>
+          <option value="jeedah">jeedah</option>
+          <option value="ksa">ksa</option>
+          <option value="qaseem">qaseem</option>
+          <option value="riyad">riyad</option>
+          <option value="riyadh">riyadh</option>
+          <option value="riyadh/Najm Al-Din Al-Ayoubi Road">riyadh/Najm Al-Din Al-Ayoubi Road</option>
+          <option value="ryadh">ryadh</option>
+          <option value="25,000">25,000</option>
+          <option value="الرياض">الرياض</option>
+          <option value="جدة">جدة</option>
+          <option value="جازان">جازان</option>
+          <option value="دمام">دمام</option>
+        </select>
       </div>
     </div>
   </div>

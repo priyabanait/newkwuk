@@ -838,7 +838,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
   {/* Image */}
   <div className="hidden md:block relative h-[200px] w-full">
   <Image
-    src="/home.png"
+    src="/Homepage_want_to_agent.jpeg"
     alt="Full Height Image"
     fill
     className="object-cover rounded-none"
@@ -881,7 +881,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
 
   <div className="ml-70 h-screen w-screen relative">
     <Image
-      src="/home.png"
+      src="/Homepage_want_to_agent.jpeg"
       alt="Full Height Image"
       fill
       className="object-cover"
@@ -955,7 +955,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
   {/* Right Image Box */}
   <div className="relative h-[460px] md:h-[420px] ">
     <Image
-      src="/home2.jpg" // Replace with your actual image path
+      src="/Homepage_buy_your_home.jpeg" // Replace with your actual image path
       alt="Home"
       fill
       className="object-cover grayscale md:border-r md:rounded-r-3xl"
@@ -1004,7 +1004,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
 
 {/* Background Image */}
 <Image
-  src="/home3.png" // Replace with your image in public folder
+  src="/Homepage_testimonials.jpeg" // Replace with your image in public folder
   alt="Background Crowd"
   fill
   className="object-cover grayscale"

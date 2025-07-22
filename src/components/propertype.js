@@ -121,7 +121,12 @@ import {
           <h3 className="font-normal text-sm md:text-xl text-gray-600">
             {property.prop_type}
           </h3>
-          <p className="text-xs text-gray-500">{property.list_address?.address}</p>
+          <p className="text-xs text-gray-500">
+  {property.list_address?.address?.split(' ').length > 7
+    ? property.list_address.address.split(' ').slice(0, 7).join(' ') + '...'
+    : property.list_address?.address}
+</p>
+
           <div className="flex w-full items-center gap-2 text-sm my-2">
             <span className="flex flex-1 items-center justify-center gap-1 rounded-lg  bg-gray-200 p-2">
               <span className="relative h-4 w-4">
@@ -163,7 +168,7 @@ import {
             localStorage.setItem('selectedProperty', JSON.stringify(property));
             router.push(`/propertydetails/${property._kw_meta?.id || property.id}`);
           }}>
-              Enquire nowc
+              Enquire now
             </button>
           </div>
         </div>
@@ -930,9 +935,12 @@ import {
                                 </div>
                                 <div className="flex-1 min-w-0 p-2">
                                   <h3 className="font-normal text-sm md:text-sm text-gray-600">{property.prop_type}</h3>
-                                  <p className="text-[10px] text-gray-500 whitespace-normal break-words">
-                                    {property.list_address?.address}
-                                  </p>
+                                  <p className="text-xs text-gray-500">
+  {property.list_address?.address?.split(' ').length > 6
+    ? property.list_address.address.split(' ').slice(0, 6).join(' ') + '...'
+    : property.list_address?.address}
+</p>
+
                                   <div className="flex w-full items-center gap-2 text-sm my-2">
                                     <span className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-gray-200 p-2">
                                       <span className="relative h-3 w-3">
@@ -1197,9 +1205,12 @@ import {
                       </div>
                       <div className="flex-1 min-w-0 p-2">
                         <h3 className="font-normal text-sm md:text-sm text-gray-600">{property.prop_type}</h3>
-                        <p className="text-[10px] text-gray-500 whitespace-normal break-words">
-                          {property.list_address?.address}
-                        </p>
+                        <p className="text-xs text-gray-500">
+  {property.list_address?.address?.split(' ').length > 20
+    ? property.list_address.address.split(' ').slice(0, 20).join(' ') + '...'
+    : property.list_address?.address}
+</p>
+
                         <div className="flex w-full items-center gap-2 text-sm my-2">
                           <span className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-gray-200 p-2">
                             <span className="relative h-3 w-3">

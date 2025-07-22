@@ -11,7 +11,7 @@ const InstantValuation = (props) => {
       <Header></Header>
       <Box
        
-       src="/training.jpg"
+       src="/Instant_valuation_page.jpeg"
        h3='Instant Valuation'
        image={
          '/instantvaluation.png'

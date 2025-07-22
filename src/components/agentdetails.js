@@ -219,7 +219,7 @@ const AgentProfile = (props) => {
     </span>
   </div>
   </div>
-      <div className="flex flex-col md:flex-row items-center justify-center  mx-2 md:mx-0 bg-white py-10 md:py-10  md:px-20">
+      <div className="flex flex-col md:flex-row items-center justify-center  mx-2 md:mx-0 bg-white py-10 md:py-10  ">
 
 <div className="grid grid-cols-1 md:grid-cols-2 max-w-full w-full gap-0">
 
@@ -262,7 +262,7 @@ const AgentProfile = (props) => {
   {/* Right Image Box */}
   <div className="relative h-[460px] md:h-[420px] ">
     <Image
-      src="/home2.jpg" // Replace with your actual image path
+       src="/Homepage_buy_your_home.jpeg" // Replace with your actual image path
       alt="Home"
       fill
       className="object-cover grayscale md:border-r md:rounded-r-3xl"
@@ -308,7 +308,7 @@ const AgentProfile = (props) => {
 
 </div>
   {/* Properties by Agent Section */}
-  <div className="w-full flex justify-center my-4 md:px-20">
+  <div className="w-full flex justify-center my-4">
         <div className="w-full max-w-7xl bg-gray-100 rounded-3xl p-6 md:p-12 shadow flex flex-col">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">

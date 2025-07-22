@@ -16,7 +16,7 @@ const Footer = () => {
       {/* Footer Grid */}
       <hr className="block md:hidden w-full bg-gray-100" />
 
-      <div className="md:mt-1 px-4 md:px-5 w-full max-w-full mx-auto">
+      <div className="md:mt-1 w-full max-w-full mx-auto">
         {/* Top Contact Info */}
         <div className="flex flex-col md:flex-row md:justify-between md:border md:border-gray-100 md:rounded-xl items-center md:items-start text-center md:text-left md:border-b md:p-8 pb-2 md:pb-4 text-xs md:text-sm md:bg-gray-100 md:text-gray-700">
           {/* Contact Us Title */}
@@ -121,7 +121,7 @@ const Footer = () => {
               path: "/seller",
               items: [
                 { name: "Instant Evaluation", path: "/instantvaluation" },
-                { name: "Seller Guide", path: "seller/sellerguid" },
+                { name: "Seller Guide", path: "/seller/sellerguid" },
                 { name: "Book/Search KW Agent", path: "/agent" },
                 { name: "Five Steps To Sell", path: "/seller" },
               ],

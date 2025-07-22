@@ -94,7 +94,7 @@ What's Next?  +`,
       
 
         <Box
-        src='/agentbg.jpg'
+        src='/seller_guide_page.jpeg'
           h3="Seller Guide"
           image="https://static.wixstatic.com/media/36a881_0ed2d4fa08bb4022acbbb9e48b783092~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4-removebg-preview.png"
         />
