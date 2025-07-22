@@ -309,7 +309,7 @@ const AgentProfile = (props) => {
 </div>
   {/* Properties by Agent Section */}
   <div className="w-full flex justify-center my-4">
-        <div className="w-full max-w-7xl bg-gray-100 rounded-3xl p-6 md:p-12 shadow flex flex-col">
+        <div className="w-full bg-gray-100 rounded-3xl p-6 md:p-12 shadow flex flex-col">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
