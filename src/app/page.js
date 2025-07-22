@@ -19,10 +19,10 @@ const Home = () => {
   const [showBackButton, setShowBackButton] = useState(false);
   // Hero background images array and index state
   const heroImages = [
-    "https://www.kwuk.com/wp-content/uploads/2023/04/home-banner-img-1.jpg",
-    "https://www.kwuk.com/wp-content/uploads/2023/04/home-banner-img-2.jpg",
-    "https://www.kwuk.com/wp-content/uploads/2023/04/home-banner-img-3.jpg",
-    "https://www.kwuk.com/wp-content/uploads/2023/04/home-banner-img-4.jpg"
+    "/Banner 1.png",
+    "/Banner 2.png",
+    "/Banner 3.png",
+   
   ];
   const [heroIndex, setHeroIndex] = useState(0);
   const [isBlurring, setIsBlurring] = useState(true);

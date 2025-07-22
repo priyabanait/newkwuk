@@ -165,7 +165,7 @@ const AgentProfile = (props) => {
 
 
 {/* Mobile-Only Agent Card Box */}
-<div className="flex flex-col bg-white shadow-lg rounded-2xl gap-4 md:hidden">
+<div className="flex flex-col bg-white shadow-lg rounded-2xl gap-4 mt-4 md:hidden">
   {/* Agent Image */}
   <div className="w-40 h-40 mx-auto rounded-full overflow-hidden border-4 border-white shadow-md bg-gray-100">
   
@@ -187,8 +187,8 @@ const AgentProfile = (props) => {
   </div>
 
   {/* Info Items */}
-  <div className="space-y-3 text-gray-700 text-sm font-medium">
-    <div className="flex items-start gap-2">
+  <div className="space-y-3 text-gray-700  text-sm font-medium p-4">
+    <div className="flex items-start gap-2 ">
       <MapPin className="w-4 h-4 mt-1" />
       <span>{agent.city || '-'}</span>
     </div>
