@@ -48,15 +48,15 @@ export default function CeoTeam() {
   return (
     <div>
         <div className=" pt-4 md:pt-10 md:mx-10 mx-6 ">
-  <div className="flex flex-col md:flex-row w-full ">
+  <div className="flex flex-col md:flex-row md:px-20 ">
     {/* Left Image */}
-    <div className="w-full md:w-full h-[40vh] md:h-[500px] flex justify-center items-start">
+    <div className="  md:w-182 h-[40vh]  md:h-[500px] flex justify-center items-start">
   <Image
     src="https://static.wixstatic.com/media/36a881_b66311c7d0ce4bab88e85a84321bd1b0~mv2.jpg/v1/fill/w_798,h_934,fp_0.50_0.33,q_85,enc_avif,quality_auto/Pic153%20(4).jpg"
     alt="CEO"
-    width={500}
+    width={800}
     height={500}
-    className="h-[40vh] md:h-[500px]  w-full md:w-140 border rounded-[4rem] border-gray-400"
+    className="h-[40vh] md:h-[500px]   md:w-182 border rounded-[4rem] border-gray-400"
   />
 </div>
 
@@ -71,7 +71,7 @@ export default function CeoTeam() {
         CEO MESSAGE
       </h2>
 
-      <p className="mt-4 md:text-[0.9rem] text-xs text-gray-700 md:leading-5 leading-normal max-w-md">
+      <p className="mt-4 md:text-[1rem] text-xs text-gray-700 md:leading-5 leading-normal max-w-md">
         More than ever, we want to thank and recognize our agents and partners
         for diligently bringing their very
         
@@ -83,7 +83,7 @@ export default function CeoTeam() {
         ourselves how we can best support them.
       </p>
 
-      <p className="mt-6 md:text-[0.9rem] text-xs text-gray-700 md:leading-5 leading-normal max-w-md">
+      <p className="mt-6 md:text-[1rem] text-xs text-gray-700 md:leading-5 leading-normal max-w-md">
         KW has cultivated a agent-  
 
         centric, technology-driven, and
