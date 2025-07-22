@@ -337,99 +337,117 @@ export default function PropertyListing() {
       }}
       style={{ cursor: 'pointer' }}
     >
-      <div className="relative w-full aspect-[4/3] min-h-[120px] max-h-[220px]">
-        {loading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white/60 z-20">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-[rgba(202,3,32,255)]"></div>
-          </div>
-        )}
-        <Image
-          src={propertyImages[currentImageIndex] || '/formimage.jpg'}
-          alt={similarProperty?.prop_type || 'Property Image'}
-          width={500}
-          height={300}
-         className="w-full h-40 object-cover border-b-0 "
-          onLoad={onImageLoad}
-        />
-        <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 flex justify-between px-2 z-10">
-          <button onClick={onPrevImage} className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors">
-            <FaChevronLeft className="w-4 h-4" />
-          </button>
-          <button onClick={onNextImage} className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors">
-            <FaChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1 z-10">
-          {propertyImages.map((_, idx) => (
-            <div
-              key={idx}
-              className={`w-1.5 h-1.5 rounded-full ${currentImageIndex === idx ? 'bg-white' : 'bg-white/50'}`}
-            />
-          ))}
-        </div>
-        <div className="absolute top-2 left-2 sm:top-2 sm:left-2 z-10">
-              {/* 360 Virtual Tour logo image instead of text */}
-              <Image
-                src="/360logo.png"
-                alt="360 Virtual Tour"
-                width={32}
-                height={32}
-                className="object-contain"
-              />
-            </div>
-      </div>
-      <div className="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-        <div>
-        <h3 className="font-normal text-sm md:text-xl text-gray-600">{similarProperty?.prop_type}</h3>
-          <p className="text-xs md:text-sm text-gray-500 line-clamp-1">{similarProperty?.list_address?.address}</p>
-          <div className="flex w-full items-center gap-1 md:gap-2 text-xs md:text-sm my-2">
-            <span className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-gray-200 p-1 md:p-2">
-              <span className="relative h-4 w-4">
-                <Image
-                  src={bedIconUrl}
-                  alt="bed"
-                  fill
-                  sizes="(max-width: 768px) 24px, (max-width: 1200px) 32px, 48px"
-                  className="object-contain"
-                />
-              </span>
-              {similarProperty?.total_bed}
-            </span>
-            <span className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-gray-200 p-1 md:p-2">
-              <span className="relative h-4 w-4">
-                <Image
-                  src={bathIconUrl}
-                  alt="bath"
-                  fill
-                  sizes="(max-width: 768px) 24px, (max-width: 1200px) 32px, 48px"
-                  className="object-contain"
-                />
-              </span>
-              {similarProperty?.total_bath}
-            </span>
-            <span className="inline-flex items-center gap-1 rounded-lg bg-gray-200 px-2 md:px-3 py-1 md:py-2 whitespace-nowrap">
-              <span className="relative h-4 w-4">
-                <Image
-                  src={areaIconUrl}
-                  alt="area"
-                  fill
-                  sizes="(max-width: 768px) 24px, (max-width: 1200px) 32px, 48px"
-                  className="object-contain"
-                />
-              </span>
-              {similarProperty?.lot_size_area} {similarProperty?.lot_size_units}
-            </span>
-          </div>
-        </div>
-        <div className="mt-2 flex flex-col gap-2">
-  <div className="flex items-center justify-between w-full gap-3">
-    <p className="text-xl tracking-wide text-gray-700">
-      {similarProperty.current_list_price?.toLocaleString?.() } SAR
-    </p>
-    <button className="text-xs md:text-sm text-white px-3 py-2 rounded-lg bg-[rgba(202,3,32,255)] ">
-      Enquire now
+      <div className="relative w-full aspect-[4/3] min-h-[120px] max-h-[220px] sm:max-h-[300px] md:max-h-[400px]">
+  {loading && (
+    <div className="absolute inset-0 flex items-center justify-center bg-white/60 z-20">
+      <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-[rgba(202,3,32,255)]"></div>
+    </div>
+  )}
+  <Image
+    src={propertyImages[currentImageIndex] || '/formimage.jpg'}
+    alt={similarProperty?.prop_type || 'Property Image'}
+    width={500}
+    height={300}
+    className="w-full h-50 object-cover border-b-0"
+    onLoad={onImageLoad}
+  />
+
+  {/* Left/Right Arrows */}
+  <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 flex justify-between px-2 z-10">
+    <button
+      onClick={onPrevImage}
+      className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+    >
+      <FaChevronLeft className="w-4 h-4" />
+    </button>
+    <button
+      onClick={onNextImage}
+      className="bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+    >
+      <FaChevronRight className="w-4 h-4" />
     </button>
   </div>
+
+  {/* Dots Indicator */}
+  <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1 z-10">
+    {propertyImages.map((_, idx) => (
+      <div
+        key={idx}
+        className={`w-1.5 h-1.5 rounded-full ${currentImageIndex === idx ? 'bg-white' : 'bg-white/50'}`}
+      />
+    ))}
+  </div>
+
+  {/* 360 Virtual Tour Icon */}
+  <div className="absolute top-2 left-2 z-10">
+    <Image
+      src="/360logo.png"
+      alt="360 Virtual Tour"
+      width={32}
+      height={32}
+      className="object-contain"
+    />
+  </div>
+</div>
+
+{/* Text & Info Section */}
+<div className="flex-1 p-3 sm:p-4 flex flex-col justify-between w-full">
+  <div>
+    <h3 className="font-normal text-sm md:text-xl text-gray-600">{similarProperty?.prop_type}</h3>
+    <p className="text-xs md:text-sm text-gray-500 line-clamp-1">{similarProperty?.list_address?.address}</p>
+
+    <div className="flex flex-wrap w-full items-center gap-2 text-xs md:text-sm my-2">
+      <span className="flex flex-1 min-w-[90px] items-center justify-center gap-1 rounded-lg bg-gray-200 p-1 md:p-2">
+        <span className="relative h-4 w-4">
+          <Image
+            src={bedIconUrl}
+            alt="bed"
+            fill
+            sizes="(max-width: 768px) 24px, (max-width: 1200px) 32px, 48px"
+            className="object-contain"
+          />
+        </span>
+        {similarProperty?.total_bed}
+      </span>
+      <span className="flex flex-1 min-w-[90px] items-center justify-center gap-1 rounded-lg bg-gray-200 p-1 md:p-2">
+        <span className="relative h-4 w-4">
+          <Image
+            src={bathIconUrl}
+            alt="bath"
+            fill
+            sizes="(max-width: 768px) 24px, (max-width: 1200px) 32px, 48px"
+            className="object-contain"
+          />
+        </span>
+        {similarProperty?.total_bath}
+      </span>
+      <span className="inline-flex items-center gap-1 rounded-lg bg-gray-200 px-2 md:px-3 py-1 md:py-2 whitespace-nowrap">
+        <span className="relative h-4 w-4">
+          <Image
+            src={areaIconUrl}
+            alt="area"
+            fill
+            sizes="(max-width: 768px) 24px, (max-width: 1200px) 32px, 48px"
+            className="object-contain"
+          />
+        </span>
+        {similarProperty?.lot_size_area} {similarProperty?.lot_size_units}
+      </span>
+    </div>
+  </div>
+
+  <div className="mt-2 flex flex-col gap-2">
+    <div className="flex items-center justify-between w-full gap-3 flex-wrap">
+      <p className="text-base md:text-xl tracking-wide text-gray-700">
+        {similarProperty.current_list_price?.toLocaleString?.()} SAR
+      </p>
+      <button className="text-xs md:text-sm text-white px-3 py-2 rounded-lg bg-[rgba(202,3,32,255)]">
+        Enquire now
+      </button>
+    </div>
+ 
+
+
 </div>
   </div>
     </div>
