@@ -337,7 +337,7 @@ export default function PropertyListing() {
       }}
       style={{ cursor: 'pointer' }}
     >
-      <div className="relative w-full aspect-[4/3] ">
+      <div className="relative w-full ">
   {loading && (
     <div className="absolute inset-0 flex items-center justify-center bg-white/60 z-20">
       <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-[rgba(202,3,32,255)]"></div>
@@ -379,80 +379,72 @@ export default function PropertyListing() {
   </div>
 
   {/* 360 Virtual Tour Icon */}
-  <div className="absolute top-2 left-2 z-10">
-    <Image
-      src="/360logo.png"
-      alt="360 Virtual Tour"
-      width={32}
-      height={32}
-      className="object-contain"
-    />
-  </div>
-</div>
+  <div className="absolute top-2 left-2 sm:top-2 sm:left-2 z-10">
+              {/* 360 Virtual Tour logo image instead of text */}
+              <Image
+                src="/360logo.png"
+                alt="360 Virtual Tour"
+                width={32}
+                height={32}
+                className="object-contain"
+              />
+            </div>
+          </div>
+       
+        <div className="p-4">
+          <h3 className="font-normal text-sm md:text-xl text-gray-600">
+            {property.prop_type}
+          </h3>
+          <p className="text-xs text-gray-500">{property.list_address?.address}</p>
+          <div className="flex w-full items-center gap-2 text-sm my-2">
+            <span className="flex flex-1 items-center justify-center gap-1 rounded-lg  bg-gray-200 p-2">
+              <span className="relative h-4 w-4">
+                <Image
+                  src={bedIconUrl}
+                  alt="bed"
+                  fill
+                  className="object-contain"
+                />
+              </span>
+              {property.total_bed}
+            </span>
+            <span className="flex flex-1 items-center  justify-center gap-1 rounded-lg bg-gray-200 p-2">
+              <span className="relative h-4 w-4 ">
+                <Image
+                  src={bathIconUrl}
+                  alt="bath"
+                  fill
+                  className="object-contain text-gray-700"
+                />
+              </span>
+              {property.total_bath}
+            </span>
+            <span className="inline-flex items-center gap-1 rounded-lg bg-gray-200 px-3 py-2 whitespace-nowrap">
+              <span className="relative h-4 w-4">
+                <Image
+                  src={areaIconUrl}
+                  alt="area"
+                  fill
+                  className="object-contain"
+                />
+              </span>
+              {property.lot_size_area} {property.lot_size_units}
+            </span>
+          </div>
 
-{/* Text & Info Section */}
-<div className="p-4">
-  <div>
-    <h3 className="font-normal text-sm md:text-xl text-gray-600">{similarProperty?.prop_type}</h3>
-    <p className="text-xs md:text-sm text-gray-500 line-clamp-1">{similarProperty?.list_address?.address}</p>
-
-    <div className="flex flex-wrap w-full items-center gap-2 text-xs md:text-sm my-2">
-      <span className="flex flex-1 min-w-[90px] items-center justify-center gap-1 rounded-lg bg-gray-200 p-1 md:p-2">
-        <span className="relative h-4 w-4">
-          <Image
-            src={bedIconUrl}
-            alt="bed"
-            fill
-            sizes="(max-width: 768px) 24px, (max-width: 1200px) 32px, 48px"
-            className="object-contain"
-          />
-        </span>
-        {similarProperty?.total_bed}
-      </span>
-      <span className="flex flex-1 min-w-[90px] items-center justify-center gap-1 rounded-lg bg-gray-200 p-1 md:p-2">
-        <span className="relative h-4 w-4">
-          <Image
-            src={bathIconUrl}
-            alt="bath"
-            fill
-            sizes="(max-width: 768px) 24px, (max-width: 1200px) 32px, 48px"
-            className="object-contain"
-          />
-        </span>
-        {similarProperty?.total_bath}
-      </span>
-      <span className="inline-flex items-center gap-1 rounded-lg bg-gray-200 px-2 md:px-3 py-1 md:py-2 whitespace-nowrap">
-        <span className="relative h-4 w-4">
-          <Image
-            src={areaIconUrl}
-            alt="area"
-            fill
-            sizes="(max-width: 768px) 24px, (max-width: 1200px) 32px, 48px"
-            className="object-contain"
-          />
-        </span>
-        {similarProperty?.lot_size_area} {similarProperty?.lot_size_units}
-      </span>
-    </div>
-  </div>
-
-  <div className="mt-2 flex flex-col gap-2">
-    <div className="flex items-center justify-between w-full gap-3 flex-wrap">
-      <p className="text-base md:text-xl tracking-wide text-gray-700">
-        {similarProperty.current_list_price?.toLocaleString?.()} SAR
-      </p>
-      <button className="text-xs md:text-sm text-white px-3 py-2 rounded-lg bg-[rgba(202,3,32,255)]">
-        Enquire now
-      </button>
-    </div>
- 
-
-
-</div>
-  </div>
-    </div>
-  );
-}
+          <div className="mt-2 flex items-center justify-between">
+            <p className="text-xl tracking-wide text-gray-700">{property.current_list_price?.toLocaleString?.() || property.current_list_price} SAR</p>
+            <button className="text-sm text-white p-2 rounded-lg bg-[rgba(202,3,32,255)] "  onClick={() => {
+            localStorage.setItem('selectedProperty', JSON.stringify(property));
+            router.push(`/propertydetails/${property._kw_meta?.id || property.id}`);
+          }}>
+              Enquire now
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
  
 
