@@ -8,6 +8,8 @@ import Link from 'next/link';
 import { BsInstagram, BsTwitterX, BsLinkedin } from "react-icons/bs";
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { FaUser, FaShoppingBag, FaMapMarkerAlt } from 'react-icons/fa';
+
 const Footer = dynamic(() => import('@/components/footer'), { ssr: false });
 
 const Agent = () => {
@@ -104,28 +106,34 @@ const Agent = () => {
         src="/find_an_agent.jpeg"
         image="https://static.wixstatic.com/media/36a881_81438044a1d045b894b318b12b06aa24~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3-removebg-preview.png"
       />
-<main className="px-2 md:py-6 mt-4 md:mt-10 md:mx-10 ">
-  <div className="bg-gray-100 shadow-sm p-4 rounded-xl flex items-center justify-center border border-gray-100">
+<main className="px-2 md:py-6 mt-4 md:mt-10 md:mx-10">
+  <div className="bg-gray-100 shadow-sm p-4 rounded-xl  border border-gray-100">
     {/* Search Filters */}
-    <div className="flex flex-col md:flex-row items-center justify-center gap-4 w-full max-w-5xl">
+    <div className="flex flex-col md:flex-row gap-4 w-full">
       
       {/* Agent Name Input */}
-      <div className="flex-1 w-full min-w-[150px]">
+      <div className="flex-1 w-full min-w-[150px] relative">
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <FaUser className="text-gray-500" />
+        </div>
         <input 
           type="text" 
           id="name"
           placeholder="Type Name.." 
-          className="w-full px-4 py-2 border border-gray-300 rounded md:text-sm text-black text-[0.7rem]"
+          className="w-full appearance-none min-w-[180px] pl-10 pr-3 py-2 rounded-lg bg-white text-sm text-gray-500 border border-gray-300"
           value={filterName}
           onChange={e => setFilterName(e.target.value)}
         />
       </div>
 
       {/* Market Center Dropdown */}
-      <div className="flex-1 w-full min-w-[150px]">
+      <div className="flex-1 relative">
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <FaShoppingBag className="text-gray-500" />
+        </div>
         <select 
           id="market" 
-          className="w-full px-4 py-2 border border-gray-300 text-gray-500 rounded md:text-[0.8rem] md:font-normal text-[0.8rem] hover:border-gray-500 focus:border-gray-500 focus:outline-none"
+          className="w-full appearance-none min-w-[180px] pl-10 pr-3 py-2 rounded-lg bg-white text-sm text-gray-500 border border-gray-300"
           value={filterMarket}
           onChange={e => setFilterMarket(e.target.value)}
         >
@@ -136,10 +144,13 @@ const Agent = () => {
       </div>
 
       {/* City Dropdown */}
-      <div className="flex-1 w-full min-w-[150px]">
+      <div className="flex-1 w-full min-w-[150px] relative">
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <FaMapMarkerAlt className="text-gray-500" />
+        </div>
         <select
           id="city"
-          className="w-full px-4 py-2 text-gray-500 md:text-[0.8rem] md:font-normal border border-gray-300 rounded text-[0.8rem] hover:border-gray-500 focus:border-gray-500 focus:outline-none"
+          className="w-full appearance-none min-w-[180px] pl-10 pr-3 py-2 rounded-lg bg-white text-sm text-gray-500 border border-gray-300"
           value={filterCity}
           onChange={e => setFilterCity(e.target.value)}
         >
