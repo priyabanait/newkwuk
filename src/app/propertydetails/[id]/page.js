@@ -391,7 +391,7 @@ export default function PropertyListing() {
 </div>
 
 {/* Text & Info Section */}
-<div className="flex-1 p-3 sm:p-4 flex flex-col justify-between w-full">
+<div className="p-4">
   <div>
     <h3 className="font-normal text-sm md:text-xl text-gray-600">{similarProperty?.prop_type}</h3>
     <p className="text-xs md:text-sm text-gray-500 line-clamp-1">{similarProperty?.list_address?.address}</p>
