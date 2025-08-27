@@ -226,7 +226,7 @@ const Properties = () => {
       [&::-webkit-slider-thumb]:h-4 
       [&::-webkit-slider-thumb]:w-4 
       [&::-webkit-slider-thumb]:rounded-full 
-      [&::-webkit-slider-thumb]:bg-[rgba(202,3,32,255)]"
+      [&::-webkit-slider-thumb]:bg-[rgb(206,32,39,255)]"
   />
   <span className="md:text-[0.9rem] text-sm mt-4 ml-35 md:ml-28">{price.toLocaleString()} SAR</span>
 </div>
@@ -234,13 +234,13 @@ const Properties = () => {
       </div>
 
       <p className="md:mt-6 mt-2 md:text-[0.9rem] text-sm leading-tight ml-6 text-gray-700">
-        Total Listings : <span className="text-[rgba(202,3,32,255)] font-semibold">{filteredProperties.length}</span>
+        Total Listings : <span className="text-[rgb(206,32,39,255)] font-semibold">{filteredProperties.length}</span>
       </p>
 
       <div className="min-h-screen p-6">
         {loading ? (
           <div className="flex justify-center items-center h-60">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[rgba(202,3,32,255)] border-solid"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[rgb(206,32,39,255)] border-solid"></div>
           </div>
         ) : error ? (
           <div className="text-red-500">{error}</div>
@@ -321,7 +321,7 @@ const Properties = () => {
                       : prop.city || prop.region || prop.municipality || '-'
                     }
                   </p>
-                  <button className="mt-10 w-full bg-black text-white py-2 rounded-full font-semibold md:text-base text-sm hover:bg-[rgba(202,3,32,255)] transition">
+                  <button className="mt-10 w-full bg-black text-white py-2 rounded-full font-semibold md:text-base text-sm hover:bg-[rgb(206,32,39,255)] transition">
                     View Property Details
                   </button>
                 </div>
@@ -334,7 +334,7 @@ const Properties = () => {
       {visibleCount < filteredProperties.length && !loading && !error && (
         <div className="flex justify-center items-center md:mt-5">
           <button
-            className="md:w-3/6 w-40 md:py-2 py-2 mb-10 md:mb-0 px-4  bg-[rgba(202,3,32,255)] hover:bg-red-950 text-white text-xs md:text-lg font-semibold rounded-full transition whitespace-nowrap"
+            className="md:w-3/6 w-40 md:py-2 py-2 mb-10 md:mb-0 px-4  bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white text-xs md:text-lg font-semibold rounded-full transition whitespace-nowrap"
             onClick={() => setVisibleCount(c => c + 6)}
           >
             View More Properties..
@@ -351,7 +351,7 @@ const Properties = () => {
         />
       </div>
 
-      <hr className="hidden md:block w-6/12 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-5 md:mt-20 mb-16" />
+      <hr className="hidden md:block w-6/12 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-5 md:mt-20 mb-16" />
     </div>
   );
 }

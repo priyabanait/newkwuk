@@ -50,7 +50,7 @@ const Page = () => {
     <span className="
       absolute right-6 top-1/2 -translate-y-1/2
       opacity-0 group-hover:opacity-100
-      transition-all duration-300 text-[rgba(202,3,32,255)] text-lg
+      transition-all duration-300 text-[rgb(206,32,39,255)] text-lg
       group-hover:translate-x-0 translate-x-4
     ">
       ⟶
@@ -88,7 +88,7 @@ const Page = () => {
     <span className="
       absolute left-6 top-1/2 -translate-y-1/2
       opacity-0 group-hover:opacity-100
-      transition-all duration-300 text-[rgba(202,3,32,255)] text-lg
+      transition-all duration-300 text-[rgb(206,32,39,255)] text-lg
       group-hover:translate-x-0 -translate-x-4
     ">
       ⟵
@@ -104,7 +104,7 @@ const Page = () => {
 </div>
 </div>
 
-<div className="order-2 md:order-1 bg-[rgba(202,3,32,255)] flex items-center justify-center h-[25px] md:h-[80px]">
+<div className="order-2 md:order-1 bg-[rgb(206,32,39,255)] flex items-center justify-center h-[25px] md:h-[80px]">
     <Image
       src="/kwline1.png"
       alt="KW Logo Center"
@@ -123,12 +123,12 @@ const Page = () => {
       height={400}
       className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
     />
-    <button className="bg-[rgba(202,3,32,255)] w-40 text-white px-8 py-1.5 text-xs font-semibold rounded-full block mx-auto md:hidden mt-4 mb-4"   onClick={() => router.push('/contactUs')}>
+    <button className="bg-[rgb(206,32,39,255)] w-40 text-white px-8 py-1.5 text-xs font-semibold rounded-full block mx-auto md:hidden mt-4 mb-4"   onClick={() => router.push('/contactUs')}>
       JOIN US
     
     </button>
   </div>
-        <hr className=" hidden md:flex w-160 mx-auto bg-[rgba(202,3,32,255)] h-[1.5px] border-0 mt-2 md:mt-8 mb-10" />
+        <hr className=" hidden md:flex w-160 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 mt-2 md:mt-8 mb-10" />
         <Footer></Footer>
              </div>
     );

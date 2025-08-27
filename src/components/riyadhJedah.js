@@ -96,7 +96,7 @@ const RiyadhJedah = (props) => {
     <span>EMAIL</span>
     <span>TELEPHONE</span>
   </div>
-  <hr className="border-t border-[rgba(202,3,32,255)] w-120 mx-auto mb-4" />
+  <hr className="border-t border-[rgb(206,32,39,255)] w-120 mx-auto mb-4" />
   <p className="text-[0.6rem] md:text-sm font-medium mt-2 tracking-wide">
     {props.address}
   </p>
@@ -186,7 +186,7 @@ const RiyadhJedah = (props) => {
     </div>
     <button
       type="submit"
-      className="w-full md:w-32 bg-[rgba(202,3,32,255)] text-white py-2 rounded-full text-base font-semibold hover:bg-gray-600 transition"
+      className="w-full md:w-32 bg-[rgb(206,32,39,255)] text-white py-2 rounded-full text-base font-semibold hover:bg-gray-600 transition"
     >
       Submit
     </button>
@@ -212,7 +212,7 @@ const RiyadhJedah = (props) => {
                          py-4 md:py-0">
             <div className="text-center px-4">
               <h2 className="text-3xl font-semibold mb-2">OUR TEAM</h2>
-              <div className="w-30 h-0.5 bg-[rgba(202,3,32,255)] mb-2 mx-auto border-0 mt-4 md:mt-10"></div>
+              <div className="w-30 h-0.5 bg-[rgb(206,32,39,255)] mb-2 mx-auto border-0 mt-4 md:mt-10"></div>
               <p className="text-sm tracking-wider mt-4 md:mt-10 text-gray-600">{props.p}</p>
             </div>
           </div>
@@ -262,7 +262,7 @@ const RiyadhJedah = (props) => {
                       className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
                     />
                   </div>
-                   <hr className="w-8/12 md:w-6/12 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-10 mb-10" />
+                   <hr className="w-8/12 md:w-6/12 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-10 mb-10" />
           <Footer></Footer>
         </div>
     );

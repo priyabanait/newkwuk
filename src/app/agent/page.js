@@ -1,61 +1,55 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Header from '@/components/header';
-import Box from '@/components/box';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
-import { BsInstagram, BsTwitterX, BsLinkedin } from "react-icons/bs";
-import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaUser, FaShoppingBag, FaMapMarkerAlt } from 'react-icons/fa';
-import { FiChevronDown } from 'react-icons/fi';
-const Footer = dynamic(() => import('@/components/footer'), { ssr: false });
+import { FaChevronRight, FaEnvelope, FaSearch } from 'react-icons/fa';
+import { MdPhone } from "react-icons/md";
+
+const Footer = dynamic(() => import('@/components/newfooter'), { ssr: false });
 
 const Agent = () => {
   const [agents, setAgents] = useState([]);
+  const [filter, setFilter] = useState("agent");
   const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const agentsPerPage = 4;
+  const agentsPerPage = 10;
   const [totalAgents, setTotalAgents] = useState(0);
-  const [backendCount, setBackendCount] = useState(0);
 
-  // Filter states
   const [filterName, setFilterName] = useState("");
   const [filterMarket, setFilterMarket] = useState("");
   const [filterCity, setFilterCity] = useState("");
 
-  // Debounce state
   const [debouncedName, setDebouncedName] = useState("");
   const debounceTimeout = useRef(null);
 
-  // Debounce effect for name
   useEffect(() => {
     if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
     debounceTimeout.current = setTimeout(() => {
       setDebouncedName(filterName);
-    }, 350); // 350ms debounce
+    }, 350);
     return () => clearTimeout(debounceTimeout.current);
   }, [filterName]);
 
-  // Fetch agents from backend with pagination and filters
   useEffect(() => {
+    if (filter !== "agent") return;
     const fetchAgents = async () => {
-      setLoading(true);
+      if (currentPage > 1) setLoadingMore(true); else setLoading(true);
       setError(null);
+
       try {
-        // Build query params for filters
         let query = `?page=${currentPage}&limit=${agentsPerPage}`;
         if (debouncedName.trim()) query += `&name=${encodeURIComponent(debouncedName.trim())}`;
         if (filterMarket && filterMarket !== "MARKET CENTER") query += `&marketCenter=${encodeURIComponent(filterMarket)}`;
         if (filterCity && filterCity !== "CITY" && filterCity !== "RESET_ALL") query += `&city=${encodeURIComponent(filterCity)}`;
+
         const response = await fetch(`https://kw-backend-q6ej.vercel.app/api/agents/merge${query}`);
         if (!response.ok) throw new Error('Failed to fetch agents');
         const data = await response.json();
-        console.log(data);
-        
-        // Map backend fields to UI fields
+
         const mappedAgents = Array.isArray(data.data) ? data.data.map(agent => ({
           name: agent.fullName || agent.name,
           phone: agent.phoneNumber || agent.phone,
@@ -63,30 +57,30 @@ const Agent = () => {
           city: agent.city,
           image: agent.photo || agent.image,
           _id: agent._id || agent.id,
-          marketCenter: agent.marketCenter || agent.market || ""
+          marketCenter: agent.marketCenter || agent.market || "",
+          kw_id: agent.kwId || agent.kw_id || ""
         })) : [];
-        setAgents(mappedAgents);
+
+        if (currentPage === 1) {
+          setAgents(mappedAgents);
+        } else {
+          setAgents(prev => [...prev, ...mappedAgents]);
+        }
+
         setTotalAgents(data.total || 0);
-        setBackendCount(data.count || mappedAgents.length);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
+        setLoadingMore(false);
       }
     };
     fetchAgents();
-  }, [currentPage, agentsPerPage, debouncedName, filterMarket, filterCity]);
+  }, [currentPage, debouncedName, filterMarket, filterCity, filter]);
 
-  // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [debouncedName, filterMarket, filterCity]);
-
-  // Remove client-side filtering
-  // const filteredAgents = agents.filter(...)
-  // const currentAgents = filteredAgents;
-  const currentAgents = agents; // Already filtered and paginated from backend
-  const totalPages = Math.ceil(totalAgents / agentsPerPage) || 1;
 
   const router = useRouter();
 
@@ -98,252 +92,197 @@ const Agent = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative p-4 sm:p-6 md:p-8">
       <Header />
 
-      <Box
-        h3="Find an Agent"
-        src="/find_an_agent.jpeg"
-        image="https://static.wixstatic.com/media/36a881_81438044a1d045b894b318b12b06aa24~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3-removebg-preview.png"
-      />
+      <div className="absolute top-0 left-0 w-20 h-20 sm:w-[100px] sm:h-[100px] md:w-[150px] md:h-[150px] bg-[rgb(206,32,39,255)] z-0"></div>
 
-
-<main className="px-2 md:py-6 mt-4 md:mt-10 ">
-  <div className="bg-gray-100 shadow-sm p-4 rounded-xl flex items-center justify-center border border-gray-100">
-    {/* Search Filters */}
-    <div className="flex flex-col md:flex-row gap-4 w-full">
-      
-      {/* Agent Name Input */}
-      <div className="flex-1 w-full min-w-[150px] relative">
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <FaUser className="text-gray-500" />
+      <div className="relative bg-gray-100">
+        <div className="pt-32 sm:pt-32 md:pt-44">
+          <h1 className="text-start font-semibold text-2xl sm:text-3xl md:text-[40px] mx-4 sm:mx-10 md:mx-36 text-gray-700">
+            {filter === "agent" ? "Find a local estate agent" : "Find a Market Center"}
+          </h1>
         </div>
-        <input 
-          type="text" 
-          id="name"
-          placeholder="Type Name.." 
-          className="w-full appearance-none min-w-[180px] pl-10 pr-3 py-2 rounded-lg bg-white text-sm text-gray-500 border border-gray-300"
-          value={filterName}
-          onChange={e => setFilterName(e.target.value)}
-        />
-      </div>
 
-      {/* Market Center Dropdown */}
-      <div className="flex-1 relative">
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <FaShoppingBag className="text-gray-500" />
-        </div>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-          <FiChevronDown className="text-gray-500" />
-        </div>
-        <select 
-          id="market" 
-          className="w-full appearance-none min-w-[180px] pl-10 pr-10 py-2 rounded-lg bg-white text-sm text-gray-500 border border-gray-300"
-          value={filterMarket}
-          onChange={e => setFilterMarket(e.target.value)}
-        >
-          <option>Market Center</option>
-          <option>Jasmin</option>
-          <option>Jeddah</option>
-        </select>
-      </div>
+        <div className="bg-white shadow-lg mx-4 sm:mx-10 md:mx-36">
+          <div className="grid grid-cols-1 md:grid-cols-2 my-6 sm:my-8 md:my-10 p-4 sm:px-6 md:px-10 gap-6 sm:gap-8">
 
-      {/* City Dropdown */}
-      <div className="flex-1 w-full min-w-[150px] relative">
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <FaMapMarkerAlt className="text-gray-500" />
-        </div>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-          <FiChevronDown className="text-gray-500" />
-        </div>
-        <select
-          id="city"
-          className="w-full appearance-none min-w-[180px] pl-10 pr-10 py-2 rounded-lg bg-white text-sm text-gray-500 border border-gray-300"
-          value={filterCity}
-          onChange={e => setFilterCity(e.target.value)}
-        >
-          <option value="CITY">City</option>
-          <option value="RESET_ALL">All</option>
-          <option value="ALRIYADH">ALRIYADH</option>
-          <option value="Al Khobar">Al Khobar</option>
-          <option value="Al_khobar">Al khobar</option>
-          <option value="Al-badaya, Qassim">Al-badaya, Qassim</option>
-          <option value="AlRiyadh">AlRiyadh</option>
-          <option value="ArRiyadh">ArRiyadh</option>
-          <option value="Riyadh">Riyadh</option>
-          <option value="Buraydah">Buraydah</option>
-          <option value="JED">JED</option>
-          <option value="JEDDAH">JEDDAH</option>
-          <option value="Jeddah">Jeddah</option>
-          <option value="jeddah">jeddah</option>
-          <option value="Jeddah city">Jeddah city</option>
-          <option value="KSA">KSA</option>
-          <option value="Saudi Arabia">Saudi Arabia</option>
-          <option value="West of Riyadh">West of Riyadh</option>
-          <option value="alriyadh">alriyadh</option>
-          <option value="jed">jed</option>
-          <option value="jeddah">jeddah</option>
-          <option value="jeedah">jeedah</option>
-          <option value="ksa">ksa</option>
-          <option value="qaseem">qaseem</option>
-          <option value="riyad">riyad</option>
-          <option value="riyadh">riyadh</option>
-          <option value="riyadh/Najm Al-Din Al-Ayoubi Road">riyadh/Najm Al-Din Al-Ayoubi Road</option>
-          <option value="ryadh">ryadh</option>
-          <option value="25,000">25,000</option>
-          <option value="الرياض">الرياض</option>
-          <option value="جدة">جدة</option>
-          <option value="جازان">جازان</option>
-          <option value="دمام">دمام</option>
-        </select>
-      </div>
-    </div>
-  </div>
-</main>
+            {/* Left */}
+            <div className="space-y-6 md:pr-6">
+              <div className="grid grid-cols-1 gap-6">
 
+                {/* Sticky Search */}
+                <div className="sticky top-12 sm:top-14 md:top-15 bg-white z-10 py-3 sm:py-4">
+                  <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-6 mb-3 sm:mb-4 text-gray-700 text-sm sm:text-base">
+                    <span className="font-medium">Search by:</span>
+                    <label className="flex items-center gap-1 sm:gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        value="agent"
+                        checked={filter === "agent"}
+                        onChange={() => setFilter("agent")}
+                        className="text-red-600 focus:ring-red-600"
+                      />
+                      Agent Name
+                    </label>
+                    <label className="flex items-center gap-1 sm:gap-2 cursor-pointer">
+                      <input
+                        type="radio"
+                        value="market"
+                        checked={filter === "market"}
+                        onChange={() => setFilter("market")}
+                        className="text-red-600 focus:ring-red-600"
+                      />
+                      Market Center
+                    </label>
+                  </div>
 
+                  <div className="flex items-center border border-gray-300">
+                    <input
+                      type="text"
+                      placeholder={filter === "agent" ? "Enter Name" : "Enter City"}
+                      className="flex-1 px-2 sm:px-3 py-2 sm:py-3 outline-none text-sm sm:text-base"
+                      value={filterName}
+                      onChange={(e) => setFilterName(e.target.value)}
+                    />
+                    <button className="bg-[rgb(206,32,39,255)] text-white px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-center">
+                      <FaSearch size={20} className="sm:w-6 sm:h-6" />
+                    </button>
+                  </div>
 
-<div className="grid grid-cols-1 md:grid-cols-[1fr_1px_1fr] bg-gray-100 md:mx-0 p-4 md:p-4 gap-0 rounded-4xl">
-  {/* Left: Agents List */}
-  <div className="space-y-6 md:pr-6 md:my-15">
-    <h2 className="font-semibold text-center text-sm ">OUR AGENTS</h2>
-    <hr className="bg-gray-500 h-[1px] border-0 md:w-160 w-30mx-auto" />
+                  <div className="mt-2 text-right">
+                    <button
+                      className="text-[rgb(206,32,39,255)] text-xs sm:text-sm hover:underline"
+                      onClick={() => {
+                        setFilterName("");
+                        setFilterMarket("");
+                        setFilterCity("");
+                      }}
+                    >
+                      Clear my search
+                    </button>
+                  </div>
+                </div>
 
+                {/* Conditional Rendering */}
+                {filter === "agent" ? (
+                  <>
+                    {loading && currentPage === 1 && (
+                      <div className="flex justify-center items-center h-40 sm:h-60">
+                        <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-t-4 border-b-4 border-[rgb(206,32,39,255)]"></div>
+                      </div>
+                    )}
+                    {error && <div className="text-red-500">{error}</div>}
+                    {!loading && !error && agents.length === 0 && (
+                      <div>No agents found.</div>
+                    )}
 
-    <div className="grid grid-cols-1 gap-6">
-      {loading && (
-        <div className="flex justify-center items-center h-60">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[rgba(202,3,32,255)] border-solid"></div>
-        </div>
-      )}
-      {error && <div className="text-red-500">{error}</div>}
-      {!loading && !error && currentAgents.length === 0 && <div>No agents found.</div>}
-      {!loading && !error && currentAgents.map((agent, idx) => (
-        <article
-          key={agent._id || idx}
-          className="bg-gray-200 p-4 rounded-xl md:mx-3 shadow-md flex flex-row items-start gap-4 relative hover:shadow-lg transition-shadow"
-        >
-          {/* Agent Image */}
-          <div className="w-32 h-32 md:w-50 md:h-50 flex-shrink-0 relative md:mx-3">
-            <div 
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent parent click (prevents navigating)
-                localStorage.setItem('selectedAgent', JSON.stringify(agent));
-                window.location.href = '/agent/newdetails';
-              }}
-              className="cursor-pointer"
-            >
-              <Image 
-              src={agent.image||'/images.jpg'}
+                    {!loading && !error && agents.map((agent, idx) => (
+                      <article key={agent._id || idx} className="p-3 sm:p-4 flex flex-row items-start gap-3 sm:gap-4 relative border-b border-gray-300">
+                        <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 relative">
+                          <Image
+                            src={agent.image || "/images.jpg"}
+                            alt={`Portrait of ${agent.name}`}
+                            width={128}
+                            height={128}
+                            className="object-cover w-full h-full"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              localStorage.setItem("selectedAgent", JSON.stringify(agent));
+                              window.location.href = "/agent/newdetails";
+                            }}
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-lg sm:text-lg md:text-2xl font-semibold mb-2">{agent.name}</h3>
+                          <p className="text-sm sm:text-base mb-2 break-all flex items-center gap-2">
+                            <MdPhone className="text-gray-600" /> {agent.phone}
+                          </p>
+                          <p className="text-sm sm:text-base mb-4 break-all flex items-center gap-2">
+                            <FaEnvelope className="text-gray-600" /> {agent.email}
+                          </p>
+                          <button
+                            onClick={() => handleAgentClick(agent)}
+                            className="hover:text-[rgb(206,32,39,255)] font-semibold transition-colors py-2 sm:py-3 px-2 sm:px-4 flex items-center justify-end gap-1 sm:gap-2 text-base sm:text-base"
+                          >
+                            <span>View Details & Properties</span>
+                            <FaChevronRight className="w-3 h-3 mt-0.5" />
+                          </button>
+                        </div>
+                      </article>
+                    ))}
 
-                alt={`Portrait of ${agent.name}`}
-                width={128}
-                height={128}
-                className="rounded-lg object-cover w-32 h-32 md:w-50 md:h-50"
-                
-              />
+                    {!loading && agents.length < totalAgents && (
+                      <div className="flex justify-center mt-4 sm:mt-6">
+                        <button
+                          className="px-4 sm:px-6 py-2 font-semibold bg-gray-500 text-white text-sm sm:text-base"
+                          onClick={() => setCurrentPage(prev => prev + 1)}
+                          disabled={loadingMore}
+                        >
+                          {loadingMore ? "Loading..." : "Show More Agents"}
+                        </button>
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {loading ? (
+                      <div className="flex justify-center items-center h-40 sm:h-60">
+                        <div className="animate-spin rounded-full h-10 w-10 sm:h-12 sm:w-12 border-[rgb(206,32,39,255)]"></div>
+                      </div>
+                    ) : (
+                      <>
+                        <article className="p-3 sm:p-4 border-b border-gray-300 flex flex-col gap-2">
+                          <h3 className="text-sm sm:text-lg md:text-2xl font-semibold mb-2">Keller Williams Jasmin</h3>
+                          <p className="text-xs sm:text-sm mb-2 sm:mb-4">Dist, 2740 King Fahd Branch Rd, as Sahafah, 6403, Riyadh 13315</p>
+                          <p className="text-xs sm:text-sm break-all flex items-center gap-2">
+                            <MdPhone className="text-gray-600"/> 09200-15671
+                          </p>
+                          <p className="text-xs sm:text-sm break-all flex items-center gap-2">
+                            <FaEnvelope className="text-gray-600"/> info@kwsaudiarabia.com
+                          </p>
+                          <a href='/jasmin' className="hover:text-[rgb(206,32,39,255)] transition-colors py-2 sm:py-3 flex items-center justify-start gap-2 text-xs sm:text-sm">
+                            More Details <FaChevronRight className="w-3 h-3 mt-0.5" />
+                          </a>
+                        </article>
+                        <article className="p-3 sm:p-4 flex flex-col gap-2">
+                          <h3 className="text-sm sm:text-lg md:text-2xl font-semibold mb-2">Keller Williams Jeddah</h3>
+                          <p className="text-xs sm:text-sm mb-2 sm:mb-4">Al Khalidiyyah, Jeddah 23421</p>
+                          <p className="text-xs sm:text-sm break-all flex items-center gap-2">
+                            <MdPhone className="text-gray-600"/> 09200-15671
+                          </p>
+                          <p className="text-xs sm:text-sm break-all flex items-center gap-2">
+                            <FaEnvelope className="text-gray-600"/> info@kwsaudiarabia.com
+                          </p>
+                          <a href='/jeddah' className="hover:text-[rgb(206,32,39,255)] transition-colors py-2 sm:py-3 flex items-center justify-start gap-2 text-xs sm:text-sm">
+                            More Details <FaChevronRight className="w-3 h-3 mt-0.5" />
+                          </a>
+                        </article>
+                      </>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* Right: Sticky Map */}
+            <div className="pl-0 my-6 md:my-10 sticky md:top-20 h-[300px] sm:h-[400px] md:h-[calc(100vh-5rem)]">
+              <div className="relative w-full overflow-hidden border border-gray-200 h-full">
+                <iframe
+                  title="Saudi Arabia Map"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4444535.330365576!2d41.51259970861697!3d23.8006960408425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15e8e4f105f8aaaf%3A0x70a8a6a2cb7f9405!2sSaudi%20Arabia!5e0!3m2!1sen!2sin!4v1717315040974!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
             </div>
           </div>
-
-          {/* Agent Info */}
-          <div className="flex-1">
-          <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 ">
-  <h3 className="text-xs font-normal md:font-semibold md:text-base md:tracking-[0.2em] uppercase md:mb-2">{agent.name}</h3>
-  <p className="text-sm text-gray-500 ml-auto">{agent.city}</p>
-</div>
-
-            <p className="md:text-sm text-[0.7rem]  mb-2 md:mb-2 break-all">{agent.phone}</p>
-          
-            <p className="md:text-sm text-[0.7rem] mb-4 md:mb-12 break-all">
-  {agent.email}
-</p>
-
-
-            <div className="space-y-1">
-              <a href="/instantvaluation" className="block md:text-sm text-[0.8rem]">Get Evaluation</a>
-              <hr  className='hidden md:flex w-60 bg-[rgba(202,3,32,255)] h-[1px] my-2 border-0'/>
-              <button onClick={() => handleAgentClick(agent)}>
-                View Details
-              </button>
-            </div>
-          </div>
-
-          {/* Social Icons */}
-          <div className=" hidden md:flex flex-row sm:flex-col space-x-4 sm:space-x-0 sm:space-y-3 absolute right-4 top-4 sm:top-14">
-            
-            <a href="#" aria-label="Instagram" className="w-6 h-6 rounded-full bg-black flex items-center justify-center text-white hover:bg-gray-800 transition-colors">
-              <BsInstagram size={12} />
-            </a>
-            <a href="#" aria-label="Twitter" className="w-6 h-6 rounded-full bg-black flex items-center justify-center text-white hover:bg-gray-800 transition-colors">
-              <BsTwitterX size={12} />
-            </a>
-            <a href="#" aria-label="LinkedIn" className="w-6 h-6 rounded-full bg-black flex items-center justify-center text-white hover:bg-gray-800 transition-colors">
-              <BsLinkedin size={12} />
-            </a>
-          </div>
-        </article>
-      ))}
-    </div>
-        {/* Pagination Controls */}
-        {!loading && !error && totalAgents > agentsPerPage && (
-          <div className="flex justify-center items-center gap-2 mt-4">
-            <button
-              className="px-3 py-1 rounded bg-gray-300 hover:bg-gray-400 disabled:opacity-50"
-              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              Prev
-            </button>
-            <span className="mx-2 text-sm">Page {currentPage} of {totalPages}</span>
-            <button
-              className="px-3 py-1 rounded bg-gray-300 hover:bg-gray-400 disabled:opacity-50"
-              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
-          </div>
-        )}
-        {/* Hide old Load More button */}
-  </div>
-
-  {/* Vertical Divider */}
-  <div className="hidden md:block w-px bg-gray-300 mx-2" />
-
-  {/* Right: Map */}
-  <div className=" hidden md:block pl-0 md:pl-6 my-6 md:my-10">
-    <div className="relative w-full h-full overflow-hidden border border-gray-200 min-h-[1200px]" style={{ height: '1200px' }}>
-      <iframe
-        title="Saudi Arabia Map"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4444535.330365576!2d41.51259970861697!3d23.8006960408425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15e8e4f105f8aaaf%3A0x70a8a6a2cb7f9405!2sSaudi%20Arabia!5e0!3m2!1sen!2sin!4v1717315040974!5m2!1sen!2sin"
-        width="100%"
-        height="100%"
-        style={{ border: 0, height: '1200px', minHeight: '1200px' }}
-        allowFullScreen=""
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
-  </div>
-</div>
-
-      {/* Hide old Load More button on desktop */}
-      <div className="hidden md:flex justify-start ml-42 mt-6">
-        {/* Pagination controls already above, so remove this button */}
+        </div>
       </div>
-
-     <div className="order-1 md:order-2 flex flex-col items-center justify-center py-4 md:py-16">
-            <Image
-              src="/howwillyouthink.png"
-              alt="How Will You Thrive"
-              width={800}
-              height={400}
-             className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
-            />
-          </div>
-
-
-      <hr className="w-5/12 mx-auto bg-[rgba(202,3,32,255)] h-[1.5px] border-0 mt-2 md:mt-20 mb-10" />
       <Footer />
     </div>
   );

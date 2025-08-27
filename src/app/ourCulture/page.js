@@ -78,7 +78,7 @@ SUCCESS: RESULTS THROUGH PEOPLE`
       height={400}
       className="w-70 h-20 md:w-[800px] md:h-[400px] object-contain"
     />
-    <button className="bg-[rgba(202,3,32,255)] w-40 text-white px-8 py-1.5 text-xs font-semibold rounded-full block mx-auto md:hidden mt-4 mb-4" onClick={() => router.push('/contactUs')}>
+    <button className="bg-[rgb(206,32,39,255)] w-40 text-white px-8 py-1.5 text-xs font-semibold rounded-full block mx-auto md:hidden mt-4 mb-4" onClick={() => router.push('/contactUs')}>
       JOIN US
     </button>
   </div>
@@ -106,7 +106,7 @@ SUCCESS: RESULTS THROUGH PEOPLE`
 </span>
 
 
-          <hr className="w-30 md:w-46 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-1 md:mt-8" />
+          <hr className="w-30 md:w-46 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-1 md:mt-8" />
           <div className="md:mt-10 md:py-0 py-10">
           <p className="md:mx-65 mx-4 font-normal tracking-[0em] md:text-[1rem] text-xs md:font-normal  no-underline bg-transparent leading-[1.6]">
           We Believe That The Company We Keep Can Contribute To Our Lives In Untold Ways.
@@ -187,7 +187,7 @@ SUCCESS: RESULTS THROUGH PEOPLE`
       </main>
       <CeoTeam></CeoTeam>
 <Howwill></Howwill>
-       <hr className=" hidden md:block w-8/12 md:w-6/12 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-10 md:mt-20 mb-10" />
+       <hr className=" hidden md:block w-8/12 md:w-6/12 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-10 md:mt-20 mb-10" />
       <Footer />
     </div>
   );

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Header from '@/components/header';
-import Footer from '@/components/footer';
+import Footer from '@/components/newfooter';
 import Box from '@/components/box';
 import Image from 'next/image';
 const WhyKW = () => {
@@ -82,7 +82,7 @@ By partnering with KW, you gain access to our state-of-the-art technology, empow
     
   ];
   return (
-    <div className="overflow-x-hidden">
+    <div className="">
       <Header />
       <Box
         src="/why_kw_page.jpeg"
@@ -95,8 +95,8 @@ By partnering with KW, you gain access to our state-of-the-art technology, empow
         <div className="max-w-full mx-auto text-center md:mt-16">
         
          
-          <p className="mt-2 md:mt-8 text-base font-semibold md:text-xl">WHY KW?</p>
-           <hr className="w-32 md:w-80 mx-auto bg-[rgba(202,3,32,255)] h-[1.5px] border-0 mt-4 md:mt-8" />
+          <p className="mt-2 md:mt-8 text-2xl font-semibold md:text-3xl">WHY KW?</p>
+           <hr className="w-32 md:w-80 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 mt-4 md:mt-8" />
         
         </div>
       </main>
@@ -110,24 +110,24 @@ By partnering with KW, you gain access to our state-of-the-art technology, empow
             {/* Mobile: stacked vertical layout */}
             <div className="md:hidden px-4 py-6 mx-6">
               <div className="text-3xl py-2 text-gray-400 font-normal mb-1">{section.number}</div>
-              <div className="text-sm font-semibold text-black mb-4 tracking-[0.1em] md:tracking-tight">{section.title}</div>
-              <div className="text-xs leading-relaxed text-gray-700">{section.description}</div>
+              <div className="text-2xl font-semibold text-black mb-4 tracking-[0.1em] md:tracking-tight">{section.title}</div>
+              <div className="text-sm leading-relaxed text-gray-700">{section.description}</div>
             </div>
             {/* Desktop: grid layout */}
-            <div className="hidden md:grid grid-cols-12 items-stretch hover:bg-[rgba(202,3,32,255)] group transition duration-300 px-4 min-h-[120px]">
+            <div className="hidden md:grid grid-cols-12 items-stretch hover:bg-[rgb(206,32,39,255)] group transition duration-300 px-4 min-h-[120px]">
               {/* Number */}
               <div className="md:ml-30 col-span-2 md:col-span-1 flex items-center justify-center text-5xl  text-gray-500 group-hover:text-black font-normal">
                 {section.number}
               </div>
 
               {/* Title */}
-              <div className="md:ml-46 col-span-4 md:col-span-4 flex items-center text-base font-semibold tracking-wide text-black group-hover:text-white">
+              <div className="md:ml-46 col-span-4 md:col-span-4 flex items-center text-xl font-semibold tracking-wide text-black group-hover:text-white">
                 {section.title}
               </div>
 
                {/* Vertical Line Between Title and Description - disappears on hover */}
               <div className="col-span-1 flex justify-center">
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
               </div>
 
               {/* Description */}
@@ -147,8 +147,8 @@ By partnering with KW, you gain access to our state-of-the-art technology, empow
         <div className="max-w-full mx-auto text-center md:mt-16">
         
          
-          <p className="mt-2 md:mt-8 text-base font-semibold md:text-xl">WHY KELLER WILLIAMS SAUDI ?</p>
-           <hr className="w-32 md:w-80 mx-auto bg-[rgba(202,3,32,255)] h-[1.5px] border-0 mt-4 md:mt-8" />
+          <p className="mt-2 md:mt-8 text-2xl font-semibold md:text-3xl">WHY KELLER WILLIAMS SAUDI ?</p>
+           <hr className="w-32 md:w-80 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 mt-4 md:mt-8" />
         
         </div>
       </main>
@@ -161,24 +161,24 @@ By partnering with KW, you gain access to our state-of-the-art technology, empow
             {/* Mobile: stacked vertical layout */}
             <div className="md:hidden px-4 py-6 mx-6">
               <div className="text-3xl py-2 text-gray-400 font-normal mb-1">{section.number}</div>
-              <div className="text-sm font-semibold text-black mb-4 tracking-[0.1em] md:tracking-tight">{section.title}</div>
-              <div className="text-xs leading-relaxed text-gray-700">{section.description}</div>
+              <div className="text-2xl font-semibold text-black mb-4 tracking-[0.1em] md:tracking-tight">{section.title}</div>
+              <div className="text-sm leading-relaxed text-gray-700">{section.description}</div>
             </div>
             {/* Desktop: grid layout */}
-            <div className="hidden md:grid grid-cols-12 items-stretch hover:bg-[rgba(202,3,32,255)] group transition duration-300 px-4 min-h-[120px]">
+            <div className="hidden md:grid grid-cols-12 items-stretch hover:bg-[rgb(206,32,39,255)] group transition duration-300 px-4 min-h-[120px]">
               {/* Number */}
               <div className="md:ml-30 col-span-2 md:col-span-1 flex items-center justify-center text-5xl  text-gray-500 group-hover:text-black font-normal">
                 {section.number}
               </div>
 
               {/* Title */}
-              <div className="md:ml-46 col-span-4 md:col-span-4 flex items-center text-base font-semibold tracking-wide text-black group-hover:text-white">
+              <div className="md:ml-46 col-span-4 md:col-span-4 flex items-center text-xl font-semibold tracking-wide text-black group-hover:text-white">
                 {section.title}
               </div>
 
                {/* Vertical Line Between Title and Description - disappears on hover */}
               <div className="col-span-1 flex justify-center">
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
               </div>
 
               {/* Description */}
@@ -204,8 +204,8 @@ By partnering with KW, you gain access to our state-of-the-art technology, empow
         />
       </div>
 
-                {/* <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div> */}
-      <hr className="w-8/12 md:w-5/12 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-2 md:mt-14 mb-10" />
+                {/* <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div> */}
+      <hr className="w-8/12 md:w-5/12 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-2 md:mt-14 mb-10" />
       <Footer />
     </div>
   );

@@ -19,7 +19,7 @@ export default function page() {
 </span>
 
 
-          <hr className="w-30 md:w-46 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-1 md:mt-8" />
+          <hr className="w-30 md:w-46 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-1 md:mt-8" />
           <div className="md:mt-10 md:py-0 py-10">
           <p className="md:mx-65 mx-4 font-[montserrat] tracking-[0em] md:text-[0.9rem] text-[0.7rem] md:font-normal font-semibold no-underline bg-transparent leading-[1.6]">
   We believe that the company we keep can contribute to our lives in untold ways.
@@ -39,7 +39,7 @@ export default function page() {
       height={400}
       className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
     />
-    <button className="bg-[rgba(202,3,32,255)] w-40 text-white px-8 py-1.5 text-[0.6rem] rounded-full block mx-auto md:hidden mt-4 mb-4">
+    <button className="bg-[rgb(206,32,39,255)] w-40 text-white px-8 py-1.5 text-[0.6rem] rounded-full block mx-auto md:hidden mt-4 mb-4">
       JOIN US
     </button>
   </div>

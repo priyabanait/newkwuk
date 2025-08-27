@@ -34,7 +34,15 @@ import {
       
       return property.photos?.map(photo => photo.ph_url) || fallbackImages;
     };
-
+    const formatPrice = (price) => {
+      if (typeof price === 'number') {
+        return price.toLocaleString('en-US');
+      }
+      if (typeof price === 'string' && !isNaN(Number(price))) {
+        return Number(price).toLocaleString('en-US');
+      }
+      return price || '';
+    };
     const handleNextImage = (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -55,7 +63,7 @@ import {
 
     return (
       <div
-        className="bg-white rounded-lg shadow-md overflow-hidden"
+        className="bg-white shadow-md overflow-hidden"
         onMouseEnter={onHover}
         onMouseLeave={onLeave}
       >
@@ -78,7 +86,7 @@ import {
               alt={property.prop_type || "Property Image"}
               width={500}
               height={300}
-              className="w-full h-40 object-cover border-b-0"
+              className="w-full h-50 md:h-60 object-cover border-b-0"
               onLoadingComplete={() => setLoading(false)}
             />
             <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 flex justify-between px-2">
@@ -105,8 +113,34 @@ import {
                 />
               ))}
             </div>
-            <div className="absolute top-2 left-2 sm:top-2 sm:left-2 z-10">
-              {/* 360 Virtual Tour logo image instead of text */}
+            <div className="absolute bottom-0 right-0 bg-black/80 text-white px-2 py-1 flex flex-row items-center gap-3">
+    {/* Beds */}
+    {/* <div className="absolute bottom-0 right-0 bg-black/80 text-white rounded-md px-3 py-2 flex flex-row items-center gap-6"> */}
+    {/* Beds */}
+    <div className="flex flex-col items-center">
+      <span className="relative w-5 h-5">
+        <Image src={bedIconUrl} alt="bed" fill className="object-contain invert" />
+      </span>
+      <span className="text-xs mt-1">
+        {property.total_bed || property.beds || property.bedrooms || 0}
+      </span>
+    </div>
+
+    {/* Baths */}
+    <div className="flex flex-col items-center">
+      <span className="relative w-5 h-5">
+        <Image src={bathIconUrl} alt="bath" fill className="object-contain invert" />
+      </span>
+      <span className="text-xs mt-1">
+        {property.total_bath || property.baths || property.bathrooms || 0}
+      </span>
+    </div>
+
+    {/* Garage (optional, if you have this) */}
+   
+    </div>
+            {/* <div className="absolute top-2 left-2 sm:top-2 sm:left-2 z-10">
+              
               <Image
                 src="/360logo.png"
                 alt="360 Virtual Tour"
@@ -114,64 +148,55 @@ import {
                 height={32}
                 className="object-contain"
               />
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="p-4">
-          <h3 className="font-normal text-sm md:text-xl text-gray-600">
-            {property.prop_type}
-          </h3>
-          <p className="text-xs text-gray-500">
-  {property.list_address?.address?.split(' ').length > 7
-    ? property.list_address.address.split(' ').slice(0, 7).join(' ') + '...'
-    : property.list_address?.address}
-</p>
+        <h3 className=" text-gray-700 text-lg flex justify-start items-center">
+                     
+                     {property.title || property.prop_type || "Property"}
+                     
+                   </h3>
+                   <span className=" flex justify-start text-[rgb(206,32,39,255)] text-lg font-semibold">
+                   {property?.list_category || "To Let"}
+                   </span>
+                   <p
+     className="text-xl font-bold text-gray-600 mb-2 truncate"
+     title={property.list_address?.address} // hover to see full text
+   >
+     {property.list_address?.address?.split(' ').length > 5
+       ? property.list_address.address.split(' ').slice(0, 5).join(' ') + '...'
+       : property.list_address?.address}
+   </p>
 
-          <div className="flex w-full items-center gap-2 text-sm my-2">
-            <span className="flex flex-1 items-center justify-center gap-1 rounded-lg  bg-gray-200 p-2">
-              <span className="relative h-4 w-4">
-                <Image
-                  src={bedIconUrl}
-                  alt="bed"
-                  fill
-                  className="object-contain"
-                />
-              </span>
-              {property.total_bed}
-            </span>
-            <span className="flex flex-1 items-center  justify-center gap-1 rounded-lg bg-gray-200 p-2">
-              <span className="relative h-4 w-4 ">
-                <Image
-                  src={bathIconUrl}
-                  alt="bath"
-                  fill
-                  className="object-contain text-gray-700"
-                />
-              </span>
-              {property.total_bath}
-            </span>
-            <span className="inline-flex items-center gap-1 rounded-lg bg-gray-200 px-3 py-2 whitespace-nowrap">
-              <span className="relative h-4 w-4">
-                <Image
-                  src={areaIconUrl}
-                  alt="area"
-                  fill
-                  className="object-contain"
-                />
-              </span>
-              {property.lot_size_area} {property.lot_size_units}
-            </span>
-          </div>
-          <div className="mt-2 flex items-center justify-between">
-            <p className="text-xl tracking-wide text-gray-700">{property.current_list_price?.toLocaleString?.() || property.current_list_price} SAR</p>
-            <button className="text-sm text-white p-2 rounded-lg bg-[rgba(202,3,32,255)] "  onClick={() => {
-            localStorage.setItem('selectedProperty', JSON.stringify(property));
-            router.push(`/propertydetails/${property._kw_meta?.id || property.id}`);
-          }}>
-              Enquire now
-            </button>
-          </div>
-        </div>
+                   
+                   <div className="flex justify-start items-center">
+                     <span className="font-medium text-base text-gray-700">
+                       {property.price
+                         ? `SAR ${formatPrice(property.price)}`
+                         : property.current_list_price
+                         ? `SAR ${formatPrice(property.current_list_price)}`
+                         : ""}
+                       {property.rental_price
+                         ? `SAR ${formatPrice(property.rental_price)} `
+                         : ""}
+                     </span>
+                    
+
+                   </div>
+                   {property.price_qualifier && (
+                     <p className="text-xs text-gray-500 mt-1">
+                       {property.price_qualifier}
+                     </p>
+                   )}
+                   
+                 </div>
+                 <button className="w-full bg-[rgb(206,32,39,255)] text-white font-bold text-base py-3 px-4 flex items-center justify-end gap-2">
+     <span>MORE DETAILS</span>
+     <FaChevronRight className="text-white w-4 h-4" />
+   </button>
+         
+      
       </div>
     );
   };
@@ -193,6 +218,7 @@ import {
     const [priceRange, setPriceRange] = useState('All');
     const [hoveredProperty, setHoveredProperty] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [loadingMore, setLoadingMore] = useState(false);
     const [mapProjection, setMapProjection] = useState(null);
     const [fullscreenProperty, setFullscreenProperty] = useState(null); // fullscreen property card for mobile
     // Helper to check if marker is near the bottom of the map (desktop only)
@@ -259,18 +285,6 @@ import {
     const bathIconUrl = "/bath.png";
     const areaIconUrl = "/area.png";
 
-    // Pagination logic
-    const currentProperties = properties; // backend returns paginated data
-    const totalPages = Math.ceil(totalCount / propertiesPerPage); // use backend totalCount
-
-    const handlePrevPage = () => {
-      setCurrentPage((prev) => Math.max(prev - 1, 1));
-    };
-
-    const handleNextPage = () => {
-      setCurrentPage((prev) => Math.min(prev + 1, totalPages));
-    };
-
     // Helper to get property images (move outside PropertyCard for reuse)
     const getPropertyImages = (property) => {
       const fallbackImages = [
@@ -296,9 +310,17 @@ import {
       : '';
 
     useEffect(() => {
+      setCurrentPage(1);
+    }, [propertyCategory, propertySubtype, marketCenter, location, priceRange, typeParam, searchTerm]);
+
+    useEffect(() => {
       const fetchData = async () => {
         try {
-          setLoading(true);
+          if (currentPage === 1) {
+            setLoading(true);
+          } else {
+            setLoadingMore(true);
+          }
           // Map priceRange to min/max price
           let minPrice = undefined, maxPrice = undefined;
           if (priceRange === 'Below SAR 50,000') {
@@ -349,12 +371,17 @@ import {
           }
 
           const response = await axios.post('https://kw-backend-q6ej.vercel.app/api/listings/list/properties', filters);
-          setProperties(response.data.data);
+          if (currentPage === 1) {
+            setProperties(response.data.data);
+          } else {
+            setProperties(prev => [...prev, ...response.data.data]);
+          }
           setTotalCount(response.data.total || 0);
         } catch (error) {
           console.error('POST request error:', error);
         } finally {
           setLoading(false);
+          setLoadingMore(false);
         }
       };
       fetchData();
@@ -468,14 +495,15 @@ import {
         }
       }, 0);
     }, [properties, isLoaded]);
+    
 
     return (
-      <div className="min-h-screen bg-gray-50  mx-4 px-4">
+      <div className="min-h-screen bg-gray-50 ">
         {/* Header */}
-        <header className="w-full bg-gray-200 shadow-sm py-4 rounded-xl">
+        {/* <header className="w-full bg-gray-200 shadow-sm py-4 rounded-xl">
   <div className="container mx-auto px-4 md:px-4">
     <div className="flex flex-wrap md:flex-row w-full gap-1 md:items-center">
-      {/* Mobile Header (List/Map + Filters button in one line) */}
+     
       <div className="md:hidden w-full flex items-center justify-between py-2">
         <div className="flex items-center border rounded-lg overflow-hidden">
           <button
@@ -501,7 +529,7 @@ import {
         </button>
       </div>
 
-      {/* Desktop Header (Original Layout) */}
+      
       <div className="hidden md:block w-full">
         <div className="flex flex-row items-center w-full">
           {/* List/Map Toggle
@@ -518,11 +546,11 @@ import {
             >
               Map
             </button>
-          </div> */}
+          </div> 
 
-          {/* Filter Panel */}
+          
           <div className="flex-1 md:flex md:flex-row md:gap-4">
-            {/* Property Type Dropdown */}
+       
             <div className="relative flex-1">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <FaHome className="text-gray-500" />
@@ -539,7 +567,7 @@ import {
               </div>
             </div>
 
-            {/* Property Category Dropdown */}
+           
             <div className="relative flex-1">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <FaBuilding className="text-gray-500" />
@@ -560,7 +588,7 @@ import {
               </div>
             </div>
 
-            {/* Property Subtype Dropdown */}
+           
             <div className="relative flex-1">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <FaWarehouse  className="text-gray-500" />
@@ -592,7 +620,7 @@ import {
               </div>
             </div>
 
-            {/* Market Center Dropdown */}
+          
             <div className="relative flex-1">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <FaShoppingBag   className="text-gray-500" />
@@ -611,7 +639,7 @@ import {
               </div>
             </div>
 
-            {/* Location Dropdown */}
+           
             <div className="relative flex-1">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <FaMapMarkerAlt className="text-gray-500" />
@@ -645,7 +673,7 @@ import {
               </div>
             </div>
 
-            {/* Price Range Dropdown */}
+          
             <div className="relative flex-1">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                 <FaMoneyBillWave className="text-gray-500" />
@@ -668,12 +696,12 @@ import {
         </div>
       </div>
 
-      {/* Mobile Filter Panel (Hidden on Desktop) */}
+     
       <div
         ref={filterPanelRef}
         className={`${showMobileFilters ? 'flex flex-col gap-2 absolute top-80 left-0 w-full z-20 p-4 bg-gray-500/50 backdrop-blur-sm  rounded-lg shadow-lg' : 'hidden'} md:hidden`}
       >
-        {/* Property Type Dropdown */}
+     
         <div className="relative w-full">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <FaHome className="text-gray-400" />
@@ -690,7 +718,7 @@ import {
           </div>
         </div>
 
-        {/* Property Category Dropdown */}
+       
         <div className="relative w-full">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <FaBuilding className="text-gray-400" />
@@ -711,7 +739,7 @@ import {
           </div>
         </div>
 
-        {/* Property Subtype Dropdown */}
+       
         <div className="relative w-full">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <FaMapMarkerAlt className="text-gray-400" />
@@ -743,7 +771,7 @@ import {
           </div>
         </div>
 
-        {/* Market Center Dropdown */}
+    
         <div className="relative w-full">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <FaShoppingBag  className="text-gray-400" />
@@ -762,7 +790,7 @@ import {
           </div>
         </div>
 
-        {/* Location Dropdown */}
+      
         <div className="relative w-full">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <FaMapMarkerAlt className="text-gray-400" />
@@ -796,7 +824,7 @@ import {
           </div>
         </div>
 
-        {/* Price Range Dropdown (Mobile) */}
+       
         <div className="relative w-full">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <FaMoneyBillWave className="text-gray-400" />
@@ -818,26 +846,28 @@ import {
       </div>
     </div>
   </div>
-</header>
+</header> */}
   
         {/* Title & Filters */}
-        <div className="p-4 md:p-1 md:pt-8">
+        {/* <div className="p-4 md:p-1 md:pt-8">
           <h2 className="text-xl md:text-2xl ml-3 text-gray-700 font-normal mb-4 mt-10">
             Properties For {props.type}
           </h2>
-          <p className=" ml-3 text-gray-700 font-normal  mt-4">{properties.length} of {totalCount} Results</p>
-        </div>
+          <p className=" ml-3 text-gray-700 font-normal  mt-4">
+            {loading ? 'Loading...' : `${properties.length} of ${totalCount} Results ${currentPage > 1 && `(Page ${currentPage})`}`}
+          </p>
+        </div> */}
 
         {/* Content: 2 Columns Split (Cards + Map) */}
-        <div className="flex flex-col md:flex-row gap-4 px-4 md:px-0 pb-8 ">
+        <div className="flex flex-col md:flex-row md:gap-4  md:px-0 pb-8 ">
           {/* Mobile: Toggle between list and map */}
           {/* List view for mobile */}
           {viewMode === "list" && (
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:hidden gap-4">
+            <div className="w-full grid grid-cols-1 gap-4 md:hidden">
               {loading ? (
                 <Loader />
               ) : (
-                currentProperties.map((property, index) => (
+                properties.map((property, index) => (
                   <PropertyCard
                     key={index}
                     property={property}
@@ -850,32 +880,37 @@ import {
                   />
                 ))
               )}
-              {!loading && (
-                <div className="col-span-full flex justify-center items-center gap-2 mt-4">
+              {!loading && properties.length === 0 && (
+                <div className="col-span-full flex justify-center items-center mt-6">
+                  <p className="text-gray-500 text-lg font-medium">No properties found</p>
+                </div>
+              )}
+              {!loading && properties.length > 0 && properties.length < totalCount && (
+                <div className="col-span-full flex justify-center items-center mt-6">
                   <button
-                    onClick={handlePrevPage}
-                    disabled={currentPage === 1}
-                    className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+                    onClick={() => {
+                      setCurrentPage(prev => prev + 1);
+                    }}
+                    disabled={loadingMore}
+                    className="px-6 py-3  bg-gray-500 text-white font-semibold transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                   >
-                    Prev
+                    {loadingMore && (
+                      <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white"></div>
+                    )}
+                    {loadingMore ? 'Loading...' : 'View More Properties'}
                   </button>
-                  <span>
-                    Page {currentPage} of {totalPages}
-                  </span>
-                  <button
-                    onClick={handleNextPage}
-                    disabled={currentPage === totalPages}
-                    className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
-                  >
-                    Next
-                  </button>
+                </div>
+              )}
+              {!loading && properties.length > 0 && properties.length >= totalCount && totalCount > 0 && (
+                <div className="col-span-full flex justify-center items-center mt-6">
+                  <p className="text-gray-500 text-sm font-medium">All properties have been loaded</p>
                 </div>
               )}
             </div>
           )}
           {/* Map view for mobile */}
           {viewMode === "map" && (
-            <div className="w-full h-[400px] md:h-64 md:hidden bg-blue-100 rounded-lg overflow-hidden sticky top-0">
+            <div className="w-full h-[400px] md:h-64 md:hidden bg-blue-100 overflow-hidden sticky top-0">
               {isLoaded && (
                 <GoogleMap
                   mapContainerStyle={{ width: '100%', height: '100%' }}
@@ -894,7 +929,7 @@ import {
                           mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
                         >
                           <div
-                            className={`bg-cyan-700 text-white font-medium rounded-full  px-2 py-2 text-xs shadow-lg mb-1 text-center min-w-[80px] cursor-pointer transition-colors ${isActive ? 'ring-2 ring-black bg-cyan-900 scale-110 z-50 ' : ''}`}
+                            className={`bg-[rgb(206,32,39,255)] text-white font-medium rounded-full  px-2 py-2 text-xs shadow-lg mb-1 text-center min-w-[80px] cursor-pointer transition-colors ${isActive ? 'ring-2 ring-black bg-[rgb(206,32,39,255)] scale-110 z-50 ' : ''}`}
                             onClick={() => setFullscreenProperty(property)}
                           >
                             {property.current_list_price?.toLocaleString?.() || property.current_list_price} SAR
@@ -966,7 +1001,7 @@ import {
                                   <div className="mt-2 flex items-center justify-between">
                                     <p className="text-[10px] font-bold text-gray-600">{property.current_list_price?.toLocaleString?.() || property.current_list_price} SAR</p>
                                     <button
-                                      className="text-[10px] text-white p-2 rounded-lg bg-[rgba(202,3,32,255)]"
+                                      className="text-[10px] text-white p-2 rounded-lg bg-[rgb(206,32,39,255)]"
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         localStorage.setItem('selectedProperty', JSON.stringify(property));
@@ -1034,25 +1069,30 @@ import {
             />
           ))
         )}
-        {!loading && (
-          <div className="col-span-full flex justify-center items-center gap-2 mt-4">
+        {!loading && properties.length === 0 && (
+          <div className="col-span-full flex justify-center items-center mt-6">
+            <p className="text-gray-500 text-lg font-medium">No properties found</p>
+          </div>
+        )}
+        {!loading && properties.length > 0 && properties.length < totalCount && (
+          <div className="col-span-full flex justify-center items-center mt-6">
             <button
-              onClick={handlePrevPage}
-              disabled={currentPage === 1}
-              className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+              onClick={() => {
+                setCurrentPage(prev => prev + 1);
+              }}
+              disabled={loadingMore}
+              className="px-6 py-3 bg-gray-500 text-white font-semibold transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
             >
-              Prev
+              {loadingMore && (
+                <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-white"></div>
+              )}
+              {loadingMore ? 'Loading...' : 'View More Properties..'}
             </button>
-            <span>
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              onClick={handleNextPage}
-              disabled={currentPage === totalPages}
-              className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
-            >
-              Next
-            </button>
+          </div>
+        )}
+        {!loading && properties.length > 0 && properties.length >= totalCount && totalCount > 0 && (
+          <div className="col-span-full flex justify-center items-center mt-6">
+            <p className="text-gray-500 text-sm font-medium">All properties have been loaded</p>
           </div>
         )}
       </div>
@@ -1060,7 +1100,7 @@ import {
 
     {/* Right - Map (sticky) */}
     <div className="w-1/2">
-      <div className="sticky top-20 w-full h-[80vh] bg-blue-100 rounded-lg overflow-hidden relative">
+      <div className="sticky top-20 w-full h-[80vh] bg-blue-100 overflow-hidden relative">
         {isLoaded && (
           <GoogleMap
             mapContainerStyle={{ width: '100%', height: '100%' }}
@@ -1107,6 +1147,15 @@ import {
                 const isActive = (hoveredProperty && hoveredProperty._id === property._id);
                 const isFixed = hoveredProperty?.fixed && hoveredProperty?._id === property._id;
                 const showAbove = shouldShowAbove(offsetCoords);
+                const formatPrice = (price) => {
+    if (typeof price === 'number') {
+      return price.toLocaleString('en-US');
+    }
+    if (typeof price === 'string' && !isNaN(Number(price))) {
+      return Number(price).toLocaleString('en-US');
+    }
+    return price || '';
+  };
         return (
           <React.Fragment key={idx}>
             {/* Price Badge Overlay */}
@@ -1116,8 +1165,8 @@ import {
             >
               <div className="relative flex flex-col items-center">
                 <div
-                  className={`bg-cyan-700  text-white font-medium rounded-full px-2 py-2 text-xs border border-white mb-0 text-center cursor-pointer transition-colors shadow-lg
-                    ${isActive ? ' scale-110 z-50 bg-cyan-900 ' : ''}
+                  className={`bg-[rgb(206,32,39,255)] text-white font-medium rounded-full px-2 py-2 text-xs text-center  shadow-lg
+                    ${isActive ? ' scale-110 z-50 bg-[rgb(206,32,39,255)] ' : ''}
                     ${hoveredProperty?.fixed && hoveredProperty?._id === property._id ? 'ring-1 ring-black' : ''}
                   `}
                   onMouseEnter={() => {
@@ -1134,6 +1183,7 @@ import {
                       const projPoint = mapProjection.fromLatLngToPoint(latLng);
                       const scale = Math.pow(2, desktopMap.getZoom());
                       const bounds = desktopMap.getBounds();
+                      
                       if (bounds) {
                         const ne = bounds.getNorthEast();
                         const sw = bounds.getSouthWest();
@@ -1157,7 +1207,7 @@ import {
                 </div>
                 {/* Pointer/arrow below the badge */}
                 <div
-                  className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-cyan-700"
+                  className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-[rgb(206,32,39,255)]"
                   style={{ marginTop: '-2px' }}
                 />
               </div>
@@ -1171,7 +1221,7 @@ import {
               >
                 <div style={{ marginTop: 36, zIndex: 100, position: 'relative' }}>
                   <div
-                    className="bg-white rounded-lg shadow-lg max-w-xs w-50 z-50 cursor-pointer"
+                    className="bg-white  shadow-lg max-w-xs w-50 z-50 cursor-pointer"
                     onClick={() => {
                       localStorage.setItem('selectedProperty', JSON.stringify(property));
                       router.push(`/propertydetails/${property._kw_meta?.id || property.id}`);
@@ -1189,63 +1239,59 @@ import {
                           src={getPropertyImages(property)[0] || '/placeholder1.jpg'}
                           alt={property.prop_type}
                           fill
-                          className="object-cover rounded"
+                          className="object-cover"
                         />
+                        
                         {isFixed && (
                           <button
                             onClick={(e) => {
                               e.stopPropagation(); // Prevents triggering the parent click
                               setHoveredProperty(null);
                             }}
-                            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-lg font-bold bg-white rounded-full w-6 h-6 flex items-center justify-center"
+                            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-lg font-bold bg-white w-6 h-6 flex items-center justify-center"
                           >
                             ×
                           </button>
                         )}
+                        
                       </div>
-                      <div className="flex-1 min-w-0 p-2">
-                        <h3 className="font-normal text-sm md:text-sm text-gray-600">{property.prop_type}</h3>
-                        <p className="text-xs text-gray-500">
-  {property.list_address?.address?.split(' ').length > 20
-    ? property.list_address.address.split(' ').slice(0, 20).join(' ') + '...'
-    : property.list_address?.address}
-</p>
+                      <div className="flex-1 min-w-0  ">
+                        <h3 className="font-normal text-sm md:text-sm  text-gray-600 px-2">{property.prop_type}</h3>
+                        <p className="text-xs text-[rgb(206,32,39,255)] py-1 px-2">
+                        {property?.list_category || "To Let"}
+</p> <p
+      className="text-xs font-bold text-gray-600 mb-2 px-2"
+     
+    >
+      {property.list_address?.address||
+         property.list_address.address||
+        property.list_address?.address}
+    </p>
 
-                        <div className="flex w-full items-center gap-2 text-sm my-2">
-                          <span className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-gray-200 p-2">
-                            <span className="relative h-3 w-3">
-                              <Image src={bedIconUrl} alt="bed" fill className="object-contain" />
-                            </span>
-                            <span className="text-[10px]">{property.total_bed}</span>
-                          </span>
-                          <span className="flex flex-1 items-center justify-center gap-1 rounded-lg bg-gray-200 p-2">
-                            <span className="relative h-3 w-3">
-                              <Image src={bathIconUrl} alt="bath" fill className="object-contain" />
-                            </span>
-                            <span className="text-[10px]">{property.total_bath}</span>
-                          </span>
-                          <span className="inline-flex items-center gap-1 rounded-lg bg-gray-200 px-2 py-2 whitespace-nowrap">
-                            <span className="relative h-3 w-3">
-                              <Image src={areaIconUrl} alt="area" fill className="object-contain" />
-                            </span>
-                            <span className="text-[10px]">
-                              {property.lot_size_area} {property.lot_size_units}
-                            </span>
-                          </span>
-                        </div>
-                        <div className="mt-2 flex items-center justify-between">
-                          <p className="text-[10px] ">{property.current_list_price?.toLocaleString?.() || property.current_list_price} SAR</p>
-                          <button
-                            className="text-[10px] text-white p-2 rounded-lg bg-[rgba(202,3,32,255)]"
-                            onClick={(e) => {
-                              e.stopPropagation(); // Prevent parent click (prevents navigating)
-                              localStorage.setItem('selectedProperty', JSON.stringify(property));
-                              router.push(`/propertydetails/${property._kw_meta?.id || property.id}`);
-                            }}
-                          >
-                            Enquire now
-                          </button>
-                        </div>
+                        
+                        <div className="mt-2 flex items-center justify-between px-2">
+                        <span className="font-medium text-sm mb-2 text-gray-700">
+                        {property.price
+                          ? `SAR${formatPrice(property.price)}`
+                          : property.current_list_price
+                          ? `SAR${formatPrice(property.current_list_price)}`
+                          : ""}
+                        {property.rental_price
+                          ? `SAR${formatPrice(property.rental_price)} `
+                          : ""}
+                      </span>
+                      {property.price_qualifier && (
+                      <p className="text-xs text-gray-500 mt-1">
+                        {property.price_qualifier}
+                      </p>
+                    )}
+                    
+                  </div>
+                  <button className="w-full bg-[rgb(206,32,39,255)] text-white font-bold text-xs py-2 px-4 flex items-center justify-end ">
+      <span>MORE DETAILS</span>
+      <FaChevronRight className="text-white w-4 h-4" />
+    </button>
+                       
                       </div>
                     </div>
                   </div>

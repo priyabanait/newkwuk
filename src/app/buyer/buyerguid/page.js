@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import Header from '@/components/header';
-import Footer from '@/components/footer';
+import Footer from '@/components/newfooter';
 import Box from '@/components/box';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
@@ -133,9 +133,9 @@ What's Next? +`,
   <div className=" p-4 md:p-0 max-w-full mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-0 md:mb-8">
       <div className="w-full md:w-auto">  {/* Removed text-center from here since parent has it */}
-        <h1 className="text-lg md:text-3xl tracking-[0.2em] md:tracking-[0.1em] py-4  md:py-8">Home <span className='text-red-700'>Buying </span> Tips from Keller Williams</h1>
+        <h1 className="text-2xl md:text-3xl  py-4  md:py-8">Home <span className='text-red-700'>Buying </span> Tips from Keller Williams</h1>
        <div className='mx-4 md:mx-0 tracking-normal mt-2 md:mt-0  md:tracking-normal'>
-       <p className="text-xs md:text-[1rem] leading-5">
+       <p className="text-sm md:text-[1rem] leading-5">
           Our Experience, A House Is Not A Dream Home Because Of Its Size Or Colour. Its About How You Feel When You Walk Through The Front Door – The Way You Can Instantly See
       
        
@@ -164,7 +164,7 @@ What's Next? +`,
       }}
     >
      <div className="w-6 h-6 relative flex items-start justify-center">
-  <span className="w-6 h-[2.5px] bg-[rgba(202,3,32,255)]" />
+  <span className="w-6 h-[2.5px] bg-[rgb(206,32,39,255)]" />
 </div>
 
     </div>
@@ -182,10 +182,10 @@ What's Next? +`,
 
   {/* Title - Reverse align compared to number */}
   <div className={`${step.align === 'right' ? 'text-left' : 'text-right'}`}>
-    <h2 className="text-[rgba(202,3,32,255)] md:text-3xl text-xl font-normal  inline-block">
+    <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-2xl font-normal  inline-block">
       {step.title}
     </h2>
-    <p className="whitespace-pre-line mt-2 text-xs">{step.content}</p>
+    <p className="whitespace-pre-line mt-2 text-sm">{step.content}</p>
   </div>
 </div>
 
@@ -197,7 +197,7 @@ What's Next? +`,
                   <div className="hidden md:block"></div>
                   <div className="hidden md:block text-left px-0 md:px-8">
                     <span className="text-gray-500 text-5xl font-normal">{`${index + 1}.`}</span>
-                    <h2 className="text-[rgba(202,3,32,255)] md:text-3xl text-xl font-normal mt-4">
+                    <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-xl font-normal mt-4">
                       {step.title}</h2>
                     <p className="whitespace-pre-line mt-2 leading-5 md:mt-4 text-[1rem]">{step.content}</p>
                   </div>
@@ -207,7 +207,7 @@ What's Next? +`,
                   {/* Content on the left side */}
                   <div className="hidden md:block text-right px-0 md:px-8">
                     <span className="text-gray-500 text-5xl font-normal">{`${index + 1}.`}</span>
-                    <h2 className="text-[rgba(202,3,32,255)] md:text-3xl text-xl font-normal mt-4">
+                    <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-xl font-normal mt-4">
                       {step.title}</h2>
                     <p className="whitespace-pre-line mt-2 leading-5 md:mt-4 text-[1rem]">{step.content}</p>
                   </div>
@@ -229,14 +229,10 @@ What's Next? +`,
       height={400}
       className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
     />
-    <button className="bg-[rgba(202,3,32,255)] w-40 text-white px-8 py-1.5 text-[0.6rem] rounded-full block mx-auto md:hidden mt-4 mb-4"
-      onClick={() => router.push('/contactUs')}
-    >
-      JOIN US
-    </button>
+    
   </div>
  
-       <hr className="hidden md:block w-8/12 md:w-5/12 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-2 md:mt-14 mb-10" />
+     
       <Footer />
     </div>
   );

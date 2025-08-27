@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import Header from '@/components/header';
-import Footer from '@/components/footer';
+import Footer from '@/components/newfooter';
 import Box from '@/components/box';
 import Image from 'next/image';
 
@@ -148,42 +148,15 @@ const Technology = () => {
         image="https://static.wixstatic.com/media/36a881_a82aacde83a9442dae07d99a846cadf4~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8-removebg-preview%20(1).png"
       />
 
-      {/* Intro Section */}
-      <main className="px-4 md:px-20 py-6 mt-4 md:mt-2">
-        <div className="max-w-full px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex flex-col items-center justify-center gap-4 mb-8">
-            <h1 className="text-sm md:text-xl md:py-2">BUILT BY AGENTS, FOR AGENTS</h1>
-            <hr className="w-50 md:w-50 mx-auto border-0 bg-[rgba(202,3,32,255)] h-[1.5px] mb-10" />
-            <p className="text-xs md:text-[1rem]">
-               At Keller Williams Saudi Arabia, We Believe Technology Exists To Simplify Everyday Life, 
-               Making Room For What Truly Matters And Giving You The Freedom To Be More Human, More Present – More
-           
-        Everything.</p>
-            <p className="text-xs mt-2 md:text-[1rem]">
-               Connect With Your Clients In A Targeted And Meaningful Way With Command. From Getting Leads, Closing Deals,
-                To Building Lifetime Client Relationships – Our Technology Puts You In Control Of
-          
-            Your Database, Your Business, And Your Future.</p>
-            <p className="text-xs mt-2 md:text-[1rem]">
-            More than a CRM, Command&apos;s interconnected tools support connections between data and clients, keeping you at the center of it all.
-            </p>
-          </div>
-        </div>
-      </main>
-
-      {/* CTA */}
-      <div className="my-10 flex justify-center text-center">
-        <button className="w-76 bg-[rgba(202,3,32,255)] text-white py-3 font-semibold text-base rounded-full transition">
-          BECOME KW AGENT TODAY
-        </button>
-      </div>
+     
+    
 
       {/* Section Title */}
-      <div className="md:my-30 my-4">
+      <div className="md:my-10 my-4">
         <h1 className="text-xl md:text-3xl py-2 md:py-2 flex justify-center text-center">
           COMMAND FOR SOLO AGENT
         </h1>
-        <hr className="w-50 md:w-50 mx-auto bg-[rgba(202,3,32,255)] h-[1.5px] mb-10" />
+        <hr className="w-50 md:w-50 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 mb-10" />
       </div>
 
       {/* Timeline Section */}
@@ -201,7 +174,7 @@ const Technology = () => {
             }}
           >
             <div className="w-6 h-6 relative flex items-start justify-center">
-              <span className="w-6 h-0.5 bg-[rgba(202,3,32,255)]" />
+              <span className="w-6 h-0.5 bg-[rgb(206,32,39,255)]" />
             </div>
           </div>
         </div>
@@ -237,10 +210,10 @@ const Technology = () => {
 </div>
               {/* Right Text */}
               <div className="text-left ml-8">
-                <h2 className="text-[rgba(202,3,32,255)] text-2xl font-semibold uppercase mb-2">
+                <h2 className="text-[rgb(206,32,39,255)] text-2xl font-semibold uppercase mb-2">
                   {step.title}
                 </h2>
-                <p className="whitespace-pre-line text-[0.8rem] md:text-[1rem] leading-relaxed">
+                <p className="whitespace-pre-line text-sm md:text-[1rem] leading-relaxed">
                   {step.content}
                 </p>
               </div>
@@ -252,10 +225,10 @@ const Technology = () => {
 
 {/* Section Title */}
       <div className="md:my-30 my-4">
-        <h1 className="text-xl md:text-4xl text-gray-600 py-2 md:py-2 flex justify-center text-center">
+       <h1 className="text-xl md:text-3xl py-2 md:py-2 flex justify-center text-center">
           Command For Solo Teams
         </h1>
-        <hr className="w-70 md:w-70 mx-auto bg-[rgba(202,3,32,255)] h-[1.5px] mb-10" />
+        <hr className="w-70 md:w-70 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 mb-10" />
       </div>
 
 {/* Timeline Section */}
@@ -273,7 +246,7 @@ const Technology = () => {
             }}
           >
             <div className="w-6 h-6 relative flex items-start justify-center">
-              <span className="w-6 h-0.5 bg-[rgba(202,3,32,255)]" />
+              <span className="w-6 h-0.5 bg-[rgb(206,32,39,255)]" />
             </div>
           </div>
         </div>
@@ -309,10 +282,10 @@ const Technology = () => {
 </div>
               {/* Right Text */}
               <div className="text-left ml-8">
-                <h2 className="text-[rgba(202,3,32,255)] text-2xl font-semibold uppercase mb-2">
+                <h2 className="text-[rgb(206,32,39,255)] text-2xl font-semibold uppercase mb-2">
                   {step.title}
                 </h2>
-                <p className="whitespace-pre-line text-[0.8rem] md:text-[1rem]  leading-relaxed">
+                <p className="whitespace-pre-line text-sm md:text-[1rem]  leading-relaxed">
                   {step.content}
                 </p>
               </div>
@@ -333,7 +306,7 @@ const Technology = () => {
         />
       </div>
 
-      <hr className="w-8/12 md:w-5/12 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-2 md:mt-14 mb-10" />
+     
       <Footer />
     </div>
   );

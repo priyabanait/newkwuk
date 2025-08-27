@@ -15,7 +15,7 @@ export default function Login() {
         </h1>
 
         {/* Red underline */}
-        <div className="w-24 sm:w-32 md:w-40 lg:w-48 h-[2px] bg-[rgba(202,3,32,255)] mb-6 md:mb-10 lg:mb-12" />
+        <div className="w-24 sm:w-32 md:w-40 lg:w-48 h-[2px] bg-[rgb(206,32,39,255)] mb-6 md:mb-10 lg:mb-12" />
 
         {/* Google Login Button */}
         <button

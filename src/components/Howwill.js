@@ -21,13 +21,13 @@ export default function Howwill() {
           <p className="text-2xl md:text-4xl font-normal">
             KW SAUDI ARABIA
           </p>
-          <hr className="w-48 md:w-96 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-6 md:mt-16" />
+          <hr className="w-48 md:w-96 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-6 md:mt-16" />
           <p className='mt-4 md:mt-8'>Together We Do More</p>
           <p className="px-4 md:px-0">Keller Williams Is There To Help At Every Big Step In The Realestate Journey.</p>
         
            <div className="flex justify-center md:justify-center mt-6 md:mt-10">
   <button className="
-    w-56 bg-[rgba(202,3,32,255)] text-white py-3 rounded-full text-sm
+    w-56 bg-[rgb(206,32,39,255)] text-white py-3 rounded-full text-sm
     relative overflow-hidden
     group transition-all duration-300
     hover:pr-8 hover:pl-4

@@ -554,7 +554,7 @@ const Properties = () => {
   return (
     <div className="relative p-6 md:p-8 ">
       <Header></Header>
-      <div className="absolute top-0 left-0 w-[100px] h-[100px] md:w-[150px] md:h-[150px] bg-[rgba(202,3,32,255)] z-0"></div>
+      <div className="absolute top-0 left-0 w-[100px] h-[100px] md:w-[150px] md:h-[150px] bg-[rgb(206,32,39,255)] z-0"></div>
 
 {/* Hero Section */}
 <div className="relative min-h-[74vh] md:min-h-screen flex items-center justify-center bg-gray-100">
@@ -603,7 +603,7 @@ const Properties = () => {
           </select>
         </div>
         {/* Search Button */}
-        <button className="bg-[rgba(202,3,32,255)] text-white px-12 py-3 text-sm md:text-base font-medium border-none outline-none">
+        <button className="bg-[rgb(206,32,39,255)] text-white px-12 py-3 text-sm md:text-base font-medium border-none outline-none">
           Search
         </button>
       </div>
@@ -627,7 +627,7 @@ const Properties = () => {
           </select>
         </div>
         {/* Search Button (full width below) */}
-        <button className="bg-[rgba(202,3,32,255)] text-white justify-center items-center font-semibold w-30 py-2 text-xs rounded-full mt-1 focus:outline-none focus:ring-0 block mx-auto">
+        <button className="bg-[rgb(206,32,39,255)] text-white justify-center items-center font-semibold w-30 py-2 text-xs rounded-full mt-1 focus:outline-none focus:ring-0 block mx-auto">
           Search
         </button>
       </div>
@@ -728,7 +728,7 @@ const Properties = () => {
           ))}
         </div> */}
         {/* <div className="flex justify-center items-center md:my-22 my-4 col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-8">
-  <hr className="md:w-140 w-50 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px]" />
+  <hr className="md:w-140 w-50 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px]" />
 </div> */}
         {/* New Property Cards Section */}
         <div ref={residentialRef} className="md:mt-10 mt-10 md:mx-12 scroll-mt-24">
@@ -745,7 +745,7 @@ const Properties = () => {
 
     {/* Right: Button */}
     <Link href="/properties/active">
-    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
+    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
       Click Here To View All Residential Properties
     </button>
     </Link>
@@ -766,7 +766,7 @@ const Properties = () => {
                    shadow-md z-10 hover:shadow-lg transition"
           >
             <FaChevronLeft 
-              className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+              className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
             />
           </button>
         )}
@@ -829,7 +829,7 @@ const Properties = () => {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgba(202,3,32,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgba(202,3,32,255)]">
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgb(206,32,39,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgb(206,32,39,255)]">
                 Coming Soon!
                 </div>
               )}
@@ -856,7 +856,7 @@ const Properties = () => {
               shadow-md z-10 hover:shadow-lg transition"
       >
         <ChevronRight 
-          className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+          className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
         />
       </button>
     )}
@@ -865,7 +865,7 @@ const Properties = () => {
           </div>
         </div>
         <Link href="/properties/active">
-    <button className="block md:hidden mx-auto text-sm mb-10 md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
+    <button className="block md:hidden mx-auto text-sm mb-10 md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
       Click Here
     </button>
     </Link>
@@ -885,7 +885,7 @@ const Properties = () => {
 
     {/* Right: Button */}
     <Link href="/properties/active">
-    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
+    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
       Click Here To View All Commercial Active Properties
     </button>
     </Link>
@@ -906,7 +906,7 @@ const Properties = () => {
                    shadow-md z-10 hover:shadow-lg transition"
           >
             <FaChevronLeft 
-              className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+              className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
             />
           </button>
         )}
@@ -969,7 +969,7 @@ const Properties = () => {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgba(202,3,32,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgba(202,3,32,255)]">
+                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgb(206,32,39,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgb(206,32,39,255)]">
                 Coming Soon!
                 </div>
               )}
@@ -996,7 +996,7 @@ const Properties = () => {
               shadow-md z-10 hover:shadow-lg transition"
       >
         <ChevronRight 
-          className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+          className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
         />
       </button>
     )}
@@ -1005,7 +1005,7 @@ const Properties = () => {
           </div>
         </div>
         <Link href="/properties/active">
-    <button className="block md:hidden mx-auto text-sm mb-10 md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
+    <button className="block md:hidden mx-auto text-sm mb-10 md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
       Click Here
     </button>
     </Link>
@@ -1026,7 +1026,7 @@ const Properties = () => {
 
     {/* Right: Button */}
     <Link href="/properties/sold"> 
-    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
+    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
       Click Here To View All Sold Properties
     </button>
     </Link>
@@ -1046,7 +1046,7 @@ const Properties = () => {
                shadow-md z-10 hover:shadow-lg transition"
   >
     <FaChevronLeft 
-      className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+      className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
     />
   </button>
 )}
@@ -1110,7 +1110,7 @@ const Properties = () => {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgba(202,3,32,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgba(202,3,32,255)]">
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgb(206,32,39,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgb(206,32,39,255)]">
               Coming Soon!
               </div>
             )}
@@ -1138,7 +1138,7 @@ const Properties = () => {
                shadow-md z-10 hover:shadow-lg transition"
   >
    <ChevronRight 
-   className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+   className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
  />
  
   </button>
@@ -1149,7 +1149,7 @@ const Properties = () => {
 
         </div>
         <Link href="/properties/sold">
-    <button className="block md:hidden text-sm mb-10 md:text-base mx-auto font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
+    <button className="block md:hidden text-sm mb-10 md:text-base mx-auto font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
       Click Here
     </button>
     </Link>
@@ -1165,7 +1165,7 @@ const Properties = () => {
 
     {/* Right: Button */}
     <Link href="/properties/rent">
-    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
+    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
       Click Here To View All Rental Properties
     </button>
     </Link>
@@ -1186,7 +1186,7 @@ const Properties = () => {
                shadow-md z-10 hover:shadow-lg transition"
   >
     <FaChevronLeft 
-      className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+      className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
     />
   </button>
 )}
@@ -1257,7 +1257,7 @@ const Properties = () => {
                 className="w-full h-full object-cover"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgba(202,3,32,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgba(202,3,32,255)]">
+              <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgb(206,32,39,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgb(206,32,39,255)]">
               Coming Soon!
               </div>
             )}
@@ -1286,7 +1286,7 @@ const Properties = () => {
                 shadow-md z-10 hover:shadow-lg transition"
    >
     <ChevronRight 
-    className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+    className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
   />
   
    </button>
@@ -1296,7 +1296,7 @@ const Properties = () => {
           </div>
         </div>
         <Link href="/properties/rent">
-    <button className="block md:hidden mx-auto text-sm mb-10 md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
+    <button className="block md:hidden mx-auto text-sm mb-10 md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
       Click Here
     </button>
     </Link>
@@ -1311,7 +1311,7 @@ const Properties = () => {
     </p>
     {/* Right: Button */}
     <Link href="/properties/auction">
-    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
+    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
       Click Here To View All Auction Properties
     </button>
     </Link>
@@ -1326,7 +1326,7 @@ const Properties = () => {
                shadow-md z-10 hover:shadow-lg transition"
   >
     <FaChevronLeft 
-      className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+      className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
     />
   </button>
 )}
@@ -1343,7 +1343,7 @@ const Properties = () => {
         });
         if (auctionListings.length === 0) {
           return (
-            <div className="w-full h-[200px] flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgba(202,3,32,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgba(202,3,32,255)]">
+            <div className="w-full h-[200px] flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgb(206,32,39,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgb(206,32,39,255)]">
             Coming Soon!
             </div>
           );
@@ -1395,7 +1395,7 @@ const Properties = () => {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgba(202,3,32,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgba(202,3,32,255)]">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgb(206,32,39,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgb(206,32,39,255)]">
                   Coming Soon!
                   </div>
                 )}
@@ -1423,7 +1423,7 @@ const Properties = () => {
                shadow-md z-10 hover:shadow-lg transition"
         >
           <ChevronRight 
-            className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+            className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
           />
         </button>
       )}
@@ -1434,7 +1434,7 @@ const Properties = () => {
           </div>
         </div>
         <Link href="/properties/auction">
-    <button className="block md:hidden mx-auto mb-10 text-sm md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
+    <button className="block md:hidden mx-auto mb-10 text-sm md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
       Click Here
     </button>
     </Link>
@@ -1452,7 +1452,7 @@ const Properties = () => {
     </p>
     {/* Right: Button */}
     <Link href="/properties/newdevelopment">
-    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
+    <button className="hidden md:flex text-sm md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
       Click Here To View All New Development Properties
     </button>
     </Link>
@@ -1467,7 +1467,7 @@ const Properties = () => {
                shadow-md z-10 hover:shadow-lg transition"
   >
     <FaChevronLeft 
-      className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+      className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
     />
   </button>
 )}
@@ -1488,7 +1488,7 @@ const Properties = () => {
         });
         if (newDevListings.length === 0) {
           return (
-            <div className="w-full h-[200px] flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgba(202,3,32,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgba(202,3,32,255)]">
+            <div className="w-full h-[200px] flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgb(206,32,39,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgb(206,32,39,255)]">
             Coming Soon!
             </div>
           );
@@ -1540,7 +1540,7 @@ const Properties = () => {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgba(202,3,32,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgba(202,3,32,255)]">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgb(206,32,39,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgb(206,32,39,255)]">
                   Coming Soon!
                   </div>
                 )}
@@ -1568,7 +1568,7 @@ const Properties = () => {
                shadow-md z-10 hover:shadow-lg transition"
         >
           <ChevronRight 
-            className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+            className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
           />
         </button>
       )}
@@ -1578,7 +1578,7 @@ const Properties = () => {
           </div>
         </div>
         <Link href="/properties/newdevelopment">
-  <button className="block md:hidden mx-auto text-sm mb-10 md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
+  <button className="block md:hidden mx-auto text-sm mb-10 md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
     Click Here
   </button>
 </Link>
@@ -1596,7 +1596,7 @@ const Properties = () => {
     </p>
     {/* Right: Button */}
     <Link href="https://www.kw.com/search/sale?viewport=56.41671222773751%2C120.63362495324327%2C-14.684966046563696%2C-6.807781296756721">
-    <button className="hidden md:flex text-sm font-semibold md:text-base  bg-[rgba(202,3,32,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
+    <button className="hidden md:flex text-sm font-semibold md:text-base  bg-[rgb(206,32,39,255)] text-white px-4 py-2 rounded-lg hover:bg-red-950 transition">
       Click Here To View All International Properties
     </button>
     </Link>
@@ -1611,7 +1611,7 @@ const Properties = () => {
                shadow-md z-10 hover:shadow-lg transition"
   >
     <FaChevronLeft 
-      className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+      className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
     />
   </button>
 )}
@@ -1628,7 +1628,7 @@ const Properties = () => {
         });
         if (internationalListings.length === 0) {
           return (
-            <div className="w-full h-[200px] flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgba(202,3,32,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgba(202,3,32,255)]">
+            <div className="w-full h-[200px] flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgb(206,32,39,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgb(206,32,39,255)]">
               Coming Soon!
             </div>
           );
@@ -1680,7 +1680,7 @@ const Properties = () => {
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgba(202,3,32,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgba(202,3,32,255)]">
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-red-200 via-white to-red-100 text-[rgb(206,32,39,255)] font-bold text-lg md:text-2xl animate-pulse rounded-xl border-2 border-dashed border-[rgb(206,32,39,255)]">
                   Coming Soon!
                   </div>
                 )}
@@ -1708,7 +1708,7 @@ const Properties = () => {
                shadow-md z-10 hover:shadow-lg transition"
         >
           <ChevronRight 
-            className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+            className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
           />
         </button>
       )}
@@ -1719,7 +1719,7 @@ const Properties = () => {
           </div>
         </div>
         <Link href="https://www.kw.com/search/sale?viewport=56.41671222773751%2C120.63362495324327%2C-14.684966046563696%2C-6.807781296756721">
-    <button className="block md:hidden mx-auto mb-10 text-sm md:text-base font-semibold bg-[rgba(202,3,32,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
+    <button className="block md:hidden mx-auto mb-10 text-sm md:text-base font-semibold bg-[rgb(206,32,39,255)] text-white px-4 py-1 rounded-lg hover:bg-red-700 transition">
       Click Here
     </button>
     </Link>
@@ -1734,12 +1734,12 @@ const Properties = () => {
             height={400}
             className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
           />
-          <button className="bg-[rgba(202,3,32,255)] w-40 text-white px-8 py-1.5 text-xs font-semibold rounded-full block mx-auto md:hidden mt-4 mb-4"  onClick={() => router.push('/contactUs')}>
+          <button className="bg-[rgb(206,32,39,255)] w-40 text-white px-8 py-1.5 text-xs font-semibold rounded-full block mx-auto md:hidden mt-4 mb-4"  onClick={() => router.push('/contactUs')}>
             JOIN US
           </button>
         </div>
         {/* Red bar with centered KW logo */}
-        <div className="order-2 md:order-1 bg-[rgba(202,3,32,255)] flex items-center justify-center h-[25px] md:h-[80px]">
+        <div className="order-2 md:order-1 bg-[rgb(206,32,39,255)] flex items-center justify-center h-[25px] md:h-[80px]">
           <Image
             src="/kwline1.png"
             alt="KW Logo Center"
@@ -1751,7 +1751,7 @@ const Properties = () => {
       </div>
       {/* Red horizontal line */}
       <div className="hidden md:flex justify-center items-center my-20 col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-8">
-        <hr className="md:w-160 w-60 mx-auto bg-[rgba(202,3,32,255)] border-0  h-[2px]" />
+        <hr className="md:w-160 w-60 mx-auto bg-[rgb(206,32,39,255)] border-0  h-[2px]" />
       </div>
       {/* Dynamic Property Types Section */}
      

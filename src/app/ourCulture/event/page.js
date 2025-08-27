@@ -69,7 +69,7 @@ export default function Page(){
               <p className="text-black text-sm line-clamp-3">{post.content}</p>
               <button
                 onClick={() => handleReadMore(post)}
-                className="mt-2 inline-block px-4 py-1 bg-[rgba(202,3,32,255)] text-black rounded transition-colors text-sm"
+                className="mt-2 inline-block px-4 py-1 bg-[rgb(206,32,39,255)] text-black rounded transition-colors text-sm"
               >
                 Read More
               </button>

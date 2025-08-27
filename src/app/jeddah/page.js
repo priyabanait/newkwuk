@@ -29,9 +29,11 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/header';
-import Footer from '@/components/footer';
+import Footer from '@/components/newfooter';
 import Box from '@/components/box';
 import Image from 'next/image';
+import { FaPhoneAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 const Jeddah = () => {
 
     const [form, setForm] = useState({
@@ -86,7 +88,8 @@ const Jeddah = () => {
             city: agent.city,
             image: agent.photo || agent.image,
             title: agent.title || '',
-            _id: agent._id || agent.id
+            _id: agent._id || agent.id,
+            kw_id: agent.kwId || agent.kw_id || ""
           })) : [];
           setTeamMembers(mappedAgents);
         } catch (err) {
@@ -109,121 +112,83 @@ const Jeddah = () => {
          }
        /> 
         {/* Combined Section */}
-      <div className="bg-gray-200 rounded-2xl border-gray-200 my-8 overflow-hidden">
-        <div className="flex flex-col md:flex-row">
-          {/* Left Side (Map + Address) */}
-         <div className="flex-1 p-6 flex justify-center items-center">
-  <div className="w-full md:max-w-full">
-  <div className="text-center mb-4">
-  <div className="font-bold uppercase tracking-widest text-sm flex justify-between max-w-xs mx-auto pb-4">
-    <span>EMAIL</span>
-    <span>TELEPHONE</span>
-  </div>
-  <hr className="border-t border-[rgba(202,3,32,255)] w-120 mx-auto mb-4" />
-  <p className="text-[0.6rem] md:text-sm font-medium mt-2 tracking-wide">
-  Al Khalidiyyah, Jeddah 23421
-  </p>
-</div>
+        <section className="mx-auto px-8 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Left Side */}
+      <div className="space-y-6">
+        <h1 className="text-3xl font-semibold leading-snug">
+          Shape Your <br></br><span className="text-[rgb(206,32,39,255)]">Future</span> in Real Estate
+        </h1>
+        <p className="text-lg leading-relaxed">
+  Are you ready to unlock your potential in the real estate industry? Join us at Keller
+  Williams Saudi Arabia Career Night to learn more about how you can become a successful
+  real estate agent with the world&apos;s largest real estate franchise.
+</p>
 
 
-    {/* Map */}
-    <div className="w-full h-[300px] mt-15 md:px-15">
-      <iframe
-        src='https://www.google.com/maps?q=Jeddah,+Saudi+Arabia&output=embed'
-        className="w-full h-full rounded"
-        loading="lazy"
-      />
-    </div>
-  </div>
-</div>
-
-          {/* Vertical Line */}
-          <div className="hidden md:flex items-stretch">
-            <div className="w-[2px] bg-gray-300 mx-1"></div>
+        {/* Contact Info */}
+        <div className="flex flex-cols-row gap-8 justify-center space-y-2 my-8 text-base text-gray-700">
+          <div className="flex items-center gap-2">
+            <span className="text-lg">📞</span>
+            <a href='tel:+966 500000000'>+966 500000000</a>
           </div>
+          <div className="flex items-center gap-2">
+            <span className="text-lg">✉️</span>
+            <a href='mailto:info@kwsaudiarabia.com'>info@kwsaudiarabia.com</a>
+          </div>
+        </div>
 
-          {/* Right Side (Form) */}
-<div className="flex-1 p-6 flex justify-center items-center">
-  <form className="w-full md:max-w-full space-y-4 py-10 md:px-15" onSubmit={handleSubmit}>
-    <div>
-      <label className="block mb-1 md:text-base text-base font-sm">First Name</label>
-      <input
-        type="text"
-        name="firstName"
-        value={form.firstName}
-        onChange={handleChange}
-        placeholder="First name"
-        className="w-full text-base p-3 mt-2 border-white rounded bg-white focus:outline-none"
-        required
-      />
-    </div>
-    <div className='py-2'>
-      <label className="block mb-1 md:text-base text-base font-sm">Last Name</label>
-      <input
-        type="text"
-        name="lastName"
-        value={form.lastName}
-        onChange={handleChange}
-        placeholder="Last name"
-        className="w-full p-3 text-base mt-2 border-white rounded bg-white focus:outline-none"
-        required
-      />
-    </div>
-    <div className='py-2'>
-      <label className="block mb-1 md:text-base text-base font-sm">Email *</label>
-      <input
-        type="email"
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-        placeholder="Email"
-        className="w-full p-3 text-base mt-2 border-white rounded bg-white focus:outline-none"
-        required
-      />
-    </div>
-    <div className='py-2'>
-      <label className="block mb-1 md:text-base text-base font-sm">Address To</label>
-      <select
-        name="addressTo"
-        value={form.addressTo}
-        onChange={handleChange}
-        className="w-full p-3 text-base mt-2 border-white rounded bg-white focus:outline-none"
-        required
-      >
-        <option value="">Select</option>
-        <option value="sales">Sales</option>
-        <option value="support">Support</option>
-      </select>
-    </div>
-    <div className='py-2'>
-      <label className="block mb-1  md:text-base text-base font-sm">Message *</label>
-      <textarea
-        name="message"
-        value={form.message}
-        onChange={handleChange}
-        placeholder="Message"
-        rows="2"
-        className="w-full p-4 text-base border-white mt-2 rounded bg-white focus:outline-none"
-        required
-      />
-    </div>
-    <button
-      type="submit"
-      className="w-full md:w-32 bg-[rgba(202,3,32,255)] text-white py-2 rounded-full text-base font-semibold hover:bg-gray-600 transition"
-    >
-      Submit
-    </button>
-    {status === 'success' && (
-      <p className="text-green-600 text-center mt-2">Thank you! Your message has been sent.</p>
-    )}
-    {status === 'error' && (
-      <p className="text-red-600 text-center mt-2">Sorry, there was an error. Please try again.</p>
-    )}
-  </form>
-</div>
-
+        {/* Google Map */}
+        <div className="w-full h-90">
+          <iframe
+            src='https://www.google.com/maps?q=Jeddah,+Saudi+Arabia&output=embed'
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
       </div>
+
+      {/* Right Side Form */}
+      <div className="bg-white shadow-md p-6">
+        <h2 className="text-2xl font-medium mb-6  flex justify-center">Contact Us Today</h2>
+        <form className="space-y-4">
+          <div>
+            <label className="block text-sm mb-2 font-medium">Full Name</label>
+            <input type="text" placeholder="First Name" className="w-full border border-gray-300 p-2" required />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-2 font-medium">Mobile Number</label>
+            <input type="text" placeholder="Mobile" className="w-full border border-gray-300 p-2" required />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-2 font-medium">Email Address</label>
+            <input type="email" placeholder="Email" className="w-full border border-gray-300 p-2" required />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-2 font-medium">City</label>
+            <input type="text" placeholder="City" className="w-full border border-gray-300 p-2" required />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-2 font-medium">Message</label>
+            <textarea placeholder="Message" rows={4} className="w-full border border-gray-300 p-2"></textarea>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-[rgb(206,32,39,255)] text-white font-semibold py-2 hover:bg-red-800 transition"
+          >
+            SUBMIT
+          </button>
+        </form>
+      </div>
+    </section>
         <div className="min-h-screen bg-white mt-4 md:mt-20">
         {/* Changed outer container to stack on mobile */}
         <div className="flex flex-col md:flex-row border-t border-b border-r border-black">
@@ -235,7 +200,7 @@ const Jeddah = () => {
                          py-4 md:py-0">
             <div className="text-center px-4">
               <h2 className="text-3xl font-semibold mb-2">OUR TEAM</h2>
-              <div className="w-30 h-0.5 bg-[rgba(202,3,32,255)] mb-2 mx-auto border-0 mt-4 md:mt-10"></div>
+              <div className="w-30 h-0.5 bg-[rgb(206,32,39,255)] mb-2 mx-auto border-0 mt-4 md:mt-10"></div>
               <p className="text-sm tracking-wider mt-4 md:mt-10 text-gray-600">JEDDAH</p>
             </div>
           </div>
@@ -244,7 +209,7 @@ const Jeddah = () => {
           <div className="w-full md:w-1/2">
       {loading && (
         <div className="flex justify-center items-center h-60">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[rgba(202,3,32,255)] border-solid"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[rgb(206,32,39,255)] border-solid"></div>
         </div>
       )}
       {error && <div className="text-red-500">{error}</div>}
@@ -287,25 +252,29 @@ const Jeddah = () => {
                 <h3 className="text-xs font-normal md:font-semibold md:text-base md:tracking-[0.2em] uppercase md:mb-2">{agent.name}</h3>
                 {/* <p className="text-sm text-gray-500 ml-auto">{agent.city}</p> */}
               </div>
-              <p className="md:text-sm text-[0.7rem]  mb-2 md:mb-2 break-all">{agent.phone}</p>
-              <p className="md:text-sm text-[0.7rem] mb-4 md:mb-12 break-all">
-                {agent.email}
-              </p>
-              <div className="space-y-1">
-                <a href="/instantvaluation" className="block md:text-sm text-[0.8rem]">Get Evaluation</a>
-                <hr  className='hidden md:flex w-60 bg-[rgba(202,3,32,255)] h-[1px] my-2 border-0'/>
-                <a 
-                  href="/jeddahagentdetails" 
-                  className="block md:text-sm text-[0.8rem] cursor-pointer hover:text-gray-600"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    localStorage.setItem('selectedAgent', JSON.stringify(agent));
-                    window.location.href = '/jeddahagentdetails';
-                  }}
-                >
-                  View Details and Properties
-                </a>
-              </div>
+              <p className="md:text-sm text-[0.7rem] text-[rgb(206,32,39,255)]  mb-2 md:mb-2 break-all">Head of operations</p>
+              <div className="mt-6 space-y-2">
+  <p className="flex items-center gap-2 md:text-sm text-sm mb-2 md:mb-2 break-all">
+    <FaPhoneAlt className="text-gray-600" />
+    {agent.phone}
+  </p>
+  <p className="flex items-center gap-2 md:text-sm text-[0.7rem] mb-4 md:mb-12 break-all">
+    <MdEmail className="text-gray-600" />
+    {agent.email}
+  </p>
+</div>
+<div className="flex justify-end">
+  <Image
+    src="/headerlogo.png"
+    alt="Keller Williams"
+    width={180}
+    height={50}
+    className="mb-4 w-28 md:w-44 lg:w-48 h-auto"
+  />
+</div>
+
+
+              
             </div>
           </article>
 
@@ -331,7 +300,7 @@ const Jeddah = () => {
                       className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
                     />
                   </div>
-                   <hr className="w-8/12 md:w-6/12 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-10 mb-10" />
+                  
           <Footer></Footer>
         </div>
     );

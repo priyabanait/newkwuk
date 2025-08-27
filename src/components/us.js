@@ -36,7 +36,7 @@ const Contact = (props) => {
     className="object-cover rounded-full w-full h-full" 
   />
 </div>
-<hr className='w-25 h-[1.3px] bg-[rgba(202,3,32,255)] border-0'/>
+<hr className='w-25 h-[1.3px] bg-[rgb(206,32,39,255)] border-0'/>
 <h3 className="text-lg font-normal py-4 text-white text-center tracking-[0.2em] md:tracking-[0.3em] lg:tracking-[0.4em] leading-relaxed">
 {props.h3}
 </h3>
@@ -70,7 +70,7 @@ const Contact = (props) => {
           <h1 className="text-xl md:text-5xl font-normal text-gray-800">
            KW SAUDI ARABIA
           </h1>
-          <hr className="w-60 md:w-60 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-6 md:mt-14" />
+          <hr className="w-60 md:w-60 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-6 md:mt-14" />
           <div className="mt-10">
             <p className="text-xs md:text-[1rem]">
             You Join A Winning Team Of Real Estate Professionals Who Are Leading The  Industry To Greater Heights
@@ -82,7 +82,7 @@ const Contact = (props) => {
      {/* Form Section */}
            <div className="min-h-screen md:py-26">
              {/* Title Banner */}
-             <div className="bg-[rgba(202,3,32,255)] md:py-2 py-2 flex justify-center relative">
+             <div className="bg-[rgb(206,32,39,255)] md:py-2 py-2 flex justify-center relative">
 
 <div className="relative">
   {/* KW Logo */}
@@ -247,7 +247,7 @@ const Contact = (props) => {
                      <div className="mt-8 flex justify-end">
                      <button
                     type="submit"
-                    className="w-full md:w-32 bg-[rgba(202,3,32,255)] text-white py-2 rounded-full text-base font-semibold hover:bg-gray-600 transition"
+                    className="w-full md:w-32 bg-[rgb(206,32,39,255)] text-white py-2 rounded-full text-base font-semibold hover:bg-gray-600 transition"
                   >
                     Submit
                   </button>
@@ -269,7 +269,7 @@ const Contact = (props) => {
                    />
                  </div>
            
-                 <hr className="w-8/12 md:w-5/12 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-2 md:mt-14 mb-10" />
+                 <hr className="w-8/12 md:w-5/12 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-2 md:mt-14 mb-10" />
       
       <Footer></Footer>
     </div>

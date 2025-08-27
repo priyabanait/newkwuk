@@ -182,10 +182,10 @@ const Header = () => {
                     className={
                       openSubmenu === item.key
                         ? (["JOIN US", "CONTACT US"].includes(item.label)
-                          ? 'text-[rgba(202,3,32,255)] font-semibold underline'
-                          : 'text-[rgba(202,3,32,255)] font-semibold underline')
+                          ? 'text-[rgb(206,32,39,255)] font-semibold underline'
+                          : 'text-[rgb(206,32,39,255)] font-semibold underline')
                         : ["JOIN US", "CONTACT US"].includes(item.label)
-                        ? 'text-[rgba(202,3,32,255)] font-semibold'
+                        ? 'text-[rgb(206,32,39,255)] font-semibold'
                         : 'text-white'
                     }
                   >
@@ -195,14 +195,14 @@ const Header = () => {
                     openSubmenu === item.key ? (
                       <FaChevronUp size={14} className="text-white" />
                     ) : (
-                      <FaChevronDown size={14} className="text-[rgba(202,3,32,255)]" />
+                      <FaChevronDown size={14} className="text-[rgb(206,32,39,255)]" />
                     )
                   )}
                 </div>
               ) : (
                 <Link
                   href={item.href}
-                  className={`block py-1 font-semibold transition-colors ${["JOIN US", "CONTACT US"].includes(item.label) ? 'text-[rgba(202,3,32,255)] hover:text-[rgba(202,3,32,255)]' : 'text-white hover:text-[rgba(202,3,32,255)]'}`}
+                  className={`block py-1 font-semibold transition-colors ${["JOIN US", "CONTACT US"].includes(item.label) ? 'text-[rgb(206,32,39,255)] hover:text-[rgb(206,32,39,255)]' : 'text-white hover:text-[rgb(206,32,39,255)]'}`}
                 >
                   {item.label}
                 </Link>

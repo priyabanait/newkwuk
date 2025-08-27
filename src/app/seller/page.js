@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import Header from '@/components/header';
-import Footer from '@/components/footer';
+import Footer from '@/components/newfooter';
 import Box from '@/components/box';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
@@ -75,7 +75,7 @@ Your KW Agent will guide you with a few suggestions such as  +`,
       <Header />
     <Box
         src='/steps_to_sell_your_home.jpg'
-          h3="Steps for Sell Your Home"
+          h3="KW Five Steps to Sell"
           image="https://static.wixstatic.com/media/36a881_0ed2d4fa08bb4022acbbb9e48b783092~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4-removebg-preview.png"
         />
     
@@ -85,9 +85,9 @@ Your KW Agent will guide you with a few suggestions such as  +`,
       <div className=" p-4 md:p-0 max-w-full mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
             <div className="w-full md:w-auto text-center">
-            <h1 className="text-lg md:text-3xl md:py-8 py-4">Five Steps To Sell</h1>
-            {/* <hr className="w-8/12 md:w-5/12 mx-auto border-0 bg-[rgba(202,3,32,255)] h-[1.5px] mt-2 md:mt-10 mb-10" /> */}
-<p className='text-xs md:text-[1rem]'>
+            <h1 className="text-2xl md:text-3xl md:py-8 py-4">Five Steps To Sell</h1>
+            {/* <hr className="w-8/12 md:w-5/12 mx-auto border-0 bg-[rgb(206,32,39,255)] h-[1.5px] mt-2 md:mt-10 mb-10" /> */}
+<p className='text-sm md:text-[1rem]'>
   You&rsquo;re Ready To Sell Your Property. And, While You&rsquo;re Looking Forward To Seeing The Word &quot;SOLD&quot; 
   Posted From The Curb, You Know There&rsquo;s A Lot To Consider Along The Way. One Of Your First Decisions Is To Select A Real Estate Company And Real Estate Agent Who&rsquo;ll Join You In The Process.
 </p>
@@ -114,7 +114,7 @@ Your KW Agent will guide you with a few suggestions such as  +`,
       }}
     >
      <div className="w-6 h-6 relative flex items-start justify-center">
-  <span className="w-8 h-[2.5px] bg-[rgba(202,3,32,255)]" />
+  <span className="w-8 h-[2.5px] bg-[rgb(206,32,39,255)]" />
 </div>
 
     </div>
@@ -129,10 +129,10 @@ Your KW Agent will guide you with a few suggestions such as  +`,
     {/* ✅ MOBILE ONLY */}
     <div className={`md:hidden mx-4 mb-4 ${step.align === 'right' ? 'text-left' : 'text-right'}`}>
     
-      <h2 className="text-[rgba(202,3,32,255)] md:text-3xl text-xl font-normal  inline-block">
+      <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-2xl font-normal  inline-block">
       {step.title}
     </h2>
-      <p className="whitespace-pre-line mt-2 text-xs">{step.content}</p>
+      <p className="whitespace-pre-line mt-2 text-sm">{step.content}</p>
     </div>
 
     {/* ✅ DESKTOP ONLY */}
@@ -140,14 +140,14 @@ Your KW Agent will guide you with a few suggestions such as  +`,
       <>
         <div className="hidden md:block" />
         <div className="hidden md:block text-left px-0 md:px-12">
-          <h2 className="text-[rgba(202,3,32,255)] text-xl md:text-3xl font-normal ">{step.title}</h2>
+          <h2 className="text-[rgb(206,32,39,255)] text-xl md:text-3xl font-normal ">{step.title}</h2>
           <p className="whitespace-pre-line mt-2 md:mt-4 md:text-[1rem] text-[0.8rem]">{step.content}</p>
         </div>
       </>
     ) : (
       <>
         <div className="hidden md:block text-right px-0 md:px-12">
-          <h2 className="text-[rgba(202,3,32,255)] text-xl md:text-3xl font-normal ">{step.title}</h2>
+          <h2 className="text-[rgb(206,32,39,255)] text-xl md:text-3xl font-normal ">{step.title}</h2>
           <p className="whitespace-pre-line mt-2 md:mt-4 md:text-[1rem] text-[0.8rem]">{step.content}</p>
         </div>
         <div className="hidden md:block" />
@@ -167,12 +167,12 @@ Your KW Agent will guide you with a few suggestions such as  +`,
       className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
       
     />
-    <button className="bg-[rgba(202,3,32,255)] w-40 text-white px-8 py-1.5 text-[0.6rem] rounded-full block mx-auto md:hidden mt-4 mb-4"  onClick={() => router.push('/contactUs')}>
+    <button className="bg-[rgb(206,32,39,255)] w-40 text-white px-8 py-1.5 text-[0.6rem] rounded-full block mx-auto md:hidden mt-4 mb-4"  onClick={() => router.push('/contactUs')}>
       JOIN US
     </button>
   </div>
  
-       <hr className="hidden md:block w-8/12 md:w-5/12 mx-auto border-0 bg-[rgba(202,3,32,255)] h-[1.5px] mt-2 md:mt-14 mb-10" />
+      
       <Footer />
     </div>
   );

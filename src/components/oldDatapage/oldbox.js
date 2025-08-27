@@ -33,7 +33,7 @@ const Box = ({ src, image, h3 }) => {
     className="object-cover rounded-full w-full h-full" 
   />
 </div>
-<hr className='w-25 h-[1.3px] bg-[rgba(202,3,32,255)] border-0'/>
+<hr className='w-25 h-[1.3px] bg-[rgb(206,32,39,255)] border-0'/>
 <h3 className="text-lg font-normal py-4 text-white text-center tracking-[0.2em] md:tracking-[0.3em] lg:tracking-[0.4em] leading-relaxed">
   {h3}
 </h3>
@@ -55,7 +55,7 @@ const Box = ({ src, image, h3 }) => {
                     className="object-cover rounded-full h-40 w-40"
                   />
                 </div>
-                <div className="w-60 h-0.5 bg-[rgba(202,3,32,255)]"></div>
+                <div className="w-60 h-0.5 bg-[rgb(206,32,39,255)]"></div>
               </div>
             </div>
           </div>

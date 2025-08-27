@@ -1,5 +1,7 @@
 import React from 'react'
 import Image from 'next/image';
+import { FaPhoneAlt } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 export default function CeoTeam() {
     const teamMembers = [
         {
@@ -47,31 +49,29 @@ export default function CeoTeam() {
       ];
   return (
     <div>
-        <div className=" pt-4 md:pt-10 md:mx-10 mx-6 ">
-  <div className="flex flex-col md:flex-row md:px-20 ">
+        <div className=" pt-4 mx-10 md:mx-10 ">
+        <div className="flex flex-col md:flex-row md:px-20 items-start">
     {/* Left Image */}
-    <div className="  md:w-182 h-[40vh]  md:h-[500px] flex justify-center items-start">
+    <div className="  md:w-140 h-[40vh] w-[40vh] md:h-[400px]  items-start">
   <Image
-    src="https://static.wixstatic.com/media/36a881_b66311c7d0ce4bab88e85a84321bd1b0~mv2.jpg/v1/fill/w_798,h_934,fp_0.50_0.33,q_85,enc_avif,quality_auto/Pic153%20(4).jpg"
+    src='/ceoimage.png'
     alt="CEO"
     width={800}
     height={500}
-    className="h-[40vh] md:h-[500px]   md:w-182 border rounded-[4rem] border-gray-400"
+    className="h-[40vh] md:h-[400px] w-[40vh] md:w-140 border  border-gray-400"
   />
 </div>
 
 
     {/* Right Content - Changed to items-start */}
-    <div className="w-full md:w-full flex flex-col justify-start items-center text-center mt-8 md:mt-12 px-2 md:px-10">
-      <h1 className="text-4xl md:text-5xl font-normal tracking-wide">
-        MEET OUR <span className="text-[rgba(202,3,32,255)] font-bold">CEO</span>
+    <div className="w-full md:w-full flex flex-col justify-end items-end text-end mt-10  px-2 md:px-10">
+      <h1 className="text-xl md:text-2xl font-semibold tracking-wide text-[rgb(206,32,39,255)]">
+        MEET OUR CEO
       </h1>
 
-      <h2 className="text-[rgba(202,3,32,255)] py-4 md:py-4 mt-4 md:mt-14 text-[0.7rem] md:text-[0.9rem] font-semibold tracking-wider">
-        CEO MESSAGE
-      </h2>
+     
 
-      <p className="mt-4 md:text-[1rem] text-xs text-gray-700 md:leading-5 leading-normal max-w-md">
+      <p className="mt-4 md:text-lg  text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
         More than ever, we want to thank and recognize our agents and partners
         for diligently bringing their very
         
@@ -83,22 +83,24 @@ export default function CeoTeam() {
         ourselves how we can best support them.
       </p>
 
-      <p className="mt-6 md:text-[1rem] text-xs text-gray-700 md:leading-5 leading-normal max-w-md">
+      <p className="mt-4 md:text-lg  text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
         KW has cultivated a agent-  
 
         centric, technology-driven, and
 
         education-based culture that rewards agents as stakeholders.
       
-        Regional team members, market center team members, and 
+       </p> 
+       <p className="mt-4 md:text-lg  text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
+       Regional team members, market center team members, and 
       
-        agent partners. No
-        one succeeds alone, and  
-      
+      agent partners. No
+      one succeeds alone, and  
+    
 
-        this is truly a shared moment in recognition of
-        our continuous achievements together.</p>
-     
+      this is truly a shared moment in recognition of
+      our continuous achievements together.
+      </p> 
     </div>
   </div>
 </div>
@@ -113,8 +115,8 @@ export default function CeoTeam() {
                    py-6 md:py-0">
       <div className="text-center px-4">
         <h2 className="text-3xl md:text-4xl md:font-normal font-semibold mb-2">OUR TEAM</h2>
-        <div className="w-30 h-0.5 bg-[rgba(202,3,32,255)] border-0 mb-2 mx-auto mt-4 md:mt-10"></div>
-        <p className="text-sm tracking-wider mt-4 md:mt-10">REGION TEAM</p>
+        <div className="w-30 h-0.5 bg-[rgb(206,32,39,255)] border-0 mb-2 mx-auto mt-4 md:mt-10"></div>
+        <p className="text-sm tracking-wider mt-4 md:mt-10">Regional Team</p>
       </div>
     </div>
 
@@ -133,18 +135,33 @@ export default function CeoTeam() {
   />
 </div>
 
-            <div className="flex-1 text-left">
-            <p className="text-xs font-normal md:font-semibold md:text-base md:tracking-[0.2em] uppercase md:mb-2 break-all">
-                {member.name}
-              </p>
-              <hr className="w-37 md:w-60 h-[1px] bg-[rgba(202,3,32,255)] border-0 my-2 mx-0"></hr>
-              <p className="font-sans font-normal not-italic no-underline md:text-[0.8rem] text-[10px] leading-[1.6] tracking-normal">
- 
-                {member.title}
-              </p>
-              <p className="text-xs md:text-sm mb-1 text-gray-600 mt-8 md:mt-28 break-all">{member.email}</p>
-              <p className="text-xs md:text-sm text-gray-600">{member.phone}</p>
-            </div>
+<div className="flex-1">
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 ">
+                <h3 className="text-xs font-normal md:font-semibold md:text-base md:tracking-[0.2em] uppercase md:mb-2">{member.name}</h3>
+                {/* <p className="text-sm text-gray-500 ml-auto">{agent.city}</p> */}
+              </div>
+              <p className="md:text-sm text-[0.7rem] text-[rgb(206,32,39,255)]  mb-2 md:mb-2 break-all">Head of operations</p>
+              <div className="mt-6 space-y-2">
+  <p className="flex items-center gap-2 md:text-sm text-sm mb-2 md:mb-2 break-all">
+    <FaPhoneAlt className="text-gray-600" />
+    {member.phone}
+  </p>
+  <p className="flex items-center gap-2 md:text-sm text-[0.7rem] mb-4 md:mb-12 break-all">
+    <MdEmail className="text-gray-600" />
+    {member.email}
+  </p>
+</div>
+<div className="flex justify-end">
+  <Image
+    src="/headerlogo.png"
+    alt="Keller Williams"
+    width={180}
+    height={50}
+    className="mb-4 w-28 md:w-44 lg:w-48 h-auto"
+  />
+</div>
+
+ </div>
           </div>
           {index !== teamMembers.length - 1 && (
             <hr className="border-t border-black" />

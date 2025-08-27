@@ -21,10 +21,10 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row md:justify-between md:border md:border-gray-100 md:rounded-xl items-center md:items-start text-center md:text-left md:border-b md:p-8 pb-2 md:pb-4 text-xs md:text-sm md:bg-gray-100 md:text-gray-700">
           {/* Contact Us Title */}
           <div className="flex items-center justify-center space-x-2 font-semibold mb-2 md:mb-0 mt-4 md:mt-0 md:py-0">
-            <span className=" text-lg text-[rgba(202,3,32,255)]">CONTACT US</span>
+            <span className=" text-lg text-[rgb(206,32,39,255)]">CONTACT US</span>
           </div>
           
-          <hr className="block md:hidden w-20 md:w-5/12 border-0 mx-auto bg-[rgba(202,3,32,255)]  h-[2px] mt-1 md:mt-14 mb-5" />
+          <hr className="block md:hidden w-20 md:w-5/12 border-0 mx-auto bg-[rgb(206,32,39,255)]  h-[2px] mt-1 md:mt-14 mb-5" />
           
           <div className="flex flex-col items-center justify-center mb-2 md:hidden w-full">
             <span className="text-sm mb-2">EMAIL  <span className="inline-block w-2" />  - <span className="inline-block w-4" />  <span className="text-[0.8rem] font-bold">INFO@KWSAUDIARABIA.COM</span></span>
@@ -77,7 +77,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <hr className="block md:hidden w-40 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[2px]" />
+        <hr className="block md:hidden w-40 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[2px]" />
 
         {/* Main Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-0 md:gap-4 w-full md:mx-0 mx-4 px-2">
@@ -188,16 +188,16 @@ const Footer = () => {
               </div>
               
               {/* Label - Mobile only */}
-              <p className="block md:hidden text-[rgba(202,3,32,255)]  md:text-[0.8rem] mt-4 mb-2">{label}</p>
+              <p className="block md:hidden text-[rgb(206,32,39,255)]  md:text-[0.8rem] mt-4 mb-2">{label}</p>
 
               {/* Items list */}
-              <div className="border-l border-[rgba(202,3,32,255)] md:border-gray-300 pl-3 ml-4">
+              <div className="border-l border-[rgb(206,32,39,255)] md:border-gray-300 pl-3 ml-4">
                 <ul className="md:text-base text-xs space-y-1 md:space-y-6 text-left">
                   {items.map((item, index) => (
-                    <li key={index} className="hover:text-[rgba(202,3,32,255)] transition-colors">
+                    <li key={index} className="hover:text-[rgb(206,32,39,255)] transition-colors">
                       <a href={item.path} className="block w-full py-1">
                       {["LOGIN", "Join Us", "Contact Us"].includes(item.name) ? (
-  <span className="text-[rgba(202,3,32,255)] font-semibold">{item.name}</span>
+  <span className="text-[rgb(206,32,39,255)] font-semibold">{item.name}</span>
 ) : (
   item.name
 )}

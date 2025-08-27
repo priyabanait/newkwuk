@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import Header from '@/components/header';
-import Footer from '@/components/footer';
+import Footer from '@/components/newfooter';
 import Box from '@/components/box';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
@@ -95,7 +95,7 @@ What's Next?  +`,
 
         <Box
         src='/seller_guide_page.jpeg'
-          h3="Seller Guide"
+          h3="KW Seller Guide"
           image="https://static.wixstatic.com/media/36a881_0ed2d4fa08bb4022acbbb9e48b783092~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4-removebg-preview.png"
         />
     
@@ -105,8 +105,8 @@ What's Next?  +`,
   <div className=" p-4 md:p-0 max-w-full mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-0 md:mb-8">
       <div className="w-full md:w-auto"> 
-        <h1 className="text-lg md:text-3xl md:py-8 py-4">Selling Your <span className='text-[rgba(202,3,32,255)]'>Home</span> Guide</h1>
-        <p className="text-xs md:text-[1rem]">
+        <h1 className="text-2xl md:text-3xl md:py-8 py-4">Selling Your <span className='text-[rgb(206,32,39,255)]'>Home</span> Guide</h1>
+        <p className="text-sm md:text-[1rem]">
         You&rsquo;re Ready To Sell Your Property. And, While You&rsquo;re Looking Forward To Seeing The Word &quot;SOLD&quot; Posted From The Curb, You Know There&rsquo;s A Lot To Consider Along The Way.
        
         
@@ -133,7 +133,7 @@ What's Next?  +`,
       }}
     >
      <div className="w-6 h-6 relative flex items-start justify-center">
-  <span className="w-6 h-[2.5px] bg-[rgba(202,3,32,255)]" />
+  <span className="w-6 h-[2.5px] bg-[rgb(206,32,39,255)]" />
 </div>
 
     </div>
@@ -153,10 +153,10 @@ What's Next?  +`,
 
   {/* Title - Reverse align compared to number */}
   <div className={`${step.align === 'right' ? 'text-left' : 'text-right'}`}>
-    <h2 className="text-[rgba(202,3,32,255)] text-3xl font-normal  inline-block">
+    <h2 className="text-[rgb(206,32,39,255)] text-2xl md:text-3xl font-normal  inline-block">
       {step.title}
     </h2>
-    <p className="whitespace-pre-line mt-2 text-xs">{step.content}</p>
+    <p className="whitespace-pre-line mt-2 text-sm">{step.content}</p>
   </div>
 </div>
 
@@ -169,7 +169,7 @@ What's Next?  +`,
                     <span className="text-gray-500 text-5xl font-normal md:mb-4">{`${index + 1}.`}</span>
                   </div>
                   <div className="hidden md:block text-left px-0 md:px-8">
-                    <h2 className="text-[rgba(202,3,32,255)] md:text-3xl text-xl font-normal ">
+                    <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-xl font-normal ">
                       {step.title}
                     </h2>
                     <p className="whitespace-pre-line mt-2 md:mt-4 leading-5 text-[1rem]">{step.content}</p>
@@ -178,7 +178,7 @@ What's Next?  +`,
               ) : (
                 <>
                   <div className="hidden md:block text-left md:text-right px-0 md:px-8">
-                    <h2 className="text-[rgba(202,3,32,255)] md:text-3xl text-xl font-normal ">
+                    <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-xl font-normal ">
                       {step.title}
                     </h2>
                     <p className="whitespace-pre-line mt-2 leading-5 md:mt-4 text-[1rem]">{step.content}</p>
@@ -205,7 +205,7 @@ What's Next?  +`,
          />
        </div>
  
-       <hr className="hidden md:block w-8/12 md:w-5/12 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px] mt-2 md:mt-14 mb-10" />
+       
       <Footer />
     </div>
   );

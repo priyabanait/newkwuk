@@ -107,7 +107,7 @@ const Home = () => {
       <div
         className={`flex-1 text-center py-0 md:py-2 mx-4 cursor-pointer ${
           i === 0 
-            ? "text-[rgba(202,3,32,255)] bg-white font-bold" 
+            ? "text-[rgb(206,32,39,255)] bg-white font-bold" 
             : "text-gray-600 font-normal"
         }`}
       >
@@ -146,7 +146,7 @@ const Home = () => {
     </div>
 
     {/* Search Button */}
-    <button className="bg-[rgba(202,3,32,255)] text-white px-12 py-2 mr-1 rounded-r-full rounded-l-full text-xs md:text-base font-semibold">
+    <button className="bg-[rgb(206,32,39,255)] text-white px-12 py-2 mr-1 rounded-r-full rounded-l-full text-xs md:text-base font-semibold">
       Search
     </button>
   </div>
@@ -176,7 +176,7 @@ const Home = () => {
 </div>
 
     {/* Search Button (full width below) */}
-    <button className="bg-[rgba(202,3,32,255)] text-white justify-center  items-center w-30 py-2 text-xs font-semibold rounded-full mt-1 focus:outline-none focus:ring-0 block mx-auto">
+    <button className="bg-[rgb(206,32,39,255)] text-white justify-center  items-center w-30 py-2 text-xs font-semibold rounded-full mt-1 focus:outline-none focus:ring-0 block mx-auto">
   Search
 </button>
   </div>
@@ -186,7 +186,7 @@ const Home = () => {
 </div>
 </div>
 
-<hr className="w-44 mx-auto bg-[rgba(202,3,32,255)] h-[1.5px] border-0 my-12 md:hidden" />
+<hr className="w-44 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 my-12 md:hidden" />
 
       {/* Image Grid Section */}
       <div className="md:mx-8 mx-14 md:py-18 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-0 md:gap-2">
@@ -215,13 +215,13 @@ const Home = () => {
 </div>
 
       <div className="flex justify-center items-center md:my-0 my-12 mt-20 col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-8">
-        <hr className="md:w-170 w-44 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px]" />
+        <hr className="md:w-170 w-44 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px]" />
       </div>
       <div className="md:w-1/3 md:text-center text-center mb-6 md:mb-0">
      
   </div>
   <div className="flex justify-center text-center my-12 md:my-0 md:mt-30">
-        <h1 className="text-center text-[1rem] md:text-[2.2rem] font-bold"><span className="text-[rgba(202,3,32,255)]">OUR </span> MARKET CENTERS</h1>
+        <h1 className="text-center text-[1rem] md:text-[2.2rem] font-bold"><span className="text-[rgb(206,32,39,255)]">OUR </span> MARKET CENTERS</h1>
       </div>
       <div className="w-full mx-auto px-4 md:px-12 lg:px-18 md:py-14 py-4 md:mt-12">
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-20">
@@ -261,7 +261,7 @@ const Home = () => {
   {/* Heading */}
   <div className="w-full text-center mb-8">
     <h1 className="text-[1rem] md:text-[2.2rem] font-bold">
-      <span className="text-[rgba(202,3,32,255)]">TOOLS</span> FOR YOUR NEEDS
+      <span className="text-[rgb(206,32,39,255)]">TOOLS</span> FOR YOUR NEEDS
     </h1>
   </div>
 
@@ -308,10 +308,10 @@ const Home = () => {
 
 
       <div className="flex justify-center items-center mt-8 col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-8  md:mb-0">
-        <hr className="md:w-170 w-44 mx-auto bg-[rgba(202,3,32,255)] border-0 h-[1.5px]" />
+        <hr className="md:w-170 w-44 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px]" />
       </div>
       <div className="flex justify-center my-12 md:my-0 md:mt-30">
-        <h1 className="text-center text-[1rem] md:text-[2.2rem] font-bold"><span className="text-[rgba(202,3,32,255)]">OUR </span> TRENDING PROPERTIES</h1>
+        <h1 className="text-center text-[1rem] md:text-[2.2rem] font-bold"><span className="text-[rgb(206,32,39,255)]">OUR </span> TRENDING PROPERTIES</h1>
       </div>
       {/* First Home Block */}
       <div className="relative w-full px-10 md:py-22 py-15 bg-white">
@@ -360,7 +360,7 @@ const Home = () => {
                shadow-md z-10 hover:shadow-lg transition"
   >
    <ChevronRight 
-   className="cursor-pointer text-[rgba(202,3,32,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
+   className="cursor-pointer text-[rgb(206,32,39,255)] w-6 h-6 md:w-[50px] md:h-[50px]" 
  />
  
   </button>
@@ -380,7 +380,7 @@ const Home = () => {
           </div>
 
           {/* Right Side - Form (Full Height & Centered Content) */}
-          <div className="w-full lg:w-1/2 bg-[rgba(202,3,32,255)] flex items-center justify-center min-h-[50vh] lg:min-h-full">
+          <div className="w-full lg:w-1/2 bg-[rgb(206,32,39,255)] flex items-center justify-center min-h-[50vh] lg:min-h-full">
             <div className="w-full max-w-md md:max-w-lg lg:max-w-2xl p-6 sm:p-8 md:p-2">
               <h2 className="text-2xl sm:text-4xl font-normal text-white mb-6 sm:mb-8">
                 YOUR FUTURE MARKET CENTER STARTS WITH ONE BOLD STEP
@@ -435,7 +435,7 @@ const Home = () => {
                 ></textarea>
               </div>
 
-              <button className="w-full md:w-2/5 bg-white md:text-base hover:bg-gray-100 text-[rgba(202,3,32,255)] font-bold text-sm py-4 sm:py-4 border px-6 rounded-3xl transition duration-200">
+              <button className="w-full md:w-2/5 bg-white md:text-base hover:bg-gray-100 text-[rgb(206,32,39,255)] font-bold text-sm py-4 sm:py-4 border px-6 rounded-3xl transition duration-200">
                 Submit
               </button>
             </div>
@@ -459,7 +459,7 @@ const Home = () => {
         <div className="relative z-10 px-4 sm:px-8 md:py-16 my-4 text-black text-center bg-white/50">
       {/* Heading */}
       <div className="mb-10 md:mb-28 md:mt-34 my-20 md:my-0">
-        <h1 className="text-xs md:text-2xl font-bold mb-2 text-[rgba(202,3,32,255)]">
+        <h1 className="text-xs md:text-2xl font-bold mb-2 text-[rgb(206,32,39,255)]">
           OUR STATS
         </h1>
         <h1 className="text-xs md:text-4xl font-bold mb-2">
@@ -481,7 +481,7 @@ const Home = () => {
           >
             <p className="text-lg md:text-5xl font-bold mb-4">{stat.value}</p>
             <div className="flex items-center justify-center md:max-w-[200px] max-w-[100px] mx-auto my-4">
-              <div className="flex-1 h-px bg-[rgba(202,3,32,255)]"></div>
+              <div className="flex-1 h-px bg-[rgb(206,32,39,255)]"></div>
               <div className="flex-1 h-px bg-gray-500"></div>
             </div>
             <p className="md:text-[1rem] text-[0.8rem]">{stat.label1}</p>
@@ -492,7 +492,7 @@ const Home = () => {
    
           {/* Bottom Red Line */}
           <div className="flex justify-center items-center  my-2 col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-8">
-            <hr className="md:w-6/12 w-44 mx-auto md:mt-20 bg-[rgba(202,3,32,255)] border-0 h-[2px]" />
+            <hr className="md:w-6/12 w-44 mx-auto md:mt-20 bg-[rgb(206,32,39,255)] border-0 h-[2px]" />
           </div>
         </div>
       </div>

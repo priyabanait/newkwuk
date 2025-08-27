@@ -2,7 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import Header from '@/components/header';
 import Box from '@/components/box';
-import Footer from '@/components/footer';
+import Footer from '@/components/newfooter';
 import Image from 'next/image';
 
 import CeoTeam from '@/components/ceoTeam';
@@ -43,14 +43,14 @@ export default function Aboutus() {
         image="https://static.wixstatic.com/media/36a881_a82aacde83a9442dae07d99a846cadf4~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8-removebg-preview%20(1).png"
       />
 
-      <div className="px-4 md:px-20 py-2 text-black bg-white">
+      <div className="px-10 md:px-20 py-2 text-black bg-white">
         {/* Heading + Image on same line */}
         <div className="md:flex md:items-start md:justify-between md:gap-10">
           {/* Text Section */}
           <div className="md:w-2/3">
             <div className="mb-6">
-                <p className='text-[rgba(202,3,32,255)] text-xl py-4'>About Us</p>
-              <h2 className="text-lg md:text-xl font-bold md:ml-20 text-left">
+                <p className='text-[rgb(206,32,39,255)] text-xl py-4'>About Us</p>
+              <h2 className="text-lg md:text-xl font-bold  text-left">
                 Empowering Real Estate Across Saudi Arabia
               </h2>
             </div>
@@ -97,7 +97,7 @@ export default function Aboutus() {
 
   {/* Second Column */}
   <div>
-    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgba(202,3,32,255)]">Our Mission</h3>
+    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgb(206,32,39,255)]">Our Mission</h3>
     <p>
       To Build Careers Worth Having, Businesses Worth Owning, Lives Worth Living, 
       Experiences Worth Giving, And Legacies Worth Leaving.
@@ -106,7 +106,7 @@ export default function Aboutus() {
 
   {/* Third Column */}
   <div>
-    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgba(202,3,32,255)]">Our Vision</h3>
+    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgb(206,32,39,255)]">Our Vision</h3>
     <p>
       To Be The Real Estate Company Of Choice For Agents And Their Customers.
     </p>
@@ -114,7 +114,7 @@ export default function Aboutus() {
 
   {/* Extra Content - Second Column */}
   <div className="md:col-start-2">
-    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgba(202,3,32,255)]">Our Perspective</h3>
+    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgb(206,32,39,255)]">Our Perspective</h3>
     <p>
     A Technology Company That Provides The Real Estate Platform That Our Agents’ Buyers And Sellers Prefer. Keller Williams Thinks Like A Top Producer, Acts Like A Trainer-consultant, And Focuses All Its Activities On Service, Productivity, And Profitability.
     </p>
@@ -122,7 +122,7 @@ export default function Aboutus() {
 
   {/* Extra Content - Third Column */}
   <div>
-    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgba(202,3,32,255)]">WI4C2TES</h3>
+    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgb(179,4,4)]">WI4C2TES</h3>
     <p>
     Our Belief System Win-win: Or No Deal Integrity: Do The Right Thing Customers: Always Come First Commitment: In All Things Communication: Seek First To Understandcreativity: Ideas Before Results Teamwork: Together Everyone Achieves More Trust: Starts With Honesty Equity: Opportunities For Allsuccess: Results Through People.
     </p>

@@ -161,13 +161,13 @@ const PropertyDetails = () => {
   <a href='/properties' className="w-5 h-5 flex items-center justify-center rounded-full bg-white border border-black text-black hover:bg-gray-100">
     <FaArrowLeft className="w-2 h-2" />
   </a>
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
   <a href='/properties' className="text-[0.6rem] text-">Back to Search</a>
 </div>
 
         {/* Right Arrow */}
        <div className="flex items-center gap-2 md:mb-6 mb-6 cursor-pointer hover:text-gray-600">
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
   <span className="text-[0.6rem] text-">View Next Listing</span>
   <div className="w-5 h-5 flex items-center justify-center rounded-full bg-white border border-black text-black hover:bg-gray-100">
     <FaArrowRight className="w-2 h-2" />
@@ -213,7 +213,7 @@ const PropertyDetails = () => {
   <div className="col-span-2 space-y-4">
     {/* Heading */}
     <h2 className="text-xl font-medium text-gray-800 text-center">PROPERTY DETAILS</h2>
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
   <hr className="w-50 md:w-60 mx-auto bg- h-[1.5px]" />
     {/* Main Info Box */}
     <div className="bg-gray-100 p-6 rounded-xl">
@@ -261,7 +261,7 @@ const PropertyDetails = () => {
     </div>
 {/* Listing Details Section */}
 <h2 className="text-xl font-medium text-gray-800 text-center mb-6">LISTING DETAILS</h2>
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
 <hr className="w-50 md:w-60 mx-auto bg- h-[1.5px]" />
 <div className="bg-gray-100 rounded-xl shadow-sm p-6">
   
@@ -293,7 +293,7 @@ const PropertyDetails = () => {
     {/* Additional Block 2 */}
    
     <h2 className="text-xl font-medium text-gray-800 text-center mb-6">MAP</h2>
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
 <hr className="w-50 md:w-60 mx-auto bg- h-[1.5px]" />
  <div className="bg-gray-100 rounded-xl shadow-sm p-6">
     <div className="w-full h-96 rounded-xl overflow-hidden shadow-md">
@@ -330,22 +330,22 @@ const PropertyDetails = () => {
 
 
  <div className="bg-gray-100 pt-20 pb-6 px-6 rounded-xl text-center">
-              <h3 className="mt-4 font-semibold text-[rgba(202,3,32,255)] text-sm">AGENT DETAILS</h3>
+              <h3 className="mt-4 font-semibold text-[rgb(206,32,39,255)] text-sm">AGENT DETAILS</h3>
               <div className="mt-6 flex justify-center">
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
                 <div className="w-[1px] bg-"></div>
                 <div className="text-left pl-4">
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
                   <p className="text-xs font-bold text- mb-2">NAME</p>
                   <p className="text-sm">Meshary</p>
                   <p className="text-sm mb-2">Almalki</p>
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
                   <p className="text-xs font-bold text- mb-2 mt-2 md:mt-6">CONTACT</p>
                   <p className="text-sm mb-2">+966 123456789</p>
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
                    <p className="text-xs font-bold text- mb-2 mt-2 md:mt-6">Market Center</p>
                   <p className="text-sm">Jasmin</p>
-                <div className=" ml-22 w-[1px] bg-[rgba(202,3,32,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
+                <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div>
                   <p className="text-xs font-bold text- mb-2 mt-2 md:mt-6">CITY</p>
                   <p className="text-sm">ALRIADH</p>
                 </div>
@@ -356,7 +356,7 @@ const PropertyDetails = () => {
       </div>
       
     </div>
-    <hr className="w-6/12 mx-auto bg-[rgba(202,3,32,255)] h-[1.5px] border-0 mt-5 md:mt-20 mb-16" />
+    <hr className="w-6/12 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 mt-5 md:mt-20 mb-16" />
       <Footer></Footer>
     </div>
   );
