@@ -41,7 +41,7 @@ export default function Home() {
             {/* Column 1 */}
             <div>
               <h3 className="text-black font-semibold mb-3">OUR CULTURE</h3>
-              <ul className="space-y-2 text-sm text-gray-700">
+              <ul className="space-y-2 text-base text-gray-700">
                 <li><a href="/aboutus">About Us</a></li>
                 <li><a href="/ourCulture/whyKW">Why KW</a></li>
                 <li><a href="/training">Training</a></li>
@@ -54,7 +54,7 @@ export default function Home() {
             {/* Column 2 */}
             <div>
               <h3 className="text-black font-semibold mb-3">SEARCH</h3>
-              <ul className="space-y-2 text-sm text-gray-700">
+              <ul className="space-y-2 text-base text-gray-700">
                 <li><a href="/properties">Properties</a></li>
                 <li><a href="/agent">Agent</a></li>
                 <li><a href="/agent">Market Center</a></li>
@@ -73,7 +73,7 @@ export default function Home() {
             {/* Column 3 */}
             <div>
               <h3 className="text-black font-semibold mb-3">OTHERS</h3>
-              <ul className="space-y-2 text-sm text-gray-700">
+              <ul className="space-y-2 text-base text-gray-700">
                 <li><a href="/contactUs">Contact</a></li>
                 <li><a href="/instantvaluation">Instant Valuation</a></li>
                 <li><a href="/franchise">Open a Franchise</a></li>
@@ -83,7 +83,7 @@ export default function Home() {
             {/* Column 4 */}
             <div>
               <h3 className="text-black font-semibold mb-3">KNOWLEDGE</h3>
-              <ul className="space-y-2 text-sm text-gray-700">
+              <ul className="space-y-2 text-base text-gray-700">
                 <li><a href="/seller/sellerguid">Seller Guide</a></li>
                 <li><a href="/buyer/buyerguid">Buyer Guide</a></li>
                 <li><a href="/seller">Five Steps to Sell</a></li>

@@ -64,8 +64,8 @@ const Header = () => {
       { label: 'Buyer Guide', href: '/buyer/buyerguid' }
     ] },
     { label: 'Rent', key: 'search', submenu: [
-      { label: 'Rental Search', href: '/properties/active' },
-      { label: 'Recently Rented', href: '/properties/sold' },
+      { label: 'Rental Search', href: '/properties/rent' },
+      { label: 'Recently Rented', href: '/properties/recentlyrented' },
     ]},
     { label: 'About', key: 'about', submenu: [
       { label: 'About Us', href:"/aboutus" },

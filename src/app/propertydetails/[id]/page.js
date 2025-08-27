@@ -44,6 +44,120 @@ export default function PropertyListing() {
   const [showModal, setShowModal] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [zoom, setZoom] = useState(1);
+
+  const propertyTemplates = {
+    land: {
+      type: "أرض (Land)",
+      description: `
+        This exceptional {size} {measurement} plot of land in {neighborhood / area} offers a rare opportunity 
+        to secure a foothold in one of {city}’s most strategically positioned and fast-developing locations. 
+        Priced at SAR {price}, the property holds remarkable potential for {residential / commercial / mixed-use} 
+        development, benefiting from proximity to major transport routes, established neighborhoods, 
+        and rapidly expanding urban infrastructure.
+  
+        Saudi Arabia’s Vision 2030 is driving unprecedented transformation in the Kingdom’s real estate sector, 
+        with a strong focus on creating modern, sustainable, and connected communities. 
+        This plot sits at the heart of that transformation.
+  
+        Whether for an immediate build or long-term investment, the land’s location offers direct access to 
+        commercial centers, educational institutions, healthcare facilities, and leisure destinations.
+      `,
+      fields: ["size",'measurement', "neighborhood / area", "city", "price", "developmentType"]
+    },
+  
+    villa: {
+      type: "فيلا (Villa)",
+      description: `
+        This beautifully designed {bedrooms}-bedroom villa in {neighborhood / area} captures the essence 
+        of modern Saudi living — a balance of elegance, comfort, and functionality. 
+        Spanning {size} {measurement} and built in {year built}, it offers spacious living areas, 
+        natural light, and privacy. Priced at SAR {price}.
+      `,
+      fields: ["bedrooms", "size",'measurement', "year built", "neighborhood / area", "city", "price"]
+    },
+  
+    residential: {
+      type: "سكني (Residential)",
+      description: `
+        This thoughtfully crafted residential property in {neighborhood / area} combines practicality, 
+        style, and strategic location. Offering {bedrooms} bedrooms, {bathrooms} bathrooms, 
+        and {size} {measurement} of living space, built in {year built}. 
+        Priced at SAR {price}.
+      `,
+      fields: ["bedrooms", "bathrooms",'measurement',  "size", "year built", "neighborhood / area", "city", "price"]
+    },
+  
+    building: {
+      type: "عمارة (Building)",
+      description: `
+        An exceptional {residential / commercial / mixed-use} building in {neighborhood / area}, 
+        spanning {size} {measurement}  with {number of units / floors}. Built in {year built} 
+        and priced at SAR {price}. Strategically located in {city}.
+      `,
+      fields: ["usageType", "size", 'measurement', "unitsOrFloors", "year built", "neighborhood / area", "city", "price"]
+    },
+  
+    apartment: {
+      type: "شقة (Apartment)",
+      description: `
+        This stylish {bedrooms}-bedroom apartment in {neighborhood / area} spans {size} {measurement}, 
+        completed in {year built}. Designed for functionality and comfort. 
+        Priced at SAR {price}, located in {city}.
+      `,
+      fields: ["bedrooms", "size",'measurement',  "year built", "neighborhood / area", "city", "price"]
+    },
+  
+    floor: {
+      type: "دور (Floor)",
+      description: `
+        This {size} {measurement} floor in {neighborhood / area} offers {bedrooms} bedrooms and {bathrooms} bathrooms. 
+        Built in {year built}, priced at SAR {price}.
+      `,
+      fields: ["size",'measurement',  "bedrooms", "bathrooms", "year built", "neighborhood / area", "city", "price"]
+    },
+  
+    farm: {
+      type: "مزرعة (Farm)",
+      description: `
+        This {size} {measurement} farm in {neighborhood / area} offers natural beauty, agricultural potential, 
+        and investment value. Features include {existing elements such as wells, plantations, storage buildings}. 
+        Priced at SAR {price}, near {nearest city}.
+      `,
+      fields: ["size",'measurement', "neighborhood / area", "nearestCity", "price", "features"]
+    },
+  
+    factory: {
+      type: "مصنع (Factory)",
+      description: `
+        This {size} {measurement} industrial facility in {neighborhood / area} is ideal for 
+        manufacturing, warehousing, or logistics. Built in {year built}, priced at SAR {price}. 
+        Includes {key features such as high ceilings, loading bays, office areas}.
+      `,
+      fields: ["size", 'measurement', "neighborhood / area", "year built", "price", "features"]
+    },
+  
+    resthouse: {
+      type: "استراحة (Rest House)",
+      description: `
+        Set on {size} {measurement} in {neighborhood / area}, this rest house is ideal for leisure and gatherings. 
+        Features {gardens, shaded areas, swimming pool, outdoor seating}. 
+        Priced at SAR {price}.
+      `,
+      fields: ["size",'measurement', "neighborhood / area", "price", "features"]
+    },
+  
+    warehouse: {
+      type: "مستودع (Warehouse)",
+      description: `
+        This {size} {measurement} warehouse in {neighborhood / area} offers space for storage, 
+        distribution, or commercial use. Built in {year built}, priced at SAR {price}. 
+        Includes {features such as loading docks, high ceilings, 24/7 security}.
+      `,
+      fields: ["size", 'measurement', "neighborhood / area", "year built", "price", "features"]
+    }
+  };
+  
+
   // Add this useEffect to reset image indices and loading states for similar properties
   useEffect(() => {
     setSimilarImageIndices(Array(similarProperties.length).fill(0));
@@ -350,6 +464,7 @@ export default function PropertyListing() {
     image: (property?.list_agent_office?.list_agent_url && /\.(jpeg|jpg|gif|png|webp|svg)$/i.test(property?.list_agent_office?.list_agent_url)) ? property?.list_agent_office?.list_agent_url : '/images.jpg',
   };
 
+  
   return (
     <div className="relative p-6 md:p-8">
       <Header />
@@ -373,7 +488,7 @@ export default function PropertyListing() {
                 </span>
               </button>
             </div>
-            <p className='mt-2 md:mt-4 text-sm sm:text-base font-medium md:text-base text-[rgb(179,4,4)]'>{getPropertyTypeDisplay()} {property?.list_category}</p>
+            <p className='mt-2 md:mt-4 text-sm sm:text-base font-medium md:text-base text-[rgb(179,4,4)]'>{getPropertyTypeDisplay()} {property?.property_subtype}</p>
             <p className="text-2xl sm:text-xl md:text-3xl font-semibold text-gray-800 mt-2">{property?.list_address.address || property?.property_address || property?.address || property?.full_address || 'Address not available'}</p>
             <h1 className="text-lg sm:text-xl md:text-xl mt-1 font-semibold text-gray-800">
   {property.price
@@ -610,33 +725,100 @@ export default function PropertyListing() {
                       </div>
                     </div>
                     <h1 className='text-lg my-10 font-semibold text-gray-800'>Address: {property?.list_address.address || 'Not specified'}</h1>
-                    <p>
-  This beautifully designed (bedrooms)-bedroom villa in (neighborhood / area)
-  captures the essence of modern Saudi living — a harmonious balance of
-  elegance, comfort, and functionality. Spanning (size) sq m and built in (year
-  built), the residence offers a refined lifestyle with spacious living areas,
-  generously proportioned bedrooms, and well-planned interiors designed to
-  maximize natural light and privacy.
-  <br /><br />
-  Priced at SAR (price), the property is perfectly positioned to benefit from
-  (city&apos;s) rapid growth under Saudi Arabia&apos;s Vision 2030, which is
-  reshaping urban environments into world-class destinations. From
-  state-of-the-art infrastructure to vibrant commercial districts, the
-  surrounding area reflects the Kingdom&apos;s commitment to creating thriving,
-  well-connected communities.
-  <br /><br />
-  Residents will enjoy proximity to high-quality schools, retail hubs, and
-  cultural attractions, while the neighborhood&apos;s green spaces and
-  recreational facilities enhance quality of life. This villa is equally
-  appealing as a permanent residence or an investment property poised to
-  appreciate alongside the country&apos;s economic and urban expansion.
-</p>
+                    {/* Dynamic Description based on Property Type */}
+                    <div className="mt-6 mb-10">
+                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Property Description</h3>
+                      {(() => {
+                        const propType = property?.prop_type || property?.property_type || '';
+                        const propSubtype = property?.prop_subtype || property?.subtype || '';
+                        
+                        // Find matching template
+                        let template = null;
+                        for (const [key, value] of Object.entries(propertyTemplates)) {
+                          if (propType.toLowerCase().includes(key) || propSubtype.toLowerCase().includes(key)) {
+                            template = value;
+                            break;
+                          }
+                        }
+                        
+                        if (template) {
+                          // Replace template placeholders with actual property data
+                          let description = template.description;
+                          const fields = template.fields;
+                          
+                          fields.forEach(field => {
+                            let value = '';
+                            switch (field) {
+                              case 'size':
+                                value = property?.lot_size_area || '0';
+                                break;
+                              case 'neighborhood / area':
+                                value = property?.list_address.full_street_address || 'N/A';
+                                break;
+                              case 'city':
+                                value = property?.list_address.city || property?.city || 'N/A';
+                                break;
+                              case 'price':
+                                value = formatPrice(property?.price || property?.current_list_price || 0);
+                                break;
+                              case 'developmentType':
+                                value = property?.list_type === 'rent' ? 'rental' : 'residential';
+                                break;
+                              case 'bedrooms':
+                                value = property?.total_bed || property?.beds || 'N/A';
+                                break;
+                              case 'year built':
+                                value = property?.year_built|| 'N/A';
+                                break;
+                              case 'bathrooms':
+                                value = property?.total_bath || property?.baths || 'N/A';
+                                break;
+                              case 'usageType':
+                                value = property?.list_type === 'rent' ? 'rental' : 'commercial';
+                                break;
+                              case 'measurement':
+                                value = property?.lot_size_units || 'N/A';
+                                break;
+                              case 'industrialArea':
+                                value = property?.list_address?.city || property?.city || 'industrial area';
+                                break;
+                              case 'features':
+                                value = property?.amenities || property?.features || 'standard features';
+                                break;
+                              case 'nearestCity':
+                                value = property?.list_address?.city || property?.city || 'N/A';
+                                break;
+                              default:
+                                value = 'N/A';
+                            }
+                           
+                            
+                            // Replace placeholder in description
+                            const regex = new RegExp(`{${field}}`, 'g');
+                            description = description.replace(regex, value);
+                          });
+                          
+                          return (
+                            <div>
+                              <p className="text-gray-700 leading-relaxed mb-4">{description}</p>
+                              <p className="text-sm text-gray-500">Property Type: {template.type}</p>
+                            </div>
+                          );
+                        } else {
+                          // Fallback to original description or default
+                          return (
+                            <p className="text-gray-700 leading-relaxed">
+                              {property?.description || property?.long_description || 'Welcome to this beautiful property. Contact us for more details about this amazing opportunity.'}
+                            </p>
+                          );
+                        }
+                      })()}
+                    </div>
 
                     <div className='my-10'>
                       <p>KW Listing ID: {property?.kw_id || property?.list_id || property?.id || 'Not specified'}</p>
                       <p> Estimation Provided by Keller Williams Realty, LLC</p>
                     </div>
-                    <p>{property.description || property.long_description || 'Welcome to this beautiful property. Contact us for more details about this amazing opportunity.'}</p>
                   </div>
                 </div>
               </div>

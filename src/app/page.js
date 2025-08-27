@@ -315,50 +315,52 @@ const Home = () => {
 {/* Hero Section */}
 <div className="relative ">
 
-  <section className="relative w-full h-screen md:h-screen text-white">
+ 
     {/* Background Image with previous blurring out and next coming in */}
+   
+  <section className="relative w-full h-screen md:h-screen text-white">
+    {/* Background Image Transition */}
     <div className="absolute inset-0 z-0">
-      {/* Previous image, if any */}
-      {prevHeroIndex !== null && (
-        <motion.div
-          key={prevHeroIndex}
-          initial={{ opacity: 1, filter: "blur(0.5rem)" }}
-          animate={{ opacity: 0, filter: "blur(1.5rem)" }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-0"
-          style={{ zIndex: 1 }}
-        >
-          <Image
-            src={heroImages[prevHeroIndex]}
-            alt="Previous Hero Background"
-            layout="fill"
-            
-            objectPosition="center"
-            priority
-            className="z-0 object-cover"
-          />
-        </motion.div>
+      
+      {/* New image (background) */}
+     {/* New image (background) */}
+<motion.div
+  key={heroIndex}
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.8, ease: "easeInOut" }}
+  className="absolute inset-0"
+  style={{ zIndex: 1 }}
+>
+  <Image
+    src={heroImages[heroIndex]}
+    alt="Hero Background"
+    fill
+    priority
+    className="object-cover"
+  />
+</motion.div>
+
+{/* Previous image (foreground, fades out AFTER new one is visible) */}
+{prevHeroIndex !== null && (
+  <motion.div
+    key={prevHeroIndex}
+    initial={{ opacity: 1 }}
+    animate={{ opacity: 0 }}
+    transition={{ duration: 0.9, ease: "easeInOut", delay: 10 }} // 👈 fade after new image is done
+    className="absolute inset-0"
+    style={{ zIndex: 2 }}
+  >
+    <Image
+      src={heroImages[prevHeroIndex]}
+      alt="Previous Hero Background"
+      fill
+      priority
+      className="object-cover"
+    />
+  </motion.div>
+
       )}
-      {/* Current image */}
-      <motion.div
-        key={heroIndex}
-        initial={{ opacity: 0, filter: "blur(1.5rem)" }}
-        animate={{ opacity: 1, filter: "blur(0rem)" }}
-        transition={{ duration: 0.8 }}
-        className="absolute inset-0"
-        style={{ zIndex: 2 }}
-      >
-        <Image
-          src={heroImages[heroIndex]}
-          alt="Hero Background"
-          layout="fill"
-          
-          objectPosition="center"
-          priority
-          className="z-0 object-cover"
-        />
-      </motion.div>
     </div>
     <div className="absolute inset-0"></div>
     <div className="inset-0 bg-opacity-60 z-10" />
@@ -401,7 +403,7 @@ const Home = () => {
 
 
       {/* Desktop View */}
-      <div className="hidden md:flex md:max-w-2xl flex-col md:flex-row items-center gap-1 md:gap-1 shadow-lg">
+      <div className="hidden md:flex md:max-w-2xl flex-col md:flex-row items-center gap-1 md:gap-1">
   {activeTab === "property" ? (
     <>
       {/* Property search */}

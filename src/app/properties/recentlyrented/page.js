@@ -180,7 +180,7 @@ const Properties = () => {
              {/* Content */}
              <div className="absolute bottom-0 left-0 w-full z-10 flex flex-col items-center text-center text-white py-24 md:py-14 px-4">
   {/* Title */}
-  <h2 className="text-3xl font-semibold pb-8"> {loading ? 'Loading...' : `${properties.length} `} Properties</h2>
+  <h2 className="text-3xl font-semibold pb-8"> {loading ? 'Loading...' : `${properties.length} `} Properties Recently Rented</h2>
 
   {/* Line 1 - For Sale + To Rent */}
   <div className="flex gap-4 pb-4">
