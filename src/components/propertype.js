@@ -910,7 +910,7 @@ import {
           )}
           {/* Map view for mobile */}
           {viewMode === "map" && (
-            <div className="w-full h-[400px] md:h-64 md:hidden bg-blue-100 overflow-hidden sticky top-0">
+            <div className="w-full h-[400px] sm:h-[400px] md:hidden bg-blue-100 overflow-hidden sticky top-0">
               {isLoaded && (
                 <GoogleMap
                   mapContainerStyle={{ width: '100%', height: '100%' }}
@@ -1100,7 +1100,7 @@ import {
 
     {/* Right - Map (sticky) */}
     <div className="w-1/2">
-      <div className="sticky top-20 w-full h-[80vh] bg-blue-100 overflow-hidden relative">
+      <div className="sticky top-16 w-full h-screen bg-blue-100 overflow-hidden relative">
         {isLoaded && (
           <GoogleMap
             mapContainerStyle={{ width: '100%', height: '100%' }}

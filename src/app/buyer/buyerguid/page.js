@@ -129,11 +129,11 @@ What's Next? +`,
         />
     
 
-    <main className="px-4 md:px-46 py-6 mt-4 md:mt-2">
-  <div className=" p-4 md:p-0 max-w-full mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <main className="px-4 md:px-46 ">
+  <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-0 md:mb-8">
       <div className="w-full md:w-auto">  {/* Removed text-center from here since parent has it */}
-        <h1 className="text-2xl md:text-3xl  py-4  md:py-8">Home <span className='text-red-700'>Buying </span> Tips from Keller Williams</h1>
+        <h1 className="text-2xl md:text-3xl  py-2 md:py-8">Home <span className='text-red-700'>Buying </span> Tips from Keller Williams</h1>
        <div className='mx-4 md:mx-0 tracking-normal mt-2 md:mt-0  md:tracking-normal'>
        <p className="text-sm md:text-[1rem] leading-5">
           Our Experience, A House Is Not A Dream Home Because Of Its Size Or Colour. Its About How You Feel When You Walk Through The Front Door – The Way You Can Instantly See

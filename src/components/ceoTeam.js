@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image';
-import { FaPhoneAlt } from "react-icons/fa";
+import { FaPhoneAlt ,FaEnvelope} from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 export default function CeoTeam() {
     const teamMembers = [
@@ -71,7 +71,7 @@ export default function CeoTeam() {
 
      
 
-      <p className="mt-4 md:text-lg  text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
+      <p className="mt-4 md:text-base  text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
         More than ever, we want to thank and recognize our agents and partners
         for diligently bringing their very
         
@@ -83,7 +83,7 @@ export default function CeoTeam() {
         ourselves how we can best support them.
       </p>
 
-      <p className="mt-4 md:text-lg  text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
+      <p className="mt-4 md:text-base text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
         KW has cultivated a agent-  
 
         centric, technology-driven, and
@@ -91,7 +91,7 @@ export default function CeoTeam() {
         education-based culture that rewards agents as stakeholders.
       
        </p> 
-       <p className="mt-4 md:text-lg  text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
+       <p className="mt-4 md:text-base  text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
        Regional team members, market center team members, and 
       
       agent partners. No
@@ -137,19 +137,23 @@ export default function CeoTeam() {
 
 <div className="flex-1">
               <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 ">
-                <h3 className="text-xs font-normal md:font-semibold md:text-base md:tracking-[0.2em] uppercase md:mb-2">{member.name}</h3>
+              <h3 className="text-lg sm:text-lg md:text-2xl font-semibold tracking-[0.1em] uppercase md:mb-2">{member.name}</h3>
                 {/* <p className="text-sm text-gray-500 ml-auto">{agent.city}</p> */}
               </div>
               <p className="md:text-sm text-[0.7rem] text-[rgb(206,32,39,255)]  mb-2 md:mb-2 break-all">Head of operations</p>
               <div className="mt-6 space-y-2">
-  <p className="flex items-center gap-2 md:text-sm text-sm mb-2 md:mb-2 break-all">
-    <FaPhoneAlt className="text-gray-600" />
-    {member.phone}
-  </p>
-  <p className="flex items-center gap-2 md:text-sm text-[0.7rem] mb-4 md:mb-12 break-all">
-    <MdEmail className="text-gray-600" />
-    {member.email}
-  </p>
+             
+
+<p className="flex items-center gap-2 md:text-base text-sm mb-2 break-all">
+  <FaPhoneAlt className="text-gray-600 " />
+  {member.phone}
+</p>
+
+<p className="flex items-center gap-2 md:text-base text-sm mb-4 md:mb-12 break-all">
+  <FaEnvelope className="text-gray-600"  />
+  {member.email}
+</p>
+
 </div>
 <div className="flex justify-end">
   <Image

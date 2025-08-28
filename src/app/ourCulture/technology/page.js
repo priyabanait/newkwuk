@@ -152,11 +152,11 @@ const Technology = () => {
     
 
       {/* Section Title */}
-      <div className="md:my-10 my-4">
-        <h1 className="text-xl md:text-3xl py-2 md:py-2 flex justify-center text-center">
+      <div className="md:my-10 mt-4">
+        <h1 className="text-2xl md:text-3xl py-2 md:py-2 flex justify-center text-center">
           COMMAND FOR SOLO AGENT
         </h1>
-        <hr className="w-50 md:w-50 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 mb-10" />
+        <hr className="w-50 md:w-50 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 " />
       </div>
 
       {/* Timeline Section */}
@@ -184,7 +184,7 @@ const Technology = () => {
           {steps.map((step, index) => (
             <div
               key={index}
-              className="grid grid-cols-1 md:grid-cols-2 items-center px-4 md:px-8 lg:px-24 gap-1 my-4"
+              className="grid grid-cols-1 md:grid-cols-2 items-center px-4 md:px-8 lg:px-24 gap-1 md:my-4"
             >
               {/* Left Image (Desktop) */}
               <div className="hidden md:flex justify-center">
@@ -224,11 +224,11 @@ const Technology = () => {
       </div>
 
 {/* Section Title */}
-      <div className="md:my-30 my-4">
-       <h1 className="text-xl md:text-3xl py-2 md:py-2 flex justify-center text-center">
+      <div className="md:my-30 mt-4">
+       <h1 className="text-2xl md:text-3xl py-2 md:py-2 flex justify-center text-center">
           Command For Solo Teams
         </h1>
-        <hr className="w-70 md:w-70 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 mb-10" />
+        <hr className="w-50 md:w-50 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 " />
       </div>
 
 {/* Timeline Section */}

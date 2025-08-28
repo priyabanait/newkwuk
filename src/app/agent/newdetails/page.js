@@ -237,6 +237,7 @@ const AgentProfile = (props) => {
   }
 
   return (
+    <div>
     <div className='relative p-6 md:p-8 '>
       <Header />
       <div className="absolute top-0 left-0 w-[100px] h-[100px] md:w-[150px] md:h-[150px] bg-[rgb(206,32,39,255)] z-0"></div>
@@ -370,7 +371,7 @@ const AgentProfile = (props) => {
 
   </div>
   <div className="flex flex-col items-center justify-center mt-10 px-4 text-center">
-  <p className="text-4xl font-semibold">
+  <p className="text-2xl md:text-4xl font-semibold">
     <span className="text-[rgb(206,32,39,255)]">Sell your home with </span>
     <span>
   {(() => {
@@ -427,7 +428,7 @@ const AgentProfile = (props) => {
   {/* Left Red Box */}
   <div className="bg-[rgb(206,32,39,255)] text-white p-6 md:p-14 py-15 md:py-0 flex  flex-col justify-center">
     <p className="text-base md:text-xl font-semibold mb-2">| Download guide</p>
-    <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6">How to sell your home</h2>
+    <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">How to sell your home</h2>
     <p className="text-base md:text-lg mb-4 md:mb-6 leading-relaxed">
       The guide to selling a property will advise not only on the process
       but also how you can be super prepared and help to achieve the highest sale price.
@@ -470,7 +471,7 @@ const AgentProfile = (props) => {
 <div className="absolute inset-0 bg-gray-500/50 py-15 md:py-0"></div>
     <div className="absolute inset-0 bg-opacity-40 p-4 md:p-10 flex flex-col justify-center text-white ">
     <p className="text-base md:text-xl font-semibold mb-2">| Download guide</p>
-    <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6">How to buy a home</h2>
+    <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">How to buy a home</h2>
     <p className="text-base md:text-lg mb-4 md:mb-6 leading-relaxed">
         The following guide to buying a property will explain how to position
         yourself to negotiate the best price, but importantly ensure you are
@@ -846,7 +847,7 @@ const AgentProfile = (props) => {
           </div>
         </div>
       )} */}
-      
+      </div>
       <NewFooter />
     </div>
   );

@@ -18,7 +18,7 @@ export default function Training() {
         }
       />
 
-      <section className="bg-white mt-2  md:pb-16 mb-4  text-center py-4 md:py-0">
+      <section className="bg-white  md:pb-16 mb-4  text-center">
       <div className=" mx-auto">
        <Image src="/keller.png" alt="Gary Keller"
        width={1800} height={700} 
@@ -73,7 +73,7 @@ export default function Training() {
                or access online sessions for world-class training anytime. Elevate your career—explore our sessions today!</p>
          <div className="flex justify-center md:justify-center">
   <button className="
-    w-56 bg-[rgb(206,32,39,255)] text-white py-3 rounded-full text-sm
+    md:px-10 px-10 bg-[rgb(206,32,39,255)] text-white md:py-3 py-2 rounded-full text-sm
     relative overflow-hidden
     group transition-all duration-300
     hover:pr-8 hover:pl-4
@@ -99,7 +99,7 @@ export default function Training() {
               and market makers. No other event compares.</p>
            <div className="flex justify-center md:justify-center">
   <button className="
-    w-56 bg-[rgb(206,32,39,255)] text-white py-3 rounded-full text-sm
+    md:px-10 px-10 bg-[rgb(206,32,39,255)] text-white md:py-3 py-2 rounded-full text-sm
     relative overflow-hidden
     group transition-all duration-300
     hover:pr-8 hover:pl-4
@@ -136,62 +136,105 @@ export default function Training() {
       </section>
 
      
-      <section className='md:py-8 py-2 md:mx-30'>
-  <div className="container">
-    <div className="flex flex-col md:flex-row items-center justify-center">
+      {/* BOOKS SECTION */}
+{/* BOOKS SECTION */}
+<section className="hidden md:block md:py-8 py-2 md:mx-10">
+  <div>
+    <div className="flex flex-col md:flex-row items-center md:items-center">
 
-      {/* Book Stack Section */}
-      <div className="relative w-[150px] md:w-[800px] h-[200px] md:h-[350px] mx-4">
-        <Image
-          src="/bookblue.png"
-          alt="The Millionaire Real Estate Investor"
-          width={200}
-          height={150}
-          className="absolute bottom-0 md:left-[0%] -translate-x-[20%] md:-translate-x-[20%] md:w-[450px] md:h-[300px] w-[200px] h-[140px] rotate-[-8deg] z-30"
-        />
-       <Image
-  src="/book.png"
-  alt="Your First Home"
-  width={200}
-  height={150}
-  className="absolute bottom-0 left-[30%] md:left-[30%] -translate-x-[7%] md:-translate-x-[20%] md:w-[450px] md:h-[300px] w-[170px] h-[140px] rotate-[-6deg] z-30"
-/>
-<Image
-  src="/bookred.png"
-  alt="The Millionaire Real Estate Agent"
-  width={200}
-  height={150}
-  className="absolute bottom-0 left-[60%] md:left-[66%] -translate-x-[0%] md:-translate-x-[20%] md:w-[450px] md:h-[300px] w-[180px] h-[140px] rotate-[-6deg] z-30"
-/>
-
-        <Image
-          src="/bookwhite.png"
-          alt="The ONE Thing"
-          width={200}
-          height={150}
-          className="absolute bottom-0 left-[10%] md:left-[80%] -translate-x-[70%] md:translate-x-0 md:w-[450px] md:h-[300px] w-[300px] h-[140px] rotate-[-5deg] z-20"
-        />
+      {/* Left side - Books */}
+      <div className="w-full flex justify-center md:justify-start mb-8 md:mb-0 ">
+        <div className="flex">
+          <Image
+            src="/bookblue.png"
+            alt="The Millionaire Real Estate Investor"
+            width={200}
+            height={150}
+            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-8deg] z-10 md:-ml-30 "
+          />
+          <Image
+            src="/book.png"
+            alt="Your First Home"
+            width={200}
+            height={150}
+            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-6deg] z-20 md:-ml-64 "
+          />
+          <Image
+            src="/bookred.png"
+            alt="The Millionaire Real Estate Agent"
+            width={200}
+            height={150}
+            className=" bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-10deg] z-30 md:-ml-64 "
+          />
+          <Image
+            src="/bookwhite.png"
+            alt="The ONE Thing"
+            width={200}
+            height={150}
+            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-6deg] z-30 md:-ml-74  "
+          />
+        </div>
       </div>
 
-      {/* Text Section */}
-      <div className="w-full mt-4 md:mt-0 mx-4 text-center md:text-right">
-      <h2 className="text-xl md:text-4xl font-normal text-[rgb(206,32,39,255)] text-center md:text-right break-words">
-          BEST SELLING<br />BOOKS
-        </h2>
+      {/* Right side - Text */}
+      {/* Right side - Text */} <div className="w-full md:w-1/2 md:pl-8 flex items-center justify-center md:justify-end px-2"> <h2 className="text-xl md:text-4xl font-normal text-[rgb(206,32,39,255)] text-center md:text-right break-words"> BEST SELLING <br /> BOOKS </h2> </div>
+    </div>
+  </div>
+</section>
+
+<section className="block lg:hidden md:py-8 py-2 md:mx-10">
+  <div>
+    <div className="flex flex-col md:flex-row items-center md:items-center">
+
+      {/* Left side - Books */}
+      <div className="w-full flex justify-center md:justify-start mb-8 md:mb-0 ">
+        <div className="flex">
+          <Image
+            src="/bookblue.png"
+            alt="The Millionaire Real Estate Investor"
+            width={200}
+            height={150}
+            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-8deg] z-10 md:-ml-30 -ml-14"
+          />
+          <Image
+            src="/book.png"
+            alt="Your First Home"
+            width={200}
+            height={150}
+            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-6deg] z-20 md:-ml-30 -ml-40"
+          />
+          <Image
+            src="/bookred.png"
+            alt="The Millionaire Real Estate Agent"
+            width={200}
+            height={150}
+            className=" bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-10deg] z-30 md:-ml-30 -ml-40"
+          />
+          <Image
+            src="/bookwhite.png"
+            alt="The ONE Thing"
+            width={200}
+            height={150}
+            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-6deg] z-30 md:-ml-30 -ml-40 "
+          />
+        </div>
       </div>
 
+      {/* Right side - Text */}
+      {/* Right side - Text */} <div className="w-full md:w-1/2 md:pl-8 flex items-center justify-center md:justify-end px-2"> <h2 className="text-xl md:text-4xl font-normal text-[rgb(206,32,39,255)] text-center md:text-right break-words"> BEST SELLING <br /> BOOKS </h2> </div>
     </div>
   </div>
 </section>
 
 
 
-
-<hr />
+{/* TRAINING SECTION */}
 <section className="py-16 bg-white overflow-hidden">
-  <div className="mx-5 md:mx-30 px-2">
+  <div className="mx-5 md:mx-10 ">
     <div className="flex flex-col md:flex-row items-center justify-center">
-      <div className="w-full md:w-7xl flex justify-center mb-8 md:mb-0 px-2">
+
+      {/* Left side - Iframe */}
+      <div className="w-full md:w-1/2 flex justify-center mb-8 md:mb-0 ">
         <div className="relative w-full aspect-video">
           <iframe
             width="100%"
@@ -204,15 +247,17 @@ export default function Training() {
           ></iframe>
         </div>
       </div>
+
+      {/* Right side - Text */}
       <div className="w-full md:w-1/2 md:pl-8 flex items-center justify-center md:justify-end px-2">
         <h2 className="text-xl md:text-4xl font-normal text-[rgb(206,32,39,255)] text-center md:text-right break-words">
-        ONGOING TRAINING <br />
-        DEVELOPMENT
+          ONGOING TRAINING <br /> DEVELOPMENT
         </h2>
       </div>
     </div>
   </div>
 </section>
+
 
 
       <section className="relative w-full min-h-[61vh] md:min-h-screen text-white flex items-center justify-center">
@@ -230,7 +275,7 @@ export default function Training() {
       </section>
 
       <main className="flex px-4 py-6 md:mt-24 mt-4">
-  <div className="mx-auto text-center max-w-4xl">
+  <div className="mx-auto text-center md:px-70 px-10">
     <p className="text-2xl md:text-4xl tracking-[0.1em]">CONNECT WITH US</p>
     <hr className="w-48 md:w-72 mx-auto bg-[rgb(206,32,39,255)] h-[2px] border-0 mt-6 md:mt-10" />
 
@@ -244,7 +289,7 @@ export default function Training() {
 </main>
 
 
-<div className="flex justify-center mt-6">
+<div className="flex justify-center my-6">
   <Link href="/contactUs">
     <button className="flex justify-center items-center text-sm md:text-base font-semibold bg-[rgb(206,32,39,255)] hover:bg-gray-600 text-white py-3 md:px-20 px-4 mt-5 rounded-full focus:outline-none transition w-auto">
       Join a Keller Williams Market Center Near You

@@ -56,13 +56,13 @@ const Franchise = () => {
         
        
             {/* Big Life Box */}
-            <main className="px-4 py-10 ">
-  <div className="mx-auto text-center max-w-5xl">
-    <h1 className="text-lg sm:text-xl md:text-4xl font-semibold md:font-semibold tracking-[0.05em] md:tracking-[0.1em] text-gray-800 leading-snug">
+            <main className="px-4 md:py-10 py-2 ">
+  <div className="mx-auto text-center ">
+    <h1 className="text-2xl md:text-3xl font-semibold md:font-semibold tracking-[0.05em] md:tracking-[0.1em] text-gray-800 leading-snug">
       WE WANT YOU TO <span className="text-[rgb(206,32,39,255)]">LIVE A BIG LIFE</span>
     </h1>
 
-    <hr className="w-32 sm:w-48 md:w-60 lg:w-72 border-0 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] mt-6 md:mt-14" />
+    <hr className="w-32 sm:w-48 md:w-60 lg:w-72 border-0 mx-auto bg-[rgb(206,32,39,255)] h-[2px] mt-6 md:mt-14" />
 
     <div className="mt-6 sm:mt-10 px-2 sm:px-6 md:px-10">
       <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-700">
@@ -116,28 +116,28 @@ const Franchise = () => {
       
      
 
-      <div className="w-full  py-12 px-8">
+      <div className="w-full py-6  md:py-12 px-8">
       <div className="mx-auto grid md:grid-cols-2 gap-10">
         
         {/* Left Section */}
         <div>
-          <h2 className="md:text-3xl text-2xl mt-6 font-semibold leading-snug">
+          <h2 className="md:text-3xl text-2xl  font-semibold leading-snug">
             WE WANT <span className="text-[rgb(206,32,39,255)]">YOU TO LIVE</span><br /> A BIG LIFE
           </h2>
-          <p className="mt-8 text-lg leading-relaxed ">
+          <p className="mt-8 text-base md:text-lg leading-relaxed ">
             At Keller Williams Saudi Arabia, we empower entrepreneurs to build thriving businesses, 
             create lasting legacies, and achieve true financial freedom. Our Franchise model is designed 
             to give you the tools, training, and support you need to lead in your market and grow beyond it.
           </p>
 
-          <h3 className="mt-8 font-bold text-xl text-[rgb(206,32,39,255)]">WHY PARTNER WITH US?</h3>
+          <h3 className="mt-8 font-bold md:text-xl text-lg text-[rgb(206,32,39,255)]">WHY PARTNER WITH US?</h3>
   <ul className="mt-6 space-y-6 text-sm">
     <li>
-    <span className="flex items-center gap-2 text-lg font-semibold">
+    <span className="flex items-center gap-2 md:text-lg text-base font-semibold">
     <FaCheck className="text-[rgb(206,32,39,255)] text-lg" />
     Competitive Investment Costs
   </span>
-      <span className="text-base">Start your franchise with one of the most cost-effective models in the industry.</span>
+      <span className="md:text-base text-sm">Start your franchise with one of the most cost-effective models in the industry.</span>
     </li>
     <li>
     <span className="flex items-center gap-2  text-lg font-semibold">
@@ -145,48 +145,50 @@ const Franchise = () => {
     Limitless Earning Potential
   </span>
       
-      <span className="text-base">Your success is only limited by your ambition and effort.</span>
+      <span className="md:text-base text-sm">Your success is only limited by your ambition and effort.</span>
     </li>
     <li>
-    <span className="flex items-center gap-2 text-lg font-semibold">
+    <span className="flex items-center gap-2  md:text-lg text-base font-semibold">
     <FaCheck className="text-[rgb(206,32,39,255)] text-lg" />
     24/7 Training & Support
   </span>
       
-      <span className="text-base">Access world-class coaching, mentorship, and operational guidance anytime.</span>
+      <span className="md:text-base text-sm">Access world-class coaching, mentorship, and operational guidance anytime.</span>
     </li>
     <li>
-    <span className="flex items-center gap-2 text-lg font-semibold">
+    <span className="flex items-center gap-2  md:text-lg text-base font-semibold">
     <FaCheck className="text-[rgb(206,32,39,255)] text-lg" />
     Industry-Leading Technology
   </span>
       
-      <span className="text-base">Stay ahead with innovative tools that drive efficiency and growth.</span>
+      <span className="md:text-base text-sm">Stay ahead with innovative tools that drive efficiency and growth.</span>
     </li>
     <li>
-    <span className="flex items-center gap-2 text-lg font-semibold">
+    <span className="flex items-center gap-2  md:text-lg text-base font-semibold">
     <FaCheck className="text-[rgb(206,32,39,255)] text-lg" />
     Additional Growth Opportunities
   </span>
       
-      <span className="text-base">Expand your business with multiple revenue streams and service offerings.</span>
+      <span className="md:text-base text-sm">Expand your business with multiple revenue streams and service offerings.</span>
     </li>
     <li>
-    <span className="flex items-center gap-2 text-lg font-semibold">
+    <span className="flex items-center gap-2 md:text-lg text-base font-semibold">
     <FaCheck className="text-[rgb(206,32,39,255)] text-lg" />
     One-of-a-Kind Culture
   </span>
       
-      <span className="text-base">Join a collaborative, success-driven network that celebrates your wins.</span>
+      <span className="md:text-base text-sm">Join a collaborative, success-driven network that celebrates your wins.</span>
     </li>
   </ul>
 
 
-          <p className="mt-8 text-lg">
-            <span className="font-bold text-[rgb(206,32,39,255)]">SHAPE YOUR FUTURE IN REAL ESTATE</span><br />
+          <h1 className="mt-8">
+            <span className="font-bold text-[rgb(206,32,39,255)] md:text-xl text-lg">SHAPE YOUR FUTURE IN REAL ESTATE</span>
+            <p className='text-base md:text-lg mt-2'>
             Ready to own a piece of the world’s largest real estate franchise? Fill out the Franchise Application 
             and take your first step toward building a business that offers both financial rewards and personal fulfillment.
-          </p>
+            </p>
+          </h1>
         </div>
 
         {/* Right Section - Form */}

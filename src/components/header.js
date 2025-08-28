@@ -19,6 +19,9 @@ const Header = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [desktopAtTop, setDesktopAtTop] = useState(true);
 
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
+
   const toggleSubmenu = (key) => {
     setOpenSubmenu(prev => (prev === key ? null : key));
   };
@@ -50,6 +53,31 @@ const Header = () => {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // 🔴 Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setIsMenuOpen(false);
+        setOpenSubmenu(null);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
 
   const menuItems = [
     { label: 'Sell', key: 'sell',  submenu: [
@@ -215,6 +243,7 @@ const Header = () => {
 
         {/* Mobile Menu Toggle */}
         <button 
+          ref={buttonRef}
           className="md:hidden text-white focus:outline-none p-2" 
           onClick={toggleMenu}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -224,7 +253,10 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="absolute md:hidden top-full left-0 right-0 py-4 ml-24 mr-2 px-4 space-y-4 shadow-lg bg-black backdrop-blur-sm z-50 border-t-4 border-[rgb(206,32,39,255)]">
+          <div 
+            ref={menuRef}
+            className="absolute md:hidden top-full left-0 right-0 py-4 ml-24 mr-2 px-4 space-y-4 shadow-lg bg-black backdrop-blur-sm z-50 border-t-4 border-[rgb(206,32,39,255)]"
+          >
             {menuItems.map(item => (
               <div key={item.key}>
                 {item.submenu ? (

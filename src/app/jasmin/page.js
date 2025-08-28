@@ -30,7 +30,7 @@ import Header from '@/components/header';
 import Footer from '@/components/newfooter';
 import Box from '@/components/box';
 import Image from 'next/image';
-import { FaPhoneAlt } from "react-icons/fa";
+import { FaPhoneAlt,FaEnvelope } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 const Riyadh = () => {
 
@@ -113,10 +113,10 @@ const Riyadh = () => {
         <section className="mx-auto px-8 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
       {/* Left Side */}
       <div className="space-y-6">
-        <h1 className="text-3xl font-semibold leading-snug">
+        <h1 className="md:text-3xl text-2xl font-semibold leading-snug">
           Shape Your <br></br><span className="text-[rgb(206,32,39,255)]">Future</span> in Real Estate
         </h1>
-        <p className="text-lg leading-relaxed">
+        <p className="md:text-lg text-md leading-relaxed">
   Are you ready to unlock your potential in the real estate industry? Join us at Keller
   Williams Saudi Arabia Career Night to learn more about how you can become a successful
   real estate agent with the world&apos;s largest real estate franchise.
@@ -124,16 +124,17 @@ const Riyadh = () => {
 
 
         {/* Contact Info */}
-        <div className="flex flex-cols-row gap-8 justify-center space-y-2 my-8 text-base text-gray-700">
-          <div className="flex items-center gap-2">
-            <span className="text-lg">📞</span>
-            <a href='tel:+966 500000000'>+966 500000000</a>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-lg">✉️</span>
-            <a href='mailto:info@kwsaudiarabia.com'>info@kwsaudiarabia.com</a>
-          </div>
-        </div>
+        <div className="flex flex-col md:flex-row md:gap-8 gap-4 justify-center my-8 text-base text-gray-700">
+  <div className="flex items-center gap-2">
+    <span className="text-lg">📞</span>
+    <a href="tel:+966500000000">+966 500000000</a>
+  </div>
+  <div className="flex items-center gap-2">
+    <span className="text-lg">✉️</span>
+    <a href="mailto:info@kwsaudiarabia.com">info@kwsaudiarabia.com</a>
+  </div>
+</div>
+
 
         {/* Google Map */}
         <div className="w-full h-90">
@@ -197,7 +198,7 @@ const Riyadh = () => {
                          border-b md:border-b md:border-r border-black
                          py-4 md:py-0">
             <div className="text-center px-4">
-              <h2 className="text-3xl font-semibold mb-2">OUR TEAM</h2>
+              <h2 className="md:text-3xl text-2xl font-semibold mb-2">OUR TEAM</h2>
               <div className="w-30 h-0.5 bg-[rgb(206,32,39,255)] mb-2 mx-auto border-0 mt-4 md:mt-10"></div>
               <p className="text-sm tracking-wider mt-4 md:mt-10 text-gray-600">JASMIN</p>
             </div>
@@ -247,17 +248,17 @@ const Riyadh = () => {
             {/* Agent Info */}
             <div className="flex-1">
               <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 ">
-                <h3 className="text-xs font-normal md:font-semibold md:text-base md:tracking-[0.2em] uppercase md:mb-2">{agent.name}</h3>
+                <h3 className="text-lg sm:text-lg md:text-2xl font-semibold tracking-[0.1em] uppercase md:mb-2">{agent.name}</h3>
                 {/* <p className="text-sm text-gray-500 ml-auto">{agent.city}</p> */}
               </div>
               <p className="md:text-sm text-[0.7rem] text-[rgb(206,32,39,255)]  mb-2 md:mb-2 break-all">Head of operations</p>
               <div className="mt-6 space-y-2">
-  <p className="flex items-center gap-2 md:text-sm text-sm mb-2 md:mb-2 break-all">
+  <p className="flex items-center gap-2 md:text-base text-sm mb-2 md:mb-2 break-all">
     <FaPhoneAlt className="text-gray-600" />
     {agent.phone}
   </p>
-  <p className="flex items-center gap-2 md:text-sm text-[0.7rem] mb-4 md:mb-12 break-all">
-    <MdEmail className="text-gray-600" />
+  <p className="flex items-center gap-2 md:text-base text-sm mb-4 md:mb-12 break-all">
+    <FaEnvelope className="text-gray-600" />
     {agent.email}
   </p>
 </div>

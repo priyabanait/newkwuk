@@ -303,6 +303,7 @@ const Home = () => {
   const [mobilePropertySearchTerm, setMobilePropertySearchTerm] = useState('');
   const [mobileAgentSearchTerm, setMobileAgentSearchTerm] = useState('');
   return (
+    <div>
     <div className="relative p-6 md:p-8">
     
   {/* Sticky Header */}
@@ -381,7 +382,7 @@ const Home = () => {
       <div className="w-full flex flex-col items-left">
       
       {/* Tab Navigation */}
-<div className="flex flex-col md:flex-row flex-wrap gap-2 md:gap-8 text-sm sm:text-base md:text-xl font-semibold w-fit mb-4 md:mb-6">
+<div className="flex flex-col md:flex-row flex-wrap gap-2 md:gap-8 text-lg sm:text-lg md:text-xl font-semibold w-fit mb-4 md:mb-6">
   <span
     onClick={() => setActiveTab('property')}
     className={`pb-1 sm:pb-2 cursor-pointer border-b-4 ${
@@ -805,7 +806,7 @@ const Home = () => {
         </motion.p>
 
         {/* Stats with dividers */}
-        <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-500 py-4 md:py-18">
+        <div className="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-500 py-2 md:py-18">
           {/* Item 1 */}
           <motion.div 
             className="flex flex-col items-center text-center py-6 px-4"
@@ -1175,7 +1176,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
 
   {/* Overlapping Text Box */}
   <div className="bg-gray-100 md:p-4 p-8 border-gray-100">
-    <p className="md:text-xl text-3xl font-bold text-gray-600">
+    <p className="md:text-xl text-xl font-bold text-gray-600">
       <span className="text-[rgb(206,32,39,255)]">Join us.</span> Our dynamic energy and innovative spirit bring the best and brightest together.
     </p>
   </div>
@@ -1194,14 +1195,14 @@ we hope to become your go-to property adviser for life. As we are also part of t
 
   {/* Left Red Box */}
   <div className="bg-[rgb(206,32,39,255)] text-white flex items-center justify-center w-full h-32">
-    <p className="md:text-lg text-3xl font-bold text-left">
+    <p className="md:text-lg text-lg font-bold text-left">
       Want to be an <br /> AGENT?
     </p>
   </div>
 
   {/* Right Transparent Box */}
-  <div className="bg-white/80 p-4 w-full">
-    <p className=" text-3xl md:text-sm font-bold py-8 md:py-0 text-gray-800 md:leading-relaxed">
+  <div className="bg-white/80 shadow-md p-4 w-full">
+    <p className=" text-lg md:text-sm font-bold py-8 md:py-0 text-gray-800 md:leading-relaxed">
       We offer the greatest rewards for 
       <span className="text-[rgb(206,32,39,255)] font-bold"> exceptional customer care.</span>
     </p>
@@ -1234,13 +1235,13 @@ we hope to become your go-to property adviser for life. As we are also part of t
     <div className="absolute inset-0 bg-gray-500/50"></div>
   </div>
 
-  <div className="absolute top-90 z-10 bg-[rgb(206,32,39,255)] text-white flex items-center justify-center w-74 h-60">
+  <div className="absolute top-90 z-10 bg-[rgb(206,32,39,255)] text-white flex items-center justify-center w-70 h-60">
     <p className="text-3xl font-bold text-center">
       Want to be an <br /> AGENT?
     </p>
   </div>
 
-  <div className="absolute top-90 left-74 z-10 bg-white/80 p-6 w-[600px] h-60">
+  <div className="absolute top-90 left-70 z-10 bg-white/80 p-6 w-[600px] h-60">
     <p className="text-3xl font-bold text-gray-800 leading-relaxed">
       We offer the greatest rewards for <br />
       <span className="text-[rgb(206,32,39,255)] font-bold">exceptional customer care.</span>
@@ -1265,7 +1266,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
   {/* Left Red Box */}
   <div className="bg-[rgb(206,32,39,255)] text-white p-6 md:p-14 py-15 md:py-0 flex  flex-col justify-center">
     <p className="text-base md:text-xl font-semibold mb-2">| Download guide</p>
-    <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6">How to sell your home</h2>
+    <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">How to sell your home</h2>
     <p className="text-base md:text-lg mb-4 md:mb-6 leading-relaxed">
       The guide to selling a property will advise not only on the process
       but also how you can be super prepared and help to achieve the highest sale price.
@@ -1307,7 +1308,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
 <div className="absolute inset-0 bg-gray-500/50 py-15 md:py-0"></div>
     <div className="absolute inset-0 bg-opacity-40 p-4 md:p-10 flex flex-col justify-center text-white ">
     <p className="text-base md:text-xl font-semibold mb-2">| Download guide</p>
-    <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6">How to buy a home</h2>
+    <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">How to buy a home</h2>
     <p className="text-base md:text-lg mb-4 md:mb-6 leading-relaxed">
         The following guide to buying a property will explain how to position
         yourself to negotiate the best price, but importantly ensure you are
@@ -1398,6 +1399,8 @@ we hope to become your go-to property adviser for life. As we are also part of t
 {/* <div className="flex justify-center items-center col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-8 md:mb-0">
           <hr className="md:w-170 w-44 my-8 md:my-12 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[2px]" />
         </div> */}
+    
+    </div>
     <Newfooter></Newfooter>
     </div>
   );

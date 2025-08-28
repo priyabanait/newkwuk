@@ -34,27 +34,27 @@ const Joinus = (props) => {
           </div>
         </div>
       </main> */}
-      <div className=" py-5 px-10 md:px-20">
+      <div className=" px-10 md:px-20">
       <div className="grid md:grid-cols-2 gap-12 items-start ">
         {/* Left Column */}
         <div className="space-y-8">
           <div>
-            <h2 className="text-3xl md:text-4xl font-semibold md:py-5 text-black">
+            <h2 className="text-2xl md:text-3xl font-semibold md:py-5 text-black">
               Shape Your <br /> 
               <span className="text-[rgb(206,32,39,255)]">Future </span>
               in Real Estate </h2>
-            <p className="mt-4 text-gray-700">
+            <p className="mt-4 md:text-lg text-md text-gray-700">
           
            
-  Are you ready to unlock your potential in the real estate industry? Join us at Keller Williams Saudi Arabia Career Night to learn more about how you can become a successful real estate agent with the world&apos;s largest real estate franchise.
-
-
-
-</p><div className="flex gap-4 items-center mt-4">
+  Are you ready to unlock your potential in the real estate industry? Join us at Keller Williams Saudi
+   Arabia Career Night to learn more about how you can become a successful real estate agent with the
+    world&apos;s largest real estate franchise.
+</p>
+<div className="flex gap-4 items-center mt-4">
   {/* Red vertical line */}
   <div className="w-1 bg-[rgb(206,32,39,255)] rounded-full min-h-[200px]" />
 
-            <ul className="mt-4 text-gray-700 list-disc list-inside space-y-1">
+            <ul className="mt-4 text-gray-700 list-disc list-inside space-y-1 md:text-base text-sm">
               <li>Prefer a specific department? Reach them via the emails listed above.</li>
               <li>
   Need personalized help? Complete our Contact Form and we&apos;ll respond promptly.
@@ -86,7 +86,7 @@ const Joinus = (props) => {
 
         {/* Right Column - Form */}
         <div className="bg-white shadow-md  p-8">
-          <h3 className="text-xl font-bold text-center mb-6">JOIN US TODAY</h3>
+          <h3 className="text-xl font-bold text-center mb-6">Join Us Today</h3>
           <form className="space-y-4">
             <label className='block mb-2'>Full Name</label>
             <input

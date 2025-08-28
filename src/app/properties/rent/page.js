@@ -154,6 +154,7 @@ const Properties = () => {
 
  
   return (
+    <div>
     <div className="relative p-6 md:p-8 ">
     
     {/* Sticky Header */}
@@ -640,9 +641,10 @@ const Properties = () => {
       </div>
 
       <hr className="hidden md:block w-6/12 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-5 md:mt-20 mb-16" /> */}
-    
-    <NewFooter></NewFooter>
+      </div>
+   
     </div>
+    <NewFooter></NewFooter>
     </div>
   );
 }

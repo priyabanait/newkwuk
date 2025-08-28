@@ -466,6 +466,7 @@ export default function PropertyListing() {
 
   
   return (
+    <div>
     <div className="relative p-6 md:p-8">
       <Header />
       <div className="absolute top-0 left-0 w-[60px] h-[60px] sm:w-[100px] sm:h-[100px] md:w-[150px] md:h-[150px] bg-[rgb(179,4,4)] z-0"></div>
@@ -1061,7 +1062,7 @@ export default function PropertyListing() {
     </div>
   </div>
 )}
-
+</div>
       
       <NewFooter />
     </div>

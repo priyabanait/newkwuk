@@ -101,8 +101,8 @@ What's Next?  +`,
     
 
       {/* Main Content Section */}
-<main className="px-4 md:px-46 py-6 mt-4 md:mt-2">
-  <div className=" p-4 md:p-0 max-w-full mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<main className="px-4 md:px-46 py-2">
+  <div className="  md:p-0 max-w-full mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-0 md:mb-8">
       <div className="w-full md:w-auto"> 
         <h1 className="text-2xl md:text-3xl md:py-8 py-4">Selling Your <span className='text-[rgb(206,32,39,255)]'>Home</span> Guide</h1>

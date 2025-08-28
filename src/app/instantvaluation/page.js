@@ -47,6 +47,7 @@ useEffect(() => {
   }, [propertyType]);
 
   return (
+    <div>
     <div className="relative p-6 md:p-8">
       {/* Sticky Header */}
       <Header />
@@ -58,22 +59,22 @@ useEffect(() => {
           {/* Left Column */}
           <div className="md:col-span-1 space-y-8">
             <Image src="/instant-val-img.jpg" alt="image" width={435} height={435} />
-            <div className="text-gray-700 text-lg leading-relaxed mx-2 md:mx-6 mt-6">
+            <div className="text-gray-700 md:text-lg text-base leading-relaxed mx-2 md:mx-6 mt-6">
               <p>
                 Your valuation is based on millions of pieces of data, from sold house
                 prices in your area to current market trends and the size of your home.
               </p>
 
-              <p className="mt-6 font-semibold">Included with your valuation :</p>
+              <p className="mt-6 font-semibold md:text-lg text-base">Included with your valuation :</p>
 
               <ul className="mt-4 space-y-2">
-                <li className="flex items-start gap-2">
+                <li className="flex items-start gap-2 ">
                   <FaPlus className="text-[rgb(206,32,39,255)] mt-1" />
-                  <span>Agent Will Contact You</span>
+                  <span className='md:text-lg text-base'>Agent will contact you</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <FaPlus className="text-[rgb(206,32,39,255)] mt-1" />
-                  <span>We help you sell Your Property</span>
+                  <span className='md:text-lg text-base'>We help you sell your property</span>
                 </li>
               </ul>
             </div>
@@ -157,7 +158,7 @@ useEffect(() => {
       </div>
 
      
-
+</div>
       <NewFooter />
     </div>
   );

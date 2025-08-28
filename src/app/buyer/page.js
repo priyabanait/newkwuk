@@ -178,16 +178,16 @@ const Properties = () => {
               className={`z-0 transition-all  duration-500 object-cover ${showFilters ? 'scale-110' : 'scale-100'}` }
             />
              {/* Content */}
-             <div className="absolute bottom-0 left-0 w-full z-10 flex flex-col items-center text-center text-white py-24 md:py-14 px-4">
+             <div className={`absolute ${showFilters ? 'bottom-0' : 'bottom-20'}  md:bottom-0 left-0 w-full z-10 flex flex-col items-center text-center text-white py-2 md:py-14 px-4`}>
   {/* Title */}
-  <h2 className="text-3xl font-semibold pb-8"> {loading ? 'Loading...' : `${properties.length} `} Properties</h2>
+  <h2 className="text-3xl font-semibold md:pb-8 pb-4"> {loading ? 'Loading...' : `${properties.length} `} Properties</h2>
 
   {/* Line 1 - For Sale + To Rent */}
-  <div className="flex gap-4 pb-4">
+  <div className="flex md:gap-4 gap-2 md:pb-4 pb-2">
     {/* For Sale */}
     <button
   onClick={() => setSelected((prev) => ({ ...prev, sale: !prev.sale }))}
-  className={`flex items-center gap-8 px-4 py-2 font-semibold border ${
+  className={`flex items-center md:gap-8 gap-2 px-4 py-2 font-semibold border ${
     selected.sale
       ? "bg-[rgb(206,32,39,255)] border-[rgb(206,32,39,255)] text-white"
       : "bg-white border-gray-300 text-black"
@@ -208,7 +208,7 @@ const Properties = () => {
     {/* To Rent */}
     <button
       onClick={() => setSelected((prev) => ({ ...prev, rent: !prev.rent }))}
-      className={`flex items-center gap-8 px-4 py-2 font-semibold border ${
+      className={`flex items-center md:gap-8 gap-2 px-4 py-2 font-semibold border ${
         selected.rent
           ? "bg-[rgb(206,32,39,255)] border-[rgb(206,32,39,255)] text-white"
           : "bg-white border-gray-300 text-black"
@@ -233,7 +233,7 @@ const Properties = () => {
       onClick={() =>
         setSelected((prev) => ({ ...prev, commercial: !prev.commercial }))
       }
-      className={`flex items-center gap-8 px-4 py-2 font-semibold border ${
+      className={`flex items-center md:gap-8 gap-2 px-4 py-2 font-semibold border ${
         selected.commercial
           ? "bg-[rgb(206,32,39,255)] border-[rgb(206,32,39,255)] text-white"
           : "bg-white border-gray-300 text-black"
@@ -271,7 +271,7 @@ const Properties = () => {
   </div>
 
   {/* More Filters Toggle */}
-  <div className="mt-2 ">
+  <div className="my-4 ">
     <button
       onClick={toggleFilters}
       className="text-white font-medium flex items-center transition-colors"
@@ -314,13 +314,13 @@ const Properties = () => {
 
   {/* Additional Filters */}
   <div
-    className={`overflow-hidden transition-all mt-6 duration-500 ease-in-out ${
+    className={`overflow-hidden transition-all md:mt-6 mt-2 duration-500 ease-in-out ${
       showFilters ? "max-h-[2000px] md:max-h-96 opacity-100" : "max-h-0 opacity-0"
     }`}
   >
     <div>
       {/* First row of dropdowns */}
-      <div className="grid grid-cols-3 gap-4 mb-4 w-4xl">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 w-full md:w-4xl">
        
         {/* Type Dropdown */}
 <div>
@@ -351,7 +351,7 @@ const Properties = () => {
     Min Price
   </label>
   <select className="border border-gray-300 p-2 w-full bg-white text-black">
-    <option>No preference</option>
+    <option>No Preference</option>
     {Array.from(
       new Set(
         properties.map(
@@ -375,7 +375,7 @@ const Properties = () => {
     Max Price
   </label>
   <select className="border border-gray-300 p-2 w-full bg-white text-black">
-    <option>No preference</option>
+    <option>No Preference</option>
     {Array.from(
       new Set(
         properties.map(
@@ -397,7 +397,7 @@ const Properties = () => {
 
 
       {/* Checkboxes */}
-      <div className="flex flex-col md:flex-row gap-6 mb-6 justify-center items-center">
+      <div className="flex flex-col md:flex-row md:gap-6 gap-2 mb-6 justify-center items-center">
   {/* Include new homes */}
   <div className="flex flex-col gap-2">
     <span className="font-medium">Include new homes?</span>

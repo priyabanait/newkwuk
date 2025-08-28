@@ -91,17 +91,17 @@ By partnering with KW, you gain access to our state-of-the-art technology, empow
       />
 
       
-<main className="px-4 py-6 md:mt-2 mt-2">
-        <div className="max-w-full mx-auto text-center md:mt-16">
+<main className="px-4 py-4 md:py-12">
+        <div className="max-w-full mx-auto text-center">
         
          
-          <p className="mt-2 md:mt-8 text-2xl font-semibold md:text-3xl">WHY KW?</p>
+          <p className="text-2xl font-semibold md:text-3xl">WHY KW?</p>
            <hr className="w-32 md:w-80 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 mt-4 md:mt-8" />
         
         </div>
       </main>
       {/* Section Boxes */}
-      <div className="max-w-full mx-auto mt-14 bg-gray-100">
+      <div className="max-w-full mx-auto  bg-gray-100">
       
         <hr className="w-full border-t border-gray-300" />
       
@@ -143,18 +143,18 @@ By partnering with KW, you gain access to our state-of-the-art technology, empow
         ))}
       </div>
 
-       <main className="px-4 py-6 md:mt-2 mt-2">
-        <div className="max-w-full mx-auto text-center md:mt-16">
+       <main className="px-4 md:py-12 py-6">
+        <div className="max-w-full mx-auto text-center">
         
          
-          <p className="mt-2 md:mt-8 text-2xl font-semibold md:text-3xl">WHY KELLER WILLIAMS SAUDI ?</p>
+          <p className="text-2xl font-semibold md:text-3xl">WHY KELLER WILLIAMS SAUDI ?</p>
            <hr className="w-32 md:w-80 mx-auto bg-[rgb(206,32,39,255)] h-[1.5px] border-0 mt-4 md:mt-8" />
         
         </div>
       </main>
 
  {/* Section Boxes */}
-      <div className="max-w-full mx-auto mt-14 bg-gray-100">
+      <div className="max-w-full mx-auto bg-gray-100">
         <hr className="w-full border-t border-gray-300" />
         {sections2.map((section, index) => (
           <React.Fragment key={index}>
@@ -205,7 +205,7 @@ By partnering with KW, you gain access to our state-of-the-art technology, empow
       </div>
 
                 {/* <div className=" ml-22 w-[1px] bg-[rgb(206,32,39,255)] h-auto md:h-28 my-4 group-hover:opacity-0 transition-opacity duration-300"></div> */}
-      <hr className="w-8/12 md:w-5/12 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-2 md:mt-14 mb-10" />
+     
       <Footer />
     </div>
   );

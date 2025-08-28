@@ -97,8 +97,8 @@ export default function Aboutus() {
 
   {/* Second Column */}
   <div>
-    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgb(206,32,39,255)]">Our Mission</h3>
-    <p>
+    <h3 className="font-semibold md:text-xl text-lg py-2 md:py-6 text-[rgb(206,32,39,255)]">Our Mission</h3>
+    <p className='md:text-base text-sm'>
       To Build Careers Worth Having, Businesses Worth Owning, Lives Worth Living, 
       Experiences Worth Giving, And Legacies Worth Leaving.
     </p>
@@ -106,24 +106,24 @@ export default function Aboutus() {
 
   {/* Third Column */}
   <div>
-    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgb(206,32,39,255)]">Our Vision</h3>
-    <p>
+    <h3 className="font-semibold md:text-xl text-lg py-2 md:py-6 text-[rgb(206,32,39,255)]">Our Vision</h3>
+    <p className='md:text-base text-sm'>
       To Be The Real Estate Company Of Choice For Agents And Their Customers.
     </p>
   </div>
 
   {/* Extra Content - Second Column */}
   <div className="md:col-start-2">
-    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgb(206,32,39,255)]">Our Perspective</h3>
-    <p>
+    <h3 className="font-semibold md:text-xl text-lg py-2 md:py-6 text-[rgb(206,32,39,255)]">Our Perspective</h3>
+    <p className='md:text-base text-sm'>
     A Technology Company That Provides The Real Estate Platform That Our Agents’ Buyers And Sellers Prefer. Keller Williams Thinks Like A Top Producer, Acts Like A Trainer-consultant, And Focuses All Its Activities On Service, Productivity, And Profitability.
     </p>
   </div>
 
   {/* Extra Content - Third Column */}
   <div>
-    <h3 className="font-semibold text-xl py-2 md:py-6 text-[rgb(179,4,4)]">WI4C2TES</h3>
-    <p>
+    <h3 className="font-semibold md:text-xl text-lg py-2 md:py-6 text-[rgb(206,32,39,255)]">WI4C2TES</h3>
+    <p className='md:text-base text-sm'>
     Our Belief System Win-win: Or No Deal Integrity: Do The Right Thing Customers: Always Come First Commitment: In All Things Communication: Seek First To Understandcreativity: Ideas Before Results Teamwork: Together Everyone Achieves More Trust: Starts With Honesty Equity: Opportunities For Allsuccess: Results Through People.
     </p>
   </div>

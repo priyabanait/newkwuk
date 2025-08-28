@@ -4,7 +4,7 @@ import Header from '@/components/header';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
-import { FaChevronRight, FaEnvelope, FaSearch } from 'react-icons/fa';
+import { FaPhoneAlt,FaChevronRight, FaEnvelope, FaSearch } from 'react-icons/fa';
 import { MdPhone } from "react-icons/md";
 
 const Footer = dynamic(() => import('@/components/newfooter'), { ssr: false });
@@ -92,6 +92,7 @@ const Agent = () => {
   };
 
   return (
+    <div>
     <div className="relative p-4 sm:p-6 md:p-8">
       <Header />
 
@@ -196,14 +197,15 @@ const Agent = () => {
                         <div className="flex-1">
                           <h3 className="text-lg sm:text-lg md:text-2xl font-semibold mb-2">{agent.name}</h3>
                           <p className="text-sm sm:text-base mb-2 break-all flex items-center gap-2">
-                            <MdPhone className="text-gray-600" /> {agent.phone}
+                            <FaPhoneAlt className="text-gray-600" /> {agent.phone}
                           </p>
                           <p className="text-sm sm:text-base mb-4 break-all flex items-center gap-2">
                             <FaEnvelope className="text-gray-600" /> {agent.email}
                           </p>
                           <button
                             onClick={() => handleAgentClick(agent)}
-                            className="hover:text-[rgb(206,32,39,255)] font-semibold transition-colors py-2 sm:py-3 px-2 sm:px-4 flex items-center justify-end gap-1 sm:gap-2 text-base sm:text-base"
+                            className="hover:text-[rgb(206,32,39,255)] font-semibold transition-colors py-2 sm:py-3  flex items-center justify-end 
+                            gap-1 sm:gap-2 text-base sm:text-base"
                           >
                             <span>View Details & Properties</span>
                             <FaChevronRight className="w-3 h-3 mt-0.5" />
@@ -233,28 +235,30 @@ const Agent = () => {
                     ) : (
                       <>
                         <article className="p-3 sm:p-4 border-b border-gray-300 flex flex-col gap-2">
-                          <h3 className="text-sm sm:text-lg md:text-2xl font-semibold mb-2">Keller Williams Jasmin</h3>
-                          <p className="text-xs sm:text-sm mb-2 sm:mb-4">Dist, 2740 King Fahd Branch Rd, as Sahafah, 6403, Riyadh 13315</p>
-                          <p className="text-xs sm:text-sm break-all flex items-center gap-2">
-                            <MdPhone className="text-gray-600"/> 09200-15671
+                          <h3 className="text-lg sm:text-lg md:text-2xl font-semibold mb-2">Keller Williams Jasmin</h3>
+                          <p className="text-sm md:text-base mb-2 sm:mb-4">Dist, 2740 King Fahd Branch Rd, as Sahafah, 6403, Riyadh 13315</p>
+                          <p className="text-sm md:text-base break-all flex items-center gap-2">
+                            <FaPhoneAlt className="text-gray-600"/> 09200-15671
                           </p>
-                          <p className="text-xs sm:text-sm break-all flex items-center gap-2">
+                          <p className="text-sm md:text-base break-all flex items-center gap-2">
                             <FaEnvelope className="text-gray-600"/> info@kwsaudiarabia.com
                           </p>
-                          <a href='/jasmin' className="hover:text-[rgb(206,32,39,255)] transition-colors py-2 sm:py-3 flex items-center justify-start gap-2 text-xs sm:text-sm">
+                          <a href='/jasmin' className="hover:text-[rgb(206,32,39,255)] font-semibold transition-colors py-2 sm:py-3 flex items-center justify-start 
+                            gap-1 sm:gap-2 text-base sm:text-base">
                             More Details <FaChevronRight className="w-3 h-3 mt-0.5" />
                           </a>
                         </article>
                         <article className="p-3 sm:p-4 flex flex-col gap-2">
-                          <h3 className="text-sm sm:text-lg md:text-2xl font-semibold mb-2">Keller Williams Jeddah</h3>
-                          <p className="text-xs sm:text-sm mb-2 sm:mb-4">Al Khalidiyyah, Jeddah 23421</p>
-                          <p className="text-xs sm:text-sm break-all flex items-center gap-2">
-                            <MdPhone className="text-gray-600"/> 09200-15671
+                          <h3 className="text-lg sm:text-lg md:text-2xl font-semibold mb-2">Keller Williams Jeddah</h3>
+                          <p className="text-sm md:text-base mb-2 sm:mb-4">Al Khalidiyyah, Jeddah 23421</p>
+                          <p className="text-sm md:text-base break-all flex items-center gap-2">
+                            <FaPhoneAlt className="text-gray-600"/> 09200-15671
                           </p>
-                          <p className="text-xs sm:text-sm break-all flex items-center gap-2">
+                          <p className="text-sm md:text-base break-all flex items-center gap-2">
                             <FaEnvelope className="text-gray-600"/> info@kwsaudiarabia.com
                           </p>
-                          <a href='/jeddah' className="hover:text-[rgb(206,32,39,255)] transition-colors py-2 sm:py-3 flex items-center justify-start gap-2 text-xs sm:text-sm">
+                          <a href='/jeddah'  className="hover:text-[rgb(206,32,39,255)] font-semibold transition-colors py-2 sm:py-3  flex items-center justify-start 
+                            gap-1 sm:gap-2 text-base sm:text-base">
                             More Details <FaChevronRight className="w-3 h-3 mt-0.5" />
                           </a>
                         </article>
@@ -282,8 +286,11 @@ const Agent = () => {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
+      
+      </div>
+    
     </div>
   );
 };
