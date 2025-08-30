@@ -50,7 +50,7 @@ export default function Home() {
         <li><a href="/training">Training</a></li>
         <li><a href="/ourCulture/technology">Technology</a></li>
         <li><a href="/ourCulture/news">News</a></li>
-        <li><a href="/ourCulture/event">Events</a></li>
+        <li><a href="/ourCulture/events">Events</a></li>
       </ul>
     </div>
 
@@ -191,7 +191,7 @@ export default function Home() {
           <li><a href="/training">Training</a></li>
           <li><a href="/ourCulture/technology">Technology</a></li>
           <li><a href="/ourCulture/news">News</a></li>
-          <li><a href="/ourCulture/event">Events</a></li>
+          <li><a href="/ourCulture/events">Events</a></li>
         </ul>
       )}
     </div>
