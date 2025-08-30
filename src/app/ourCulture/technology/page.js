@@ -213,7 +213,7 @@ const Technology = () => {
                 <h2 className="text-[rgb(206,32,39,255)] text-2xl font-semibold uppercase mb-2">
                   {step.title}
                 </h2>
-                <p className="whitespace-pre-line text-sm md:text-[1rem] leading-relaxed">
+                <p className="whitespace-pre-line text-md md:text-lg leading-relaxed">
                   {step.content}
                 </p>
               </div>
@@ -285,7 +285,7 @@ const Technology = () => {
                 <h2 className="text-[rgb(206,32,39,255)] text-2xl font-semibold uppercase mb-2">
                   {step.title}
                 </h2>
-                <p className="whitespace-pre-line text-sm md:text-[1rem]  leading-relaxed">
+                <p className="whitespace-pre-line text-md md:text-lg  leading-relaxed">
                   {step.content}
                 </p>
               </div>

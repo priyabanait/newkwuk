@@ -171,16 +171,24 @@ import {
 
                    
                    <div className="flex justify-start items-center">
-                     <span className="font-medium text-base text-gray-700">
-                       {property.price
-                         ? `SAR ${formatPrice(property.price)}`
-                         : property.current_list_price
-                         ? `SAR ${formatPrice(property.current_list_price)}`
-                         : ""}
-                       {property.rental_price
-                         ? `SAR ${formatPrice(property.rental_price)} `
-                         : ""}
-                     </span>
+                   
+
+  <span className="relative w-4 h-4 mr-2">
+    <Image 
+      src="/currency.png"   // 👈 replace with your currency image path
+      alt="currency"
+      fill
+      className="object-contain"
+    />
+  </span>
+
+  <span>
+    {property.price
+      ? formatPrice(property.price)
+      : property.current_list_price
+      ? formatPrice(property.current_list_price)
+      : ""}
+  </span>
                     
 
                    </div>
@@ -859,7 +867,7 @@ import {
         </div> */}
 
         {/* Content: 2 Columns Split (Cards + Map) */}
-        <div className="flex flex-col md:flex-row md:gap-4  md:px-0 pb-8 ">
+        <div className="flex flex-col md:flex-row md:gap-4 bg-gray-100  md:px-0 pb-8 ">
           {/* Mobile: Toggle between list and map */}
           {/* List view for mobile */}
           {viewMode === "list" && (
@@ -1052,7 +1060,7 @@ import {
     {/* Left - Properties List (natural scroll) */}
     <div className="w-1/2 pr-3">
       {/* Property Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-2">
         {loading ? (
           <Loader />
         ) : (
@@ -1200,16 +1208,23 @@ import {
                   }}
                   style={{ position: 'relative', zIndex: 10 }}
                 >
-                  <span className="inline-flex items-center gap-1">
-                    {property.current_list_price?.toLocaleString?.() || property.current_list_price}
-                    <span className="">SAR</span>
-                  </span>
+                 <span className="inline-flex items-center gap-1">
+  
+  <Image
+    src="/saudicurrencywhite.png"   // 👈 put your SAR currency logo path here
+    alt="SAR"
+    width={14}
+    height={14}
+    className="inline-block "
+  />
+  {property.current_list_price?.toLocaleString?.() || property.current_list_price}
+</span>
                 </div>
                 {/* Pointer/arrow below the badge */}
-                <div
+                {/* <div
                   className="w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-[rgb(206,32,39,255)]"
                   style={{ marginTop: '-2px' }}
-                />
+                /> */}
               </div>
             </OverlayView>
 
@@ -1270,16 +1285,25 @@ import {
 
                         
                         <div className="mt-2 flex items-center justify-between px-2">
-                        <span className="font-medium text-sm mb-2 text-gray-700">
-                        {property.price
-                          ? `SAR${formatPrice(property.price)}`
-                          : property.current_list_price
-                          ? `SAR${formatPrice(property.current_list_price)}`
-                          : ""}
-                        {property.rental_price
-                          ? `SAR${formatPrice(property.rental_price)} `
-                          : ""}
-                      </span>
+                        <div className="flex items-center font-medium text-sm mb-2 text-gray-700">
+  <span className="relative w-4 h-4 mr-2">
+    <Image 
+      src="/currency.png"   // 👈 replace with your currency image path
+      alt="currency"
+      fill
+      className="object-contain"
+    />
+  </span>
+
+  <span>
+    {property.price
+      ? formatPrice(property.price)
+      : property.current_list_price
+      ? formatPrice(property.current_list_price)
+      : ""}
+  </span>
+</div>
+
                       {property.price_qualifier && (
                       <p className="text-xs text-gray-500 mt-1">
                         {property.price_qualifier}

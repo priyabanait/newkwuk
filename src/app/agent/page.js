@@ -182,7 +182,7 @@ const Agent = () => {
                       <article key={agent._id || idx} className="p-3 sm:p-4 flex flex-row items-start gap-3 sm:gap-4 relative border-b border-gray-300">
                         <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 relative">
                           <Image
-                            src={agent.image || "/images.jpg"}
+                            src={agent.image || "/avtar.jpg"}
                             alt={`Portrait of ${agent.name}`}
                             width={128}
                             height={128}

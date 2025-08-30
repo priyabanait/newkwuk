@@ -30,9 +30,9 @@ export default function Howwill() {
     md:px-20 px-10 bg-[rgb(206,32,39,255)] text-white py-2 md:py-3 rounded-full text-sm
     relative overflow-hidden
     group transition-all duration-300
-    hover:pr-8 hover:pl-4
+    hover:pr-20 hover:pl-10
   ">
-    <span className="inline-block font-semibold text-sm transition-all duration-300 group-hover:-translate-x-3"  onClick={() => router.push('/contactUs')}>
+    <span className="inline-block font-semibold text-sm transition-all duration-300"  onClick={() => router.push('/contactUs')}>
   JOIN US
     </span>
     <span className="

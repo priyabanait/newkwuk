@@ -14,7 +14,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useRef,useState,useEffect,useMemo  } from 'react';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight,ChevronLeft } from 'lucide-react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -86,6 +86,7 @@ const Home = () => {
   const heroImages = [
     "/Banner 1.png",
     "/Banner 2.png",
+    "/Banner 4.png",
     "/Banner 3.png",
    
   ];
@@ -302,6 +303,19 @@ const Home = () => {
   const [agentSearchTerm, setAgentSearchTerm] = useState('');
   const [mobilePropertySearchTerm, setMobilePropertySearchTerm] = useState('');
   const [mobileAgentSearchTerm, setMobileAgentSearchTerm] = useState('');
+  const [loadedIndex, setLoadedIndex] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [loaded, setLoaded] = useState({}); // track which images are loaded
+  const [stableIndex, setStableIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPrevHeroIndex(heroIndex);
+      const nextIndex = (heroIndex + 1) % heroImages.length;
+      setHeroIndex(nextIndex);
+      setLoadedIndex(null); // reset before new loads
+    }, 6000); // every 6s
+    return () => clearInterval(interval);
+  }, [heroIndex, heroImages.length]);
   return (
     <div>
     <div className="relative p-6 md:p-8">
@@ -319,58 +333,73 @@ const Home = () => {
  
     {/* Background Image with previous blurring out and next coming in */}
    
-  <section className="relative w-full h-screen md:h-screen text-white">
+  <section className="relative w-full h-screen md:h-[120vh] text-white">
     {/* Background Image Transition */}
-    <div className="absolute inset-0 z-0">
-      
-      {/* New image (background) */}
-     {/* New image (background) */}
-<motion.div
-  key={heroIndex}
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 0.8, ease: "easeInOut" }}
-  className="absolute inset-0"
-  style={{ zIndex: 1 }}
->
-  <Image
-    src={heroImages[heroIndex]}
-    alt="Hero Background"
-    fill
-    priority
-    className="object-cover"
-  />
-</motion.div>
+    <div className="absolute inset-0 z-0 overflow-hidden">
+  <AnimatePresence initial={false} mode="sync">
+    {[stableIndex, heroIndex]
+      .filter((v, i, a) => a.indexOf(v) === i) // de-dupe when they match
+      .map((idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: idx === heroIndex ? 0 : 1, filter: "blur(15px)" }}
+          animate={{
+            opacity:
+              idx === heroIndex
+                ? (loaded[idx] ? 1 : 0) // new one stays hidden until loaded
+                : 1,                     // old one stays fully visible
+            filter: loaded[idx] ? "blur(0px)" : "blur(15px)",
+          }}
+          exit={{ opacity: idx === stableIndex ? 0 : 1 }} // old fades only after we commit
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          className="absolute inset-0"
+          onAnimationComplete={() => {
+            // once the new one has faded in, make it the stable one and remove the old
+            if (idx === heroIndex && loaded[idx]) setStableIndex(heroIndex);
+          }}
+          style={{ willChange: "opacity, filter" }}
+        >
+          <Image
+            src={heroImages[idx]}
+            alt="Hero Background"
+            fill
+            priority={idx === 0}
+            className="object-cover"
+            onLoadingComplete={() =>
+              setLoaded((prev) => ({ ...prev, [idx]: true }))
+            }
+          />
+        </motion.div>
+      ))}
+  </AnimatePresence>
 
-{/* Previous image (foreground, fades out AFTER new one is visible) */}
-{prevHeroIndex !== null && (
-  <motion.div
-    key={prevHeroIndex}
-    initial={{ opacity: 1 }}
-    animate={{ opacity: 0 }}
-    transition={{ duration: 0.9, ease: "easeInOut", delay: 10 }} // 👈 fade after new image is done
-    className="absolute inset-0"
-    style={{ zIndex: 2 }}
-  >
+  {/* Hidden preloader for the *next* image */}
+  <div className="hidden">
     <Image
-      src={heroImages[prevHeroIndex]}
-      alt="Previous Hero Background"
-      fill
-      priority
-      className="object-cover"
+      src={heroImages[(heroIndex + 1) % heroImages.length]}
+      alt="preload"
+      width={1}
+      height={1}
+      onLoadingComplete={() =>
+        setLoaded((prev) => ({
+          ...prev,
+          [(heroIndex + 1) % heroImages.length]: true,
+        }))
+      }
     />
-  </motion.div>
+  </div>
+</div>
 
-      )}
-    </div>
+
+
     <div className="absolute inset-0"></div>
     <div className="inset-0 bg-opacity-60 z-10" />
 
     {/* Content */}
-    <div className="absolute bottom-20 md:bottom-0 left-0 w-full px-6 md:px-36 pb-8 md:pb-10">
+    <div className="absolute bottom-20 md:bottom-36 left-0 w-full px-6 md:px-36 pb-8 md:pb-10">
       <div className="max-w-full mx-auto">
       <h1 className="text-3xl sm:text-2xl  md:text-5xl font-bold md:font-semibold mb-3 md:mb-6 leading-tight">
-        Protect your move with a <br className="hidden md:block" /> Keller Williams Agent.
+        Protect your move with a Keller<br className="hidden md:block" />  Williams Agent.
       </h1>
 
       <p className="text-base sm:text-sm md:text-[1.1rem] font-normal mb-3 md:mb-8 max-w-full md:max-w-2xl">
@@ -415,7 +444,7 @@ const Home = () => {
           value={propertySearchTerm}
           onChange={(e) => setPropertySearchTerm(e.target.value)}
           placeholder="City, Area or Street"
-          className=" py-3 px-4  bg-white text-black text-xl font-medium outline-none "
+          className=" py-3 px-4  bg-white w-85 text-black text-xl font-medium outline-none "
         />
       {/* </div> */}
 
@@ -452,7 +481,7 @@ const Home = () => {
           value={agentSearchTerm}
           onChange={(e) => setAgentSearchTerm(e.target.value)}
           placeholder="Name or City"
-          className=" py-3 px-4 bg-white text-black text-xl font-medium outline-none "
+          className=" py-3 px-4 bg-white w-85 text-black text-xl font-medium outline-none "
         />
       </div>
 
@@ -912,8 +941,8 @@ About Keller Williams
 </h1>
 
 
-<p className="text-base md:text-lg font-semibold py-4 md:py-6">You come FIRST with Keller Williams. Your trust is our business.</p>
-<hr className="w-40 md:w-40 my-8 mx-auto border-[rgb(206,32,39,255)] border-4" />
+<p className="text-base md:text-lg font-semibold py-4 md:py-4">You come FIRST with Keller Williams. Your trust is our business.</p>
+<hr className="w-40 md:w-40 my-6 mx-auto border-[rgb(206,32,39,255)] border-2" />
 <p className="my-2 text-base md:text-lg mx-2 md:mx-40 leading-relaxed"> Maya Angelou said, &quot;People may not remember exactly what you did, or what you said, but they will always remember how you made them feel.&quot; By building understanding, trust, and respect, we can do what it takes to make things happen for you. We know how to deliver a dedicated and bespoke service. We want you to know, but more importantly, feel that we are there for every step of the property journey. Because we will be. Whether you need us today, or in the coming years, we are here to serve. As your local agent, 
 we hope to become your go-to property adviser for life. As we are also part of the global Keller Williams&apos; family, our local hands have a global reach.</p>
 <p className="text-base md:text-lg font-semibold py-4 md:py-6">One call could build you a better tomorrow.</p>
@@ -931,11 +960,11 @@ we hope to become your go-to property adviser for life. As we are also part of t
    
 
     <div className="flex flex-col items-center justify-center my-8 md:my-20  text-center px-2  md:px-4 md:mb-30 bg-gray-100 border border-gray-100">
-  <h1 className="text-lg md:text-[2.5rem] mt-6 md:mt-10 font-bold mb-2 md:mb-4">
+  <h1 className="text-2xl md:text-[2.5rem] mt-6 md:mt-10 font-bold mb-2 md:mb-4">
     <span className="text-[rgb(206,32,39,255)]">Recent </span>Properties
   </h1>
   <h2 className="text-base md:text-xl font-semibold text-gray-600 mb-4 md:mb-6">
-    Start Your Search <span className="text-[rgb(206,32,39,255)]">Here</span>
+    Start your search <span className="text-[rgb(206,32,39,255)]">here</span>
   </h2>
 
   <div className="hidden md:flex  flex-col md:flex-row  gap-1 md:gap-1 ">
@@ -1108,16 +1137,22 @@ we hope to become your go-to property adviser for life. As we are also part of t
 </div>
 
                 <div className="flex justify-start items-center">
-                <span className="font-medium text-base text-gray-700" dir="ltr">
-  {property.price
-    ? `﷼ ${formatPrice(property.price)}`
-    : property.current_list_price
-    ? `﷼ ${formatPrice(property.current_list_price)}`
-    : ""}
-  {property.rental_price
-    ? ` ﷼ ${formatPrice(property.rental_price)}`
-    : ""}
-</span>
+                <span className="relative w-4 h-4 mr-2">
+    <Image 
+      src="/currency.png"   // 👈 replace with your currency image path
+      alt="currency"
+      fill
+      className="object-contain"
+    />
+  </span>
+
+  <span>
+    {property.price
+      ? formatPrice(property.price)
+      : property.current_list_price
+      ? formatPrice(property.current_list_price)
+      : ""}
+  </span>
 
                  
 
@@ -1131,7 +1166,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
               </div>
               <button className="w-full bg-[rgb(206,32,39,255)] text-white font-bold text-base py-3 px-4 flex items-center justify-end gap-2">
   <span>MORE DETAILS</span>
-  <FaChevronRight className="text-white w-4 h-4" />
+  <ChevronRight className="text-white w-4 h-4" />
 </button>
 
             </div>
@@ -1149,7 +1184,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
         onClick={handleScrollLeft}
         className="bg-white border border-gray-300 p-4 shadow-md hover:shadow-lg transition"
       >
-        <FaChevronLeft className="text-[rgb(206,32,39,255)] w-10 h-8" />
+        <ChevronLeft className="text-[rgb(206,32,39,255)] w-10 h-10" />
       </button>
     )}
     {showScrollButton && (
@@ -1157,7 +1192,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
         onClick={scrollRight}
         className="bg-white border border-gray-300 p-4 shadow-md hover:shadow-lg transition"
       >
-        <FaChevronRight className="text-[rgb(206,32,39,255)] w-10 h-8" />
+        <ChevronRight className="text-[rgb(206,32,39,255)] w-10 h-10" />
       </button>
     )}
   </div>
@@ -1184,7 +1219,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
   {/* Image */}
   <div className="hidden md:block relative h-[200px] w-full">
   <Image
-    src="/Homepage_want_to_agent.jpeg"
+    src="/"
     alt="Full Height Image"
     fill
     className="object-cover "
@@ -1195,14 +1230,14 @@ we hope to become your go-to property adviser for life. As we are also part of t
 
   {/* Left Red Box */}
   <div className="bg-[rgb(206,32,39,255)] text-white flex items-center justify-center w-full h-32">
-    <p className="md:text-lg text-lg font-bold text-left">
+    <p className="md:text-xl text-xl font-bold text-left">
       Want to be an <br /> AGENT?
     </p>
   </div>
 
   {/* Right Transparent Box */}
   <div className="bg-white/80 shadow-md p-4 w-full">
-    <p className=" text-lg md:text-sm font-bold py-8 md:py-0 text-gray-800 md:leading-relaxed">
+    <p className=" text-xl md:text-xl font-bold py-8 md:py-0 text-gray-800 md:leading-relaxed">
       We offer the greatest rewards for 
       <span className="text-[rgb(206,32,39,255)] font-bold"> exceptional customer care.</span>
     </p>
@@ -1220,14 +1255,14 @@ we hope to become your go-to property adviser for life. As we are also part of t
 <div className="hidden md:flex w-full relative  ">
   {/* Box with half-overlap */}
   <div className="absolute top-0 z-10  bg-gray-100 p-6 w-140 border-gray-100  ">
-    <p className="text-4xl font-bold text-gray-800">
+    <p className="text-3xl font-bold text-gray-800">
       <span className="text-[rgb(206,32,39,255)]">Join us.</span> Our dynamic energy and innovative spirit bring the best and brightest together.
     </p>
   </div>
 
   <div className="ml-70 h-screen w-screen relative">
     <Image
-      src="/Homepage_want_to_agent.jpeg"
+      src="/4.jpg"
       alt="Full Height Image"
       fill
       className="object-cover"
@@ -1235,19 +1270,19 @@ we hope to become your go-to property adviser for life. As we are also part of t
     <div className="absolute inset-0 bg-gray-500/50"></div>
   </div>
 
-  <div className="absolute top-90 z-10 bg-[rgb(206,32,39,255)] text-white flex items-center justify-center w-70 h-60">
-    <p className="text-3xl font-bold text-center">
+  <div className="absolute top-90 z-10 bg-[rgb(206,32,39,255)] text-white flex items-center justify-center w-70 h-70">
+    <p className="text-3xl font-bold text-left">
       Want to be an <br /> AGENT?
     </p>
   </div>
 
-  <div className="absolute top-90 left-70 z-10 bg-white/80 p-6 w-[600px] h-60">
-    <p className="text-3xl font-bold text-gray-800 leading-relaxed">
+  <div className="absolute top-90 left-70 z-10 bg-white/80 p-6 w-[700px] h-70">
+    <p className="text-3xl mt-14 font-bold text-gray-800 leading-relaxed">
       We offer the greatest rewards for <br />
       <span className="text-[rgb(206,32,39,255)] font-bold">exceptional customer care.</span>
     </p>
 
-    <button className="mt-4 bg-[rgb(206,32,39,255)] text-white px-6 py-3 ml-110  text-base font-semibold flex items-center gap-2">
+    <button className="mt-4 bg-[rgb(206,32,39,255)] text-white px-6 py-3 ml-132  text-base font-semibold flex items-center gap-2">
       <span className="whitespace-nowrap">Market Centre Search</span>
       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -1265,13 +1300,16 @@ we hope to become your go-to property adviser for life. As we are also part of t
 
   {/* Left Red Box */}
   <div className="bg-[rgb(206,32,39,255)] text-white p-6 md:p-14 py-15 md:py-0 flex  flex-col justify-center">
-    <p className="text-base md:text-xl font-semibold mb-2">| Download guide</p>
+  <p className="text-base md:text-xl font-semibold mb-2 pl-3 border-l-6 border-white">
+  Download guide
+</p>
+
     <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">How to sell your home</h2>
     <p className="text-base md:text-lg mb-4 md:mb-6 leading-relaxed">
       The guide to selling a property will advise not only on the process
       but also how you can be super prepared and help to achieve the highest sale price.
     </p>
-    <div className="hidden md:flex w-full max-w-full md:max-w-md p-1    items-center ">
+    <div className="hidden md:flex w-full max-w-full md:max-w-lg p-1    items-center ">
       <input
     type="text"
     placeholder="Email Address"
@@ -1300,21 +1338,23 @@ we hope to become your go-to property adviser for life. As we are also part of t
   {/* Right Image Box */}
   <div className="relative h-[460px] md:h-[420px] ">
     <Image
-      src="/Homepage_buy_your_home.jpeg" // Replace with your actual image path
+      src="/3.jpg" // Replace with your actual image path
       alt="Home"
       fill
       className="object-cover grayscale "
     />
 <div className="absolute inset-0 bg-gray-500/50 py-15 md:py-0"></div>
     <div className="absolute inset-0 bg-opacity-40 p-4 md:p-10 flex flex-col justify-center text-white ">
-    <p className="text-base md:text-xl font-semibold mb-2">| Download guide</p>
+    <p className="text-base md:text-xl font-semibold mb-2 pl-3 border-l-6 border-white">
+  Download guide
+</p>
     <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">How to buy a home</h2>
     <p className="text-base md:text-lg mb-4 md:mb-6 leading-relaxed">
         The following guide to buying a property will explain how to position
         yourself to negotiate the best price, but importantly ensure you are
         the winning bidder when up against the competition.
       </p>
-      <div className="hidden md:flex w-full max-w-full md:max-w-md p-1    items-center ">
+      <div className="hidden md:flex w-full max-w-full md:max-w-lg p-1    items-center ">
       <input
     type="text"
     placeholder="Email Address"
@@ -1349,7 +1389,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
 
 {/* Background Image */}
 <Image
-  src="/Homepage_testimonials.jpeg" // Replace with your image in public folder
+  src="/2.jpg" // Replace with your image in public folder
   alt="Background Crowd"
   fill
   className="object-cover grayscale"
@@ -1376,7 +1416,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
       <p className="text-[rgb(206,32,39,255)] font-bold  mb-2">
         {testimonials[currentIndex].name}
       </p>
-      <p className="italic  text-gray-600">
+      <p className="font-bold  text-gray-600">
         {testimonials[currentIndex].role}
       </p>
     </motion.div>

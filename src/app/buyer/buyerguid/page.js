@@ -135,7 +135,7 @@ What's Next? +`,
       <div className="w-full md:w-auto">  {/* Removed text-center from here since parent has it */}
         <h1 className="text-2xl md:text-3xl  py-2 md:py-8">Home <span className='text-red-700'>Buying </span> Tips from Keller Williams</h1>
        <div className='mx-4 md:mx-0 tracking-normal mt-2 md:mt-0  md:tracking-normal'>
-       <p className="text-sm md:text-[1rem] leading-5">
+       <p className="text-md md:text-lg leading-5">
           Our Experience, A House Is Not A Dream Home Because Of Its Size Or Colour. Its About How You Feel When You Walk Through The Front Door – The Way You Can Instantly See
       
        
@@ -185,7 +185,7 @@ What's Next? +`,
     <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-2xl font-normal  inline-block">
       {step.title}
     </h2>
-    <p className="whitespace-pre-line mt-2 text-sm">{step.content}</p>
+    <p className="whitespace-pre-line mt-2 text-md">{step.content}</p>
   </div>
 </div>
 
@@ -199,7 +199,7 @@ What's Next? +`,
                     <span className="text-gray-500 text-5xl font-normal">{`${index + 1}.`}</span>
                     <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-xl font-normal mt-4">
                       {step.title}</h2>
-                    <p className="whitespace-pre-line mt-2 leading-5 md:mt-4 text-[1rem]">{step.content}</p>
+                    <p className="whitespace-pre-line mt-2 leading-7 md:mt-4 text-lg">{step.content}</p>
                   </div>
                 </>
               ) : (
@@ -209,7 +209,7 @@ What's Next? +`,
                     <span className="text-gray-500 text-5xl font-normal">{`${index + 1}.`}</span>
                     <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-xl font-normal mt-4">
                       {step.title}</h2>
-                    <p className="whitespace-pre-line mt-2 leading-5 md:mt-4 text-[1rem]">{step.content}</p>
+                    <p className="whitespace-pre-line mt-2 leading-7 md:mt-4 text-lg">{step.content}</p>
                   </div>
                    {/* Empty div for the right side */}
                    <div className="hidden md:block"></div>

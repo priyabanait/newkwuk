@@ -12,7 +12,7 @@ const Joinus = (props) => {
 
       <Box
        
-        src="/training.jpg"
+        src="/Homepage_want_to_agent.jpeg"
         h3='Become a Keller Williams Agent'
         image={
           '/joinus.png'
@@ -35,7 +35,7 @@ const Joinus = (props) => {
         </div>
       </main> */}
       <div className=" px-10 md:px-20">
-      <div className="grid md:grid-cols-2 gap-12 items-start ">
+      <div className="grid md:grid-cols-2 gap-0 items-start ">
         {/* Left Column */}
         <div className="space-y-8">
           <div>
@@ -43,26 +43,14 @@ const Joinus = (props) => {
               Shape Your <br /> 
               <span className="text-[rgb(206,32,39,255)]">Future </span>
               in Real Estate </h2>
-            <p className="mt-4 md:text-lg text-md text-gray-700">
+            <p className="mt-4 md:pr-50 md:text-lg text-md text-gray-700">
           
            
   Are you ready to unlock your potential in the real estate industry? Join us at Keller Williams Saudi
    Arabia Career Night to learn more about how you can become a successful real estate agent with the
     world&apos;s largest real estate franchise.
 </p>
-<div className="flex gap-4 items-center mt-4">
-  {/* Red vertical line */}
-  <div className="w-1 bg-[rgb(206,32,39,255)] rounded-full min-h-[200px]" />
 
-            <ul className="mt-4 text-gray-700 list-disc list-inside space-y-1 md:text-base text-sm">
-              <li>Prefer a specific department? Reach them via the emails listed above.</li>
-              <li>
-  Need personalized help? Complete our Contact Form and we&apos;ll respond promptly.
-
-</li>
-              <li>Want to work with someone local? Search our Agent &amp; Office Directory to connect directly.</li>
-            </ul>
-          </div>
           </div>
           {/* Why Attend */}
           <div>
@@ -70,15 +58,15 @@ const Joinus = (props) => {
             <ul className="text-gray-700 space-y-2">
   <li className="flex items-start gap-2">
     <span className="text-[rgb(206,32,39,255)] font-bold mt-1">✓</span>
-    <span>One-of-a-kind culture</span>
+    <span className='md:text-lg text-md'>One-of-a-kind culture</span>
   </li>
   <li className="flex items-start gap-2">
     <span className="text-[rgb(206,32,39,255)] font-bold mt-1">✓</span>
-    <span>Limitless earning potential</span>
+    <span className='md:text-lg text-md'>Limitless earning potential</span>
   </li>
   <li className="flex items-start gap-2">
     <span className="text-[rgb(206,32,39,255)] font-bold mt-1">✓</span>
-    <span>Industry-leading technology</span>
+    <span className='md:text-lg text-md'>Industry-leading technology</span>
   </li>
 </ul>
           </div>

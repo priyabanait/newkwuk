@@ -138,51 +138,7 @@ export default function Training() {
      
       {/* BOOKS SECTION */}
 {/* BOOKS SECTION */}
-<section className="hidden md:block md:py-8 py-2 md:mx-10">
-  <div>
-    <div className="flex flex-col md:flex-row items-center md:items-center">
-
-      {/* Left side - Books */}
-      <div className="w-full flex justify-center md:justify-start mb-8 md:mb-0 ">
-        <div className="flex">
-          <Image
-            src="/bookblue.png"
-            alt="The Millionaire Real Estate Investor"
-            width={200}
-            height={150}
-            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-8deg] z-10 md:-ml-30 "
-          />
-          <Image
-            src="/book.png"
-            alt="Your First Home"
-            width={200}
-            height={150}
-            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-6deg] z-20 md:-ml-64 "
-          />
-          <Image
-            src="/bookred.png"
-            alt="The Millionaire Real Estate Agent"
-            width={200}
-            height={150}
-            className=" bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-10deg] z-30 md:-ml-64 "
-          />
-          <Image
-            src="/bookwhite.png"
-            alt="The ONE Thing"
-            width={200}
-            height={150}
-            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-6deg] z-30 md:-ml-74  "
-          />
-        </div>
-      </div>
-
-      {/* Right side - Text */}
-      {/* Right side - Text */} <div className="w-full md:w-1/2 md:pl-8 flex items-center justify-center md:justify-end px-2"> <h2 className="text-xl md:text-4xl font-normal text-[rgb(206,32,39,255)] text-center md:text-right break-words"> BEST SELLING <br /> BOOKS </h2> </div>
-    </div>
-  </div>
-</section>
-
-<section className="block lg:hidden md:py-8 py-2 md:mx-10">
+<section className="md:py-8 py-2 mx-2 md:mx-10">
   <div>
     <div className="flex flex-col md:flex-row items-center md:items-center">
 
@@ -201,30 +157,33 @@ export default function Training() {
             alt="Your First Home"
             width={200}
             height={150}
-            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-6deg] z-20 md:-ml-30 -ml-40"
+            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-6deg] z-20 md:-ml-64 -ml-40"
           />
           <Image
             src="/bookred.png"
             alt="The Millionaire Real Estate Agent"
             width={200}
             height={150}
-            className=" bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-10deg] z-30 md:-ml-30 -ml-40"
+            className=" bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-10deg] z-30 md:-ml-64 -ml-40"
           />
           <Image
             src="/bookwhite.png"
             alt="The ONE Thing"
             width={200}
             height={150}
-            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-6deg] z-30 md:-ml-30 -ml-40 "
+            className="bottom-0 md:w-[450px] md:h-[300px] w-[220px] h-[140px] rotate-[-6deg] z-30 md:-ml-74 -ml-40 "
           />
         </div>
       </div>
 
-      {/* Right side - Text */}
-      {/* Right side - Text */} <div className="w-full md:w-1/2 md:pl-8 flex items-center justify-center md:justify-end px-2"> <h2 className="text-xl md:text-4xl font-normal text-[rgb(206,32,39,255)] text-center md:text-right break-words"> BEST SELLING <br /> BOOKS </h2> </div>
+    <div className="w-full md:w-1/2 md:pl-8 flex items-center justify-center md:justify-end px-2"> 
+      <h2 className="text-xl md:text-4xl font-normal text-[rgb(206,32,39,255)] text-center
+       md:text-right break-words"> BEST SELLING <br /> BOOKS </h2> </div>
     </div>
   </div>
 </section>
+<hr className='mt-10'></hr>
+
 
 
 

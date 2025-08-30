@@ -106,7 +106,7 @@ What's Next?  +`,
     <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-0 md:mb-8">
       <div className="w-full md:w-auto"> 
         <h1 className="text-2xl md:text-3xl md:py-8 py-4">Selling Your <span className='text-[rgb(206,32,39,255)]'>Home</span> Guide</h1>
-        <p className="text-sm md:text-[1rem]">
+        <p className="text-md md:text-lg">
         You&rsquo;re Ready To Sell Your Property. And, While You&rsquo;re Looking Forward To Seeing The Word &quot;SOLD&quot; Posted From The Curb, You Know There&rsquo;s A Lot To Consider Along The Way.
        
         
@@ -156,7 +156,7 @@ What's Next?  +`,
     <h2 className="text-[rgb(206,32,39,255)] text-2xl md:text-3xl font-normal  inline-block">
       {step.title}
     </h2>
-    <p className="whitespace-pre-line mt-2 text-sm">{step.content}</p>
+    <p className="whitespace-pre-line mt-2 text-md">{step.content}</p>
   </div>
 </div>
 
@@ -172,7 +172,7 @@ What's Next?  +`,
                     <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-xl font-normal ">
                       {step.title}
                     </h2>
-                    <p className="whitespace-pre-line mt-2 md:mt-4 leading-5 text-[1rem]">{step.content}</p>
+                    <p className="whitespace-pre-line mt-2 md:mt-4 leading-7 text-lg">{step.content}</p>
                   </div>
                 </>
               ) : (
@@ -181,7 +181,7 @@ What's Next?  +`,
                     <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-xl font-normal ">
                       {step.title}
                     </h2>
-                    <p className="whitespace-pre-line mt-2 leading-5 md:mt-4 text-[1rem]">{step.content}</p>
+                    <p className="whitespace-pre-line mt-2 leading-7 md:mt-4 text-lg">{step.content}</p>
                   </div>
                   {/* Number on the right side */}
                   <div className="hidden md:flex items-center justify-start pl-4">

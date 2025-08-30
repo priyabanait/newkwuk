@@ -82,12 +82,12 @@ Your KW Agent will guide you with a few suggestions such as  +`,
 
       {/* Main Content Section */}
       <main className="px-4 md:px-40 py-2  md:mt-2">
-      <div className="  md:p-0 max-w-full mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className=" max-w-full mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
             <div className="w-full md:w-auto text-center">
             <h1 className="text-2xl md:text-3xl md:py-8 py-4">Five Steps To Sell</h1>
             {/* <hr className="w-8/12 md:w-5/12 mx-auto border-0 bg-[rgb(206,32,39,255)] h-[1.5px] mt-2 md:mt-10 mb-10" /> */}
-<p className='text-sm md:text-[1rem]'>
+<p className='text-md md:text-lg'>
   You&rsquo;re Ready To Sell Your Property. And, While You&rsquo;re Looking Forward To Seeing The Word &quot;SOLD&quot; 
   Posted From The Curb, You Know There&rsquo;s A Lot To Consider Along The Way. One Of Your First Decisions Is To Select A Real Estate Company And Real Estate Agent Who&rsquo;ll Join You In The Process.
 </p>
@@ -132,7 +132,7 @@ Your KW Agent will guide you with a few suggestions such as  +`,
       <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-2xl font-normal  inline-block">
       {step.title}
     </h2>
-      <p className="whitespace-pre-line mt-2 text-sm">{step.content}</p>
+      <p className="whitespace-pre-line mt-2 text-md">{step.content}</p>
     </div>
 
     {/* ✅ DESKTOP ONLY */}
@@ -141,14 +141,14 @@ Your KW Agent will guide you with a few suggestions such as  +`,
         <div className="hidden md:block" />
         <div className="hidden md:block text-left px-0 md:px-12">
           <h2 className="text-[rgb(206,32,39,255)] text-xl md:text-3xl font-normal ">{step.title}</h2>
-          <p className="whitespace-pre-line mt-2 md:mt-4 md:text-[1rem] text-[0.8rem]">{step.content}</p>
+          <p className="whitespace-pre-line mt-2 md:mt-4 md:text-lg text-md">{step.content}</p>
         </div>
       </>
     ) : (
       <>
         <div className="hidden md:block text-right px-0 md:px-12">
           <h2 className="text-[rgb(206,32,39,255)] text-xl md:text-3xl font-normal ">{step.title}</h2>
-          <p className="whitespace-pre-line mt-2 md:mt-4 md:text-[1rem] text-[0.8rem]">{step.content}</p>
+          <p className="whitespace-pre-line mt-2 md:mt-4 md:text-lg text-md">{step.content}</p>
         </div>
         <div className="hidden md:block" />
       </>
@@ -167,9 +167,7 @@ Your KW Agent will guide you with a few suggestions such as  +`,
       className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
       
     />
-    <button className="bg-[rgb(206,32,39,255)] w-40 text-white px-8 py-1.5 text-[0.6rem] rounded-full block mx-auto md:hidden mt-4 mb-4"  onClick={() => router.push('/contactUs')}>
-      JOIN US
-    </button>
+   
   </div>
  
       

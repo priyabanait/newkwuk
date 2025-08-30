@@ -4,7 +4,7 @@ import { useState,useRef,useEffect } from 'react';
 import { ChevronLeft, ChevronRight} from 'lucide-react';
 import Image from 'next/image';
 import NewFooter from '@/components/newfooter'
-import { Phone, Mail, FileText, MessageCircle } from "lucide-react";
+import { Phone, Mail, User , MessageCircle } from "lucide-react";
 import { FaPhoneAlt, FaEnvelope, FaRegCalendarAlt, FaSnowflake, FaHome,  FaMoneyBillWave, FaCar } from 'react-icons/fa';
 
 import { PiMapPinLineThin } from 'react-icons/pi';
@@ -297,9 +297,7 @@ export default function PropertyListing() {
   };
 
  
-  const bedIconUrl = "/bed.png";
-  const bathIconUrl = "/bath.png";
-  const areaIconUrl = "/area.png";
+
   
   const [formData, setFormData] = useState({
     name: '',
@@ -367,13 +365,11 @@ export default function PropertyListing() {
   const handleTabClick = (key) => {
     setActiveTab(key);
     if (key === 'overview' && overviewContentRef.current) {
-      const yOffset = -130;
-      const y = overviewContentRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
     if (key === 'property details' && propertyDetailsContentRef.current) {
-      const yOffset = -130;
-      const y = propertyDetailsContentRef.current.getBoundingClientRect().top + window.pageYOffset + yOffset;
+     
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   };
@@ -489,14 +485,28 @@ export default function PropertyListing() {
                 </span>
               </button>
             </div>
-            <p className='mt-2 md:mt-4 text-sm sm:text-base font-medium md:text-base text-[rgb(179,4,4)]'>{getPropertyTypeDisplay()} {property?.property_subtype}</p>
+            <p className='mt-2 md:mt-4 text-sm sm:text-base font-medium md:text-base text-[rgb(179,4,4)]'>   {property?.list_status}</p>
             <p className="text-2xl sm:text-xl md:text-3xl font-semibold text-gray-800 mt-2">{property?.list_address.address || property?.property_address || property?.address || property?.full_address || 'Address not available'}</p>
             <h1 className="text-lg sm:text-xl md:text-xl mt-1 font-semibold text-gray-800">
-  {property.price
-    ? `﷼ ${formatPrice(property.price)}`
-    : property.current_list_price
-    ? `﷼ ${formatPrice(property.current_list_price)}`
-    : ""}
+            <div className="flex items-center gap-1">
+  <span className="relative w-4 h-4">
+    <Image 
+      src="/currencysuadi.png"   // 👈 replace with your currency image path
+      alt="currency"
+      fill
+      className="object-contain"
+    />
+  </span>
+
+  <span>
+    {property.price
+      ? formatPrice(property.price)
+      : property.current_list_price
+      ? formatPrice(property.current_list_price)
+      : ""}
+  </span>
+</div>
+
   {property.rental_price ? ` ﷼ ${formatPrice(property.rental_price)}` : ""}
 </h1>
           </div>
@@ -522,7 +532,7 @@ export default function PropertyListing() {
                     className="absolute left-0 top-1/2 -translate-y-1/2 bg-[rgb(179,4,4)] p-1 md:p-2 shadow-lg z-30"
                     style={{ zIndex: 30 }}
                   >
-                    <FaChevronLeft className="w-6 h-6 md:w-6 md:h-6 text-white" />
+                    <FaChevronLeft className="w-6 h-6 md:w-10 md:h-10 text-white" />
                   </button>
 
                   <button
@@ -530,18 +540,18 @@ export default function PropertyListing() {
                     className="absolute right-0 top-1/2 -translate-y-1/2 bg-[rgb(179,4,4)]  p-1 md:p-2 shadow-lg z-30"
                     style={{ zIndex: 30 }}
                   >
-                    <FaChevronRight className="w-6 h-6 md:w-6 md:h-6 text-white" />
+                    <FaChevronRight className="w-6 h-6 md:w-10 md:h-10 text-white" />
                   </button>
                 </>
               )}
 
               {/* Dots for Mobile */}
-              <div className="sm:hidden absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+              <div className="sm:hidden absolute  bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
                 {propertyImages.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentImageIndex(index)}
-                    className={`w-2 h-2 md:w-3 md:h-3  border border-white transition-all ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}
+                    className={`w-2 h-2 md:w-3 md:h-3  border rounded-full border-white transition-all ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}
                   />
                 ))}
               </div>
@@ -602,29 +612,31 @@ export default function PropertyListing() {
 )}
 
 
-            {/* Thumbnail column */}
-            <div className="hidden sm:flex flex-col gap-2  overflow-y-auto ml-2 overflow-x-hidden scrollbar-hide h-[180px]  md:h-[500px]">
-              {thumbnailImages.map((image, index) => (
-                <div
-                  key={index}
-                  className={`w-full h-16 md:h-36 cursor-pointer border-2 transition-all duration-200 ${index === currentImageIndex ? 'border-[rgb(179,4,4)]' : 'border-transparent'}`}
-                  onClick={() => handleThumbnailClick(index)}
-                >
-                  <Image
-                    src={image}
-                    alt={`Property view ${index + 1}`}
-                    width={80}
-                    height={80}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform "
-                  />
-                </div>
-              ))}
+            {/* Thumbnail Grid */}
+            <div className="hidden sm:flex flex-col gap-2 overflow-y-auto ml-6 overflow-x-hidden scrollbar-hide h-[180px] md:h-[500px]">
+              <div className="grid grid-cols-2 gap-2">
+                {thumbnailImages.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`aspect-square cursor-pointer border-2 transition-all duration-200 overflow-hidden ${index === currentImageIndex ? 'border-[rgb(179,4,4)]' : 'border-gray-200'}`}
+                    onClick={() => handleThumbnailClick(index)}
+                  >
+                    <Image
+                      src={image}
+                      alt={`Property view ${index + 1}`}
+                      width={80}
+                      height={80}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-200"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
 
         {/* Tabs and Buttons */}
-        <div className="sticky top-16 md:top-20 z-40 mt-6 px-4 md:px-36  md:mt-10 flex justify-start overflow-x-auto scrollbar-hide bg-gray-100">
+        <div className="z-40 mt-6 py-4 md:px-36  md:mt-10 flex justify-start overflow-x-auto scrollbar-hide bg-gray-100">
           <div className="flex min-w-full md:min-w-0 gap-1 md:gap-2">
             {tabList.map(tab => (
               <button
@@ -643,15 +655,15 @@ export default function PropertyListing() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col lg:flex-row gap-4 justify-between md:gap-8 px-6 md:px-36 mt-6 md:mt-10">
-        <div ref={overviewContentRef} className="w-full md:w-2/3 ">
+      <div className="w-full flex flex-col lg:flex-row gap-4 justify-between md:gap-8 px-6 md:px-36">
+        <div className="w-full md:w-2/3 ">
           
           {/* OVERVIEW TAB CONTENT */}
           {activeTab === 'overview' && (
             <>
               {/* Description */}
               <div className="mt-4 md:mt-8">
-                <h2 className="font-semibold text-base sm:text-lg md:text-2xl mb-2 md:mb-6 flex items-center gap-2 tracking-[0.1rem]">
+                <h2 className="font-bold text-lg text-gray-800 sm:text-lg md:text-2xl flex items-center gap-2">
                   PROPERTY DESCRIPTION
                 </h2>
               </div>
@@ -675,14 +687,7 @@ export default function PropertyListing() {
                       {/* Left column */}
                       <div className="flex items-center">
                         <CheckIcon />
-                        {
-                          (() => {
-                            const val = String(property?.market_center || property?.office || '');
-                            if (val === '50449') return 'Jasmin';
-                            if (val === '2414288') return 'Jeddah';
-                            return val || 'Not specified';
-                          })()
-                        }
+                        {property?.list_address.city ||'Not specified'}
                       </div>
                       <div className="flex items-center">
                         <CheckIcon />
@@ -727,8 +732,8 @@ export default function PropertyListing() {
                     </div>
                     <h1 className='text-lg my-10 font-semibold text-gray-800'>Address: {property?.list_address.address || 'Not specified'}</h1>
                     {/* Dynamic Description based on Property Type */}
-                    <div className="mt-6 mb-10">
-                      <h3 className="text-lg font-semibold text-gray-800 mb-4">Property Description</h3>
+                    <div className="">
+                     
                       {(() => {
                         const propType = property?.prop_type || property?.property_type || '';
                         const propSubtype = property?.prop_subtype || property?.subtype || '';
@@ -801,25 +806,28 @@ export default function PropertyListing() {
                           
                           return (
                             <div>
-                              <p className="text-gray-700 leading-relaxed mb-4">{description}</p>
-                              <p className="text-sm text-gray-500">Property Type: {template.type}</p>
+                              <p className="text-gray-700 leading-relaxed ">{description}</p>
+                         
                             </div>
                           );
                         } else {
                           // Fallback to original description or default
                           return (
                             <p className="text-gray-700 leading-relaxed">
-                              {property?.description || property?.long_description || 'Welcome to this beautiful property. Contact us for more details about this amazing opportunity.'}
+                            Not Available
                             </p>
                           );
                         }
                       })()}
                     </div>
 
-                    <div className='my-10'>
-                      <p>KW Listing ID: {property?.kw_id || property?.list_id || property?.id || 'Not specified'}</p>
-                      <p> Estimation Provided by Keller Williams Realty, LLC</p>
-                    </div>
+                                         <div className='py-10'>
+                        <p>KW Listing ID: {property?.kw_id || property?.list_id || property?.id || 'Not specified'}</p>
+                        <p> Estimation Provided by Keller Williams Realty, LLC</p>
+                     </div>
+                     <p className=''>
+                      {property?.list_desc||'Not Available'}
+                     </p>
                   </div>
                 </div>
               </div>
@@ -831,7 +839,7 @@ export default function PropertyListing() {
         </div>
 
         {/* RIGHT SIDE: Sticky Agent Box */}
-        {activeTab === 'overview' && (  <main className="flex flex-col justify-between  mt-30 md:mt-15">
+        {activeTab === 'overview' && (  <main className="flex flex-col justify-between  mt-30 md:mt-34">
           <div className="relative bg-gray-100 p-6 shadow-md w-full max-w-sm text-center">
             {/* Profile Image */}
             <div className="absolute -top-24 left-1/2 transform -translate-x-1/2">
@@ -840,7 +848,7 @@ export default function PropertyListing() {
                    src={
                 property.list_agent_office?.list_agent_url || 
                 property.agent_photo || 
-                "/images.jpg"
+                "/avtar.jpg"
               }
               alt="Agent"
                   width={128}
@@ -924,8 +932,8 @@ export default function PropertyListing() {
   }}
   className="flex flex-col items-center justify-center border p-2 hover:bg-gray-200 transition"
 >
-  <FileText className="w-6 h-6 text-gray-700" />
-  <span className="text-[0.6rem] md:text-xs mt-1">File</span>
+  <User  className="w-6 h-6 text-gray-700" />
+  <span className="text-[0.6rem] md:text-xs mt-1">Profile</span>
 </button>
 
               </div>
@@ -938,14 +946,14 @@ export default function PropertyListing() {
           {/* MAP LOCATION TAB CONTENT */}
           {/* MAP LOCATION TAB CONTENT */}
 {activeTab === "map" && (
-  <div ref={mapSectionRef} className="w-full">
+  <div  className="w-full">
     {/* <h2 className="text-lg md:text-2xl md:mx-36 mb-6 font-semibold text-gray-800 text-left flex items-center gap-2 tracking-[0.1rem]">
       <PiMapPinLineThin className="text-[rgb(179,4,4)] text-xl md:text-2xl" />
       MAP LOCATION
     </h2> */}
 
-    <div className="px-6 md:px-36">  {/* 👈 horizontal margin */}
-      <div className="w-full h-64 md:h-96 lg:h-[500px] overflow-hidden shadow-md">
+    <div className="px-6 md:px-36 mt-4 md:mt-10">  {/* 👈 horizontal margin */}
+      <div className="w-full h-64 md:h-80 lg:h-[400px] overflow-hidden shadow-md">
         <iframe
           src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.222373018991!2d${property?.longitude || -122.389936}!3d${property?.latitude || 37.768255}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDQ2JzA1LjciTiAxMjLCsDIzJzIzLjgiVw!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus`}
           width="100%"
@@ -963,13 +971,13 @@ export default function PropertyListing() {
 
          {/* 360 TOUR TAB CONTENT */}
 {activeTab === "tour" && (
-  <div ref={tourSectionRef} className="w-full">
-    <div className="flex flex-col items-center justify-center px-6 md:px-36 ">
+  <div className="w-full">
+    <div className="flex flex-col items-center justify-center px-6 md:px-36 mt-4 md:mt-10">
       
 
       <div className="flex flex-col items-center mx-4 w-full">
         {/* Main Image Container */}
-        <div className="w-full h-64 md:h-96 lg:h-[500px]  overflow-hidden shadow-md relative mb-4 md:mb-6 cursor-pointer">
+        <div className="w-full h-64 md:h-80 lg:h-[400px]  overflow-hidden shadow-md relative mb-4 md:mb-6 cursor-pointer">
           <Image
             src={propertyImages[currentImageIndex]}
             alt="360 Virtual Tour"
@@ -992,7 +1000,7 @@ export default function PropertyListing() {
         </div>
 
         {/* Centered Button */}
-        <div className="flex justify-center w-full">
+        {/* <div className="flex justify-center w-full">
           <button
             onClick={() => {
               const fullscreenImage = propertyImages[currentImageIndex];
@@ -1057,7 +1065,7 @@ export default function PropertyListing() {
           >
             View in Full Screen
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   </div>

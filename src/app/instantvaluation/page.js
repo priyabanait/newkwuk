@@ -59,7 +59,7 @@ useEffect(() => {
           {/* Left Column */}
           <div className="md:col-span-1 space-y-8">
             <Image src="/instant-val-img.jpg" alt="image" width={435} height={435} />
-            <div className="text-gray-700 md:text-lg text-base leading-relaxed mx-2 md:mx-6 mt-6">
+            <div className="text-gray-700 md:pr-30 md:text-lg text-md leading-relaxed mx-2 md:mx-6 mt-6">
               <p>
                 Your valuation is based on millions of pieces of data, from sold house
                 prices in your area to current market trends and the size of your home.

@@ -52,13 +52,13 @@ export default function CeoTeam() {
         <div className=" pt-4 mx-10 md:mx-10 ">
         <div className="flex flex-col md:flex-row md:px-20 items-start">
     {/* Left Image */}
-    <div className="  md:w-140 h-[40vh] w-[40vh] md:h-[400px]  items-start">
+    <div className="  md:w-140 h-[40vh] w-full md:h-full  items-start">
   <Image
     src='/ceoimage.png'
     alt="CEO"
     width={800}
     height={500}
-    className="h-[40vh] md:h-[400px] w-[40vh] md:w-140 border  border-gray-400"
+    className="h-[40vh] md:h-full w-full md:w-140 border  border-gray-400"
   />
 </div>
 
@@ -71,7 +71,7 @@ export default function CeoTeam() {
 
      
 
-      <p className="mt-4 md:text-base  text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
+      <p className="mt-4 md:text-lg  text-md md:leading-relaxed leading-normal mx-w-sm">
         More than ever, we want to thank and recognize our agents and partners
         for diligently bringing their very
         
@@ -83,7 +83,7 @@ export default function CeoTeam() {
         ourselves how we can best support them.
       </p>
 
-      <p className="mt-4 md:text-base text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
+      <p className="mt-4 md:text-lg text-md md:leading-relaxed leading-normal mx-w-sm">
         KW has cultivated a agent-  
 
         centric, technology-driven, and
@@ -91,7 +91,7 @@ export default function CeoTeam() {
         education-based culture that rewards agents as stakeholders.
       
        </p> 
-       <p className="mt-4 md:text-base  text-sm text-gray-700 md:leading-relaxed leading-normal mx-w-sm">
+       <p className="mt-4 md:text-lg  text-md md:leading-relaxed leading-normal mx-w-sm">
        Regional team members, market center team members, and 
       
       agent partners. No

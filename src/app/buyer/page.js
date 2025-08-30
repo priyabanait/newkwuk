@@ -169,7 +169,7 @@ const Properties = () => {
     <section className={`relative w-full ${showFilters ? 'h-[120vh] md:h-[125vh]' : 'h-screen md:h-screen'} text-white overflow-hidden transition-all duration-500 ease-in-out`}>
       {/* Background Image with previous blurring out and next coming in */}
       <Image
-              src='/lisitngspage.jpeg'
+              src='/1.jpg'
               alt="Previous Hero Background"
               layout="fill"
               
@@ -254,21 +254,31 @@ const Properties = () => {
 
   {/* Line 3 - Residential Dropdown */}
   <div className="mb-6 w-full max-w-sm">
-    <select className="w-full px-4 py-2 text-black border bg-white border-gray-300 outline-none">
-      <option>Residential</option>
-      <option>Commercial</option>
-    </select>
+  <select className="w-full px-4 py-2 text-black border bg-white border-gray-300 outline-none">
+  <option value="">Select Type</option>
+  {[...new Set(properties.map((p) => p.prop_subtype))].map((type, idx) => (
+    <option key={idx} value={type}>
+      {type}
+    </option>
+  ))}
+</select>
   </div>
 
   {/* Location Input */}
   <div className="mb-6 w-full max-w-4xl">
-  <label className='flex justify-start text-base'>Location</label>
-    <input
-      type="text"
-      placeholder="Location"
-      className="w-full bg-white px-4 py-2 text-black outline-none border border-gray-300"
-    />
-  </div>
+  <label className="flex justify-start text-base">Location</label>
+  <select
+    className="w-full bg-white px-4 py-2 text-black outline-none border border-gray-300"
+  >
+  <option value="">Select Location</option>
+{[...new Set(properties.map((loc) => loc.list_address.city))].map((city, idx) => (
+  <option key={idx} value={city}>
+    {city}
+  </option>
+))}
+  </select>
+</div>
+
 
   {/* More Filters Toggle */}
   <div className="my-4 ">
@@ -474,160 +484,186 @@ const Properties = () => {
     </section>
     
 
-      <div className="min-h-screen mx-6 md:mx-38">
-     <div className='py-6 mt-10 gap-2 flex flex-col md:flex-row  justify-start'>
-     <select className="border border-gray-400  p-2   bg-white text-black">
-            <option>Sort by price: high to low</option>
-            <option>Sort by date added</option>
-            <option>Sort by price: low to high</option>
-            
-          </select>
-          <button
-  className="hidden md:inline-block border border-gray-400 p-2 px-4 bg-white text-black"
-  onClick={() => setShowMap(!showMap)}
->
-  {showMap ? "Hide Map" : "Map View"}
-</button>
+    <div className="min-h-screen">
+  {/* Filters always inside margin */}
+  <div className={`${showMap ? "md:mx-2" : "mx-6 md:mx-38"}`}>
+    <div className="py-6 mt-10 gap-2 flex flex-col md:flex-row justify-start">
+      <select className="border border-gray-400 p-2 bg-white text-black">
+        <option>Sort by price: high to low</option>
+        <option>Sort by date added</option>
+        <option>Sort by price: low to high</option>
+      </select>
+
+      <button
+        className="hidden md:inline-block border border-gray-400 p-2 bg-white text-black"
+        onClick={() => setShowMap(!showMap)}
+      >
+        {showMap ? "Hide Map" : "Map View"}
+      </button>
+    </div>
+  </div>
 
 
-      </div>
 
-      {/* Render PropertyType component when showMap is true, otherwise render property cards */}
-      {showMap ? (
-        <PropertyType />
-      ) : (
-        <>
-          {loading ? (
-            <div className="flex justify-center items-center h-60">
+  {/* Conditional rendering */}
+  {showMap ? (
+    // ✅ Map is outside mx-38 → takes full width
+    <PropertyType />
+  ) : (
+    <>
+      <div className="mx-6 md:mx-38">
+        {loading ? (
+          <div className="flex justify-center items-center h-60">
             <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-red-600"></div>
-            </div>
-          ) : error ? (
-            <div className="text-red-500">{error}</div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProperties.slice(0, visibleCount).map((property, idx) => (
-                                  <div
-                  key={property._kw_meta?.id || property.id || idx}
-                  className="bg-white shadow-2xl  overflow-hidden w-full cursor-pointer"
-                  onClick={() => {
-                    const propertyId = property._kw_meta?.id || property.id || idx;
+          </div>
+        ) : error ? (
+          <div className="text-red-500">{error}</div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProperties.slice(0, visibleCount).map((property, idx) => (
+              <div
+                key={property._kw_meta?.id || property.id || idx}
+                className="bg-white shadow-2xl overflow-hidden w-full cursor-pointer"
+                onClick={() => {
+                  const propertyId =
+                    property._kw_meta?.id || property.id || idx;
+                  window.location.href = `/propertydetails/${propertyId}`;
+                }}
+              >
+                {/* Image Section */}
+                <div className="relative w-full h-50 md:h-60">
+                  <Image
+                    src={
+                      property.image ||
+                      (Array.isArray(property.images) && property.images[0]) ||
+                      (Array.isArray(property.photos) &&
+                        property.photos[0]?.ph_url) ||
+                      "/property.jpg"
+                    }
+                    alt={property.title || property.prop_type || "property"}
+                    fill
+                    className="object-cover cursor-pointer hover:opacity-90 transition-opacity"
+                  />
+
+                  {/* Beds & Baths Overlay */}
+                  <div className="absolute bottom-0 right-0 bg-black/80 text-white px-2 py-1 flex flex-row items-center gap-3">
+                    <div className="flex flex-col items-center">
+                      <span className="relative w-5 h-5">
+                        <Image
+                          src={bedIconUrl}
+                          alt="bed"
+                          fill
+                          className="object-contain invert"
+                        />
+                      </span>
+                      <span className="text-xs mt-1">
+                        {property.total_bed ||
+                          property.beds ||
+                          property.bedrooms ||
+                          0}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col items-center">
+                      <span className="relative w-5 h-5">
+                        <Image
+                          src={bathIconUrl}
+                          alt="bath"
+                          fill
+                          className="object-contain invert"
+                        />
+                      </span>
+                      <span className="text-xs mt-1">
+                        {property.total_bath ||
+                          property.baths ||
+                          property.bathrooms ||
+                          0}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Details */}
+                <div className="p-4 py-6">
+                  <h3 className="text-gray-700 text-lg flex justify-start items-center">
+                    {property.title || property.prop_type || "Property"}
+                  </h3>
+                  <span className="flex justify-start text-[rgb(206,32,39,255)] text-lg font-semibold">
+                    {property?.prop_subtype || "To Let"}
+                  </span>
+
+                  <p
+                    className="text-xl font-bold text-gray-600 mb-2 truncate"
+                    title={property.list_address?.address}
+                  >
+                    {property.list_address.address?.split(" ").length > 5
+                      ? property.list_address.address
+                          .split(" ")
+                          .slice(0, 5)
+                          .join(" ") + "..."
+                      : property.list_address.address}
+                  </p>
+
+                  <div className="flex justify-start items-center">
+                  <span className="relative w-4 h-4 mr-2">
+    <Image 
+      src="/currency.png"   // 👈 replace with your currency image path
+      alt="currency"
+      fill
+      className="object-contain"
+    />
+  </span>
+
+  <span>
+    {property.price
+      ? formatPrice(property.price)
+      : property.current_list_price
+      ? formatPrice(property.current_list_price)
+      : ""}
+  </span>
+                  </div>
+
+                  {property.price_qualifier && (
+                    <p className="text-xs text-gray-500 mt-1">
+                      {property.price_qualifier}
+                    </p>
+                  )}
+                </div>
+
+                {/* Button */}
+                <button
+                  className="w-full bg-[rgb(206,32,39,255)] text-white font-bold text-base py-3 px-4 flex items-center justify-end gap-2"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const propertyId =
+                      property._kw_meta?.id || property.id || idx;
                     window.location.href = `/propertydetails/${propertyId}`;
                   }}
                 >
-                
-                  <div className="relative w-full h-50 md:h-60">
-                    {/* 360 logo overlay */}
-                   
-                    <Image
-                      src={
-                        property.image ||
-                        (Array.isArray(property.images) && property.images[0]) ||
-                        (Array.isArray(property.photos) && property.photos[0]?.ph_url) ||
-                        '/property.jpg'
-                      }
-                      alt={property.title || property.prop_type || 'property'}
-                      fill
-                      className="object-cover  cursor-pointer hover:opacity-90 transition-opacity"
-                    />
-                
-                  <div className="absolute bottom-0 right-0 bg-black/80 text-white px-2 py-1 flex flex-row items-center gap-3">
-    {/* Beds */}
-    {/* <div className="absolute bottom-0 right-0 bg-black/80 text-white rounded-md px-3 py-2 flex flex-row items-center gap-6"> */}
-    {/* Beds */}
-    <div className="flex flex-col items-center">
-      <span className="relative w-5 h-5">
-        <Image src={bedIconUrl} alt="bed" fill className="object-contain invert" />
-      </span>
-      <span className="text-xs mt-1">
-        {property.total_bed || property.beds || property.bedrooms || 0}
-      </span>
-    </div>
-
-    {/* Baths */}
-    <div className="flex flex-col items-center">
-      <span className="relative w-5 h-5">
-        <Image src={bathIconUrl} alt="bath" fill className="object-contain invert" />
-      </span>
-      <span className="text-xs mt-1">
-        {property.total_bath || property.baths || property.bathrooms || 0}
-      </span>
-    </div>
-
-    {/* Garage (optional, if you have this) */}
-   
-    </div>
-  </div>
-                   
-                   {/* Property Details */}
-                  <div className="p-4 py-6 ">
-                    <h3 className=" text-gray-700 text-lg flex justify-start items-center">
-                     
-                      {property.title || property.prop_type || "Property"}
-                      
-                    </h3>
-                    <span className=" flex justify-start text-[rgb(206,32,39,255)] text-lg font-semibold">
-                    {property?.prop_subtype || "To Let"}
-                    </span>
-                    <p
-      className="text-xl font-bold text-gray-600 mb-2 truncate"
-      title={property.list_address?.address} // hover to see full text
-    >
-      {property.list_address.city?.split(' ').length > 5
-        ? property.list_address.city.split(' ').slice(0, 5).join(' ') + '...'
-        : property.list_address.city}
-    </p>
-
-                    
-                    <div className="flex justify-start items-center">
-                      <span className="font-medium text-base text-gray-700">
-                        {property.price
-                          ? `﷼ ${formatPrice(property.price)}`
-                          : property.current_list_price
-                          ? `﷼ ${formatPrice(property.current_list_price)}`
-                          : ""}
-                        {property.rental_price
-                          ? `﷼ ${formatPrice(property.rental_price)} `
-                          : ""}
-                      </span>
-                     
-
-                    </div>
-                    {property.price_qualifier && (
-                      <p className="text-xs text-gray-500 mt-1">
-                        {property.price_qualifier}
-                      </p>
-                    )}
-                    
-                  </div>
-                  <button 
-                    className="w-full bg-[rgb(206,32,39,255)] text-white font-bold text-base py-3 px-4 flex items-center justify-end gap-2"
-                    onClick={(e) => {
-                      e.stopPropagation(); // Prevent triggering the card's onClick
-                      const propertyId = property._kw_meta?.id || property.id || idx;
-                      window.location.href = `/propertydetails/${propertyId}`;
-                    }}
-                  >
-                    <span>MORE DETAILS</span>
-                    <FaChevronRight className="text-white w-4 h-4" />
-                  </button>
-
-                </div>
-              ))}
-            </div>
-          )}
-        </>
-      )}
+                  <span>MORE DETAILS</span>
+                  <FaChevronRight className="text-white w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-      {!showMap && visibleCount < filteredProperties.length && !loading && !error && (
-  <div className="flex justify-center items-center my-10 md:my-5">
-    <button
-      className="md:w-80 w-50 md:py-2 py-2 mb-10 md:mb-0 px-4 bg-gray-500 text-white text-base md:text-lg font-semibold transition whitespace-nowrap"
-      onClick={() => setVisibleCount(c => c + 6)}
-    >
-      View More Properties..
-    </button>
-  </div>
-)}
+
+      {/* View More Button */}
+      {visibleCount < filteredProperties.length && !loading && !error && (
+        <div className="flex justify-center items-center ">
+          <button
+            className="md:w-80 w-50 md:py-2 py-2 my-10 md:my-10 px-4 bg-gray-500 text-white text-base md:text-lg font-semibold transition whitespace-nowrap"
+            onClick={() => setVisibleCount((c) => c + 6)}
+          >
+            View More Properties..
+          </button>
+        </div>
+      )}
+    </>
+  )}
+</div>
+
 
       {/* <div className="hidden md:flex justify-center py-4 md:py-16">
         <Image
@@ -641,8 +677,9 @@ const Properties = () => {
 
       <hr className="hidden md:block w-6/12 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-5 md:mt-20 mb-16" /> */}
     
-    <NewFooter></NewFooter>
+   
     </div>
+    <NewFooter></NewFooter>
     </div>
   );
 }
