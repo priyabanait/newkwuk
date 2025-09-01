@@ -196,7 +196,7 @@ What's Next? +`,
                   {/* Empty div for the left side */}
                   <div className="hidden md:block"></div>
                   <div className="hidden md:block text-left px-0 md:px-8">
-                    <span className="text-gray-500 text-5xl font-normal">{`${index + 1}.`}</span>
+                    <span className="text-gray-500 text-4xl font-normal">{`${index + 1}.`}</span>
                     <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-xl font-normal mt-4">
                       {step.title}</h2>
                     <p className="whitespace-pre-line mt-2 leading-7 md:mt-4 text-lg">{step.content}</p>
@@ -206,7 +206,7 @@ What's Next? +`,
                 <>
                   {/* Content on the left side */}
                   <div className="hidden md:block text-right px-0 md:px-8">
-                    <span className="text-gray-500 text-5xl font-normal">{`${index + 1}.`}</span>
+                    <span className="text-gray-500 text-4xl font-normal">{`${index + 1}.`}</span>
                     <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-xl font-normal mt-4">
                       {step.title}</h2>
                     <p className="whitespace-pre-line mt-2 leading-7 md:mt-4 text-lg">{step.content}</p>

@@ -493,11 +493,13 @@ export const getAgentListings = async (kw_uid) => {
 // Function to fetch properties data with agent filtering
 export const fetchPropertiesWithAgents = async (req, res) => {
   try {
-    // 1. Input: single agent and pagination
+    // 1. Input: org_id, single agent and pagination
+    const orgId = req.body.org_id || req.query.org_id; // Dynamic org_id from request
     const singleAgent = req.body.singleAgent || req.query.singleAgent; // kw_uid for single agent
     const page = Number(req.body.page ?? req.query.page ?? 1);
     const perPage = Number(req.body.limit ?? req.query.limit ?? 50);
     
+    console.log('Org ID requested:', orgId);
     console.log('Single agent requested:', singleAgent);
     console.log('Page:', page, 'Per page:', perPage);
 
@@ -518,22 +520,31 @@ export const fetchPropertiesWithAgents = async (req, res) => {
       });
     }
 
-    // 2. Define org_ids for both market centers
-    const orgIds = [2414288, 50449]; // Jeddah and Jasmin
+    // 2. Define org_ids based on request or use default
+    let orgIds = [];
+    if (orgId && orgId !== '' && orgId !== null && orgId !== undefined) {
+      // If specific org_id provided, use only that
+      orgIds = [Number(orgId)];
+    } else {
+      // If no org_id provided, use default market centers
+      orgIds = [2414288, 50449]; // Jeddah and Jasmin
+    }
     
+    console.log('Using org_ids:', orgIds);
+
     // 3. Headers for API calls
     const headers = {
       Authorization: 'Basic b2FoNkRibjE2dHFvOE52M0RaVXk0NHFVUXAyRjNHYjI6eHRscnJmNUlqYVZpckl3Mg==',
       Accept: 'application/json',
     };
 
-    // 4. Fetch agents from both org_ids
+    // 4. Fetch agents from specified org_ids
     console.log('Fetching agents from org_ids:', orgIds);
     let allAgents = [];
     
-    for (const orgId of orgIds) {
-      console.log(`Fetching agents from org_id: ${orgId}`);
-      const baseURL = `https://partners.api.kw.com/v2/listings/orgs/${orgId}/people`;
+    for (const currentOrgId of orgIds) {
+      console.log(`Fetching agents from org_id: ${currentOrgId}`);
+      const baseURL = `https://partners.api.kw.com/v2/listings/orgs/${currentOrgId}/people`;
       
       let offset = 0;
       const apiLimit = 1000;
@@ -567,15 +578,15 @@ export const fetchPropertiesWithAgents = async (req, res) => {
           // Add org_id to each agent for tracking
           const agentsWithOrgId = agentsPage.map(agent => ({
             ...agent,
-            source_org_id: orgId
+            source_org_id: currentOrgId
           }));
           
           allAgents = allAgents.concat(agentsWithOrgId);
-          console.log(`Agents from org ${orgId}:`, agentsWithOrgId.length);
+          console.log(`Agents from org ${currentOrgId}:`, agentsWithOrgId.length);
 
           offset += apiLimit;
         } catch (orgError) {
-          console.error(`Error fetching agents from org ${orgId}:`, orgError.message);
+          console.error(`Error fetching agents from org ${currentOrgId}:`, orgError.message);
           break;
         }
       } while (offset < totalCount);
@@ -725,8 +736,9 @@ export const fetchPropertiesWithAgents = async (req, res) => {
     // 12. Send comprehensive response
     const response = {
       success: true,
+      org_id: orgId || null, // Include the org_id used in response
       single_agent: singleAgent,
-      org_ids: orgIds,
+      org_ids_used: orgIds, // Show which org_ids were actually used
       agents: {
         total: agentData.length,
         data: agentData
@@ -750,6 +762,8 @@ export const fetchPropertiesWithAgents = async (req, res) => {
     };
 
     console.log('Response summary:', {
+      org_id_requested: orgId,
+      org_ids_used: orgIds,
       agents_count: agentData.length,
       properties_total: totalProperties,
       properties_page: paginatedProperties.length,

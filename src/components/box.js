@@ -7,14 +7,14 @@ const Box = ({ src, image, h3 }) => {
     <div className=" p-6 md:p-8">
     <div className="absolute top-0 left-0 w-[100px] h-[100px] md:w-[150px] md:h-[150px] bg-[rgb(206,32,39,255)] z-0"></div>
       {/* Hero Section */}
-      <div className="relative  md:min-h-[76vh">
+      <div className="relative">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
             src={src}
             alt="Background"
             fill
-            className=" w-50 h-50 object-cover "
+            className="object-cover "
             priority
           />
         </div>

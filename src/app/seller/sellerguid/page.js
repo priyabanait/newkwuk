@@ -166,7 +166,7 @@ What's Next?  +`,
                 <>
                   {/* Number on the left side */}
                   <div className="hidden md:flex items-center justify-end pr-4">
-                    <span className="text-gray-500 text-5xl font-normal md:mb-4">{`${index + 1}.`}</span>
+                    <span className="text-gray-500 text-4xl font-normal md:mb-4">{`${index + 1}.`}</span>
                   </div>
                   <div className="hidden md:block text-left px-0 md:px-8">
                     <h2 className="text-[rgb(206,32,39,255)] md:text-3xl text-xl font-normal ">
@@ -185,7 +185,7 @@ What's Next?  +`,
                   </div>
                   {/* Number on the right side */}
                   <div className="hidden md:flex items-center justify-start pl-4">
-                    <span className="text-gray-500 text-5xl font-normal md:mb-4">{`${index + 1}.`}</span>
+                    <span className="text-gray-500 text-4xl font-normal md:mb-4">{`${index + 1}.`}</span>
                   </div>
                 </>
               )}

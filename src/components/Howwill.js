@@ -6,15 +6,7 @@ export default function Howwill() {
   const router=useRouter();
   return (
     <div>
-        <div className="order-1 md:order-2 flex flex-col items-center justify-center py-2 md:py-0">
-                   <Image
-                     src="/howwillyouthink.png"
-                     alt="How Will You Thrive"
-                     width={800}
-                     height={400}
-                     className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
-                   />
-                 </div>
+       
            
       <main className=" px-4 py-2 md:py-6 md:mt-2">
         <div className="max-w-full mx-auto text-center md:mt-14">
@@ -47,6 +39,15 @@ export default function Howwill() {
 </div>
         </div>
        </main>
+       <div className="order-1 md:order-2 flex flex-col items-center justify-center py-2 md:py-0">
+                   <Image
+                     src="/howwillyouthink.png"
+                     alt="How Will You Thrive"
+                     width={800}
+                     height={400}
+                     className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
+                   />
+                 </div>
     </div>
   )
 }

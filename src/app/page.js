@@ -440,12 +440,18 @@ const Home = () => {
       {/* <div className="relative "> */}
         {/* <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 md:text-xl text-sm" /> */}
         <input
-          type="text"
-          value={propertySearchTerm}
-          onChange={(e) => setPropertySearchTerm(e.target.value)}
-          placeholder="City, Area or Street"
-          className=" py-3 px-4  bg-white w-85 text-black text-xl font-medium outline-none "
-        />
+  type="text"
+  value={propertySearchTerm}
+  onChange={(e) => setPropertySearchTerm(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter') {
+      const normalizedSearch = propertySearchTerm.toLowerCase().trim(); // Normalize case
+      router.push(`/buyer?city=${encodeURIComponent(normalizedSearch)}`);
+    }
+  }}
+  placeholder="City, Area or Street"
+  className="py-3 px-4 bg-white w-85 text-black text-xl font-medium outline-none"
+/>
       {/* </div> */}
 
       <div className="flex gap-1 md:gap-1">
@@ -453,7 +459,7 @@ const Home = () => {
           className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-6 sm:px-4 md:px-6 py-3 text-base md:text-xl font-semibold"
           onClick={() =>
             router.push(
-              `/properties/type/sale?q=${encodeURIComponent(propertySearchTerm)}`
+              `/buyer?city=${encodeURIComponent(propertySearchTerm)}`
             )
           }
         >
@@ -463,12 +469,22 @@ const Home = () => {
           className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-6 sm:px-4 md:px-6 py-3 text-base md:text-xl font-semibold"
           onClick={() =>
             router.push(
-              `/properties/type/rent?q=${encodeURIComponent(propertySearchTerm)}`
+              `/buyer?city=${encodeURIComponent(propertySearchTerm)}`
             )
           }
         >
           Rent
         </button>
+        {/* <button
+          className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-6 sm:px-4 md:px-6 py-3 text-base md:text-xl font-semibold"
+          onClick={() =>
+            router.push(
+              `/buyer?city=${encodeURIComponent(propertySearchTerm)}`
+            )
+          }
+        >
+          Search
+        </button> */}
       </div>
     </>
   ) : (
@@ -480,12 +496,24 @@ const Home = () => {
           type="text"
           value={agentSearchTerm}
           onChange={(e) => setAgentSearchTerm(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && agentSearchTerm.trim()) {
+              router.push(`/agent?search=${encodeURIComponent(agentSearchTerm.trim())}`);
+            }
+          }}
           placeholder="Name or City"
           className=" py-3 px-4 bg-white w-85 text-black text-xl font-medium outline-none "
         />
       </div>
 
-      <button className=" bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-15 py-3 text-sm sm:text-base md:text-xl font-semibold mt-2 md:mt-0">
+      <button 
+        className=" bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-15 py-3 text-sm sm:text-base md:text-xl font-semibold mt-2 md:mt-0"
+        onClick={() => {
+          if (agentSearchTerm.trim()) {
+            router.push(`/agent?search=${encodeURIComponent(agentSearchTerm.trim())}`);
+          }
+        }}
+      >
         Search
       </button>
     </>
@@ -504,6 +532,11 @@ const Home = () => {
       type="text"
       value={mobilePropertySearchTerm}
       onChange={e => setMobilePropertySearchTerm(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          router.push(`/buyer?city=${encodeURIComponent(mobilePropertySearchTerm)}`)
+        }
+      }}
       placeholder="City, Area or street"
       className="py-3 px-2 shadow-2xl text-black font-normal w-40  bg-white text-base outline-none"
     />
@@ -516,6 +549,16 @@ const Home = () => {
       <button className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-2 py-3 text-base font-normal ">
         Rent
       </button>
+      <button
+        className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-2 py-3 text-base font-normal"
+        onClick={() =>
+          router.push(
+            `/buyer?city=${encodeURIComponent(mobilePropertySearchTerm)}`
+          )
+        }
+      >
+        Search
+      </button>
  
   </>
 ) : (
@@ -526,12 +569,24 @@ const Home = () => {
         type="text"
         value={mobileAgentSearchTerm}
         onChange={e => setMobileAgentSearchTerm(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && mobileAgentSearchTerm.trim()) {
+            router.push(`/agent?search=${encodeURIComponent(mobileAgentSearchTerm.trim())}`);
+          }
+        }}
         placeholder="Name or City"
         className="py-3 px-2 shadow-2xl text-black font-normal w-40  bg-white text-normal outline-none"
       />
 
       {/* Search button */}
-      <button className="flex-shrink-0 bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-6 py-3 text-normal font-medium">
+      <button 
+        className="flex-shrink-0 bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-6 py-3 text-normal font-medium"
+        onClick={() => {
+          if (mobileAgentSearchTerm.trim()) {
+            router.push(`/agent?search=${encodeURIComponent(mobileAgentSearchTerm.trim())}`);
+          }
+        }}
+      >
         Search
       </button>
     </div>
@@ -1254,7 +1309,7 @@ we hope to become your go-to property adviser for life. As we are also part of t
 {/* Laptop Version: Original Layout */}
 <div className="hidden md:flex w-full relative  ">
   {/* Box with half-overlap */}
-  <div className="absolute top-0 z-10  bg-gray-100 p-6 w-140 border-gray-100  ">
+  <div className="absolute top-0 z-10  bg-gray-100 p-6 w-120 border-gray-100  ">
     <p className="text-3xl leading-10 font-bold text-gray-800">
       <span className="text-[rgb(206,32,39,255)]">Join us.</span> Our dynamic energy and innovative spirit bring the best and brightest together.
     </p>

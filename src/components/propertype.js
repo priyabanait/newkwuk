@@ -1,5 +1,5 @@
 // pages/index.js
-import React from "react";
+import React, { Suspense } from "react";
 import {
     FaChevronDown,
     FaHome,

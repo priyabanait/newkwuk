@@ -8,7 +8,7 @@ import { Phone, Mail, User , MessageCircle } from "lucide-react";
 import { FaPhoneAlt, FaEnvelope, FaRegCalendarAlt, FaSnowflake, FaHome,  FaMoneyBillWave, FaCar } from 'react-icons/fa';
 
 import { PiMapPinLineThin } from 'react-icons/pi';
-import { FaArrowLeft ,FaChevronLeft ,FaChevronRight ,FaTimes  } from 'react-icons/fa';
+import { FaArrowLeft ,FaChevronLeft ,FaChevronRight ,FaTimes,FaWhatsapp   } from 'react-icons/fa';
 
 import Header from '@/components/header';
 
@@ -457,7 +457,7 @@ export default function PropertyListing() {
     name: property?.list_agent_office?.list_agent_full_name || property?.list_agent_full_name || '',
     fullName: property?.list_agent_office?.list_agent_full_name || property?.list_agent_full_name || '',
     email: property?.list_agent_office?.list_office_email || property?.agent_email || '',
-    image: (property?.list_agent_office?.list_agent_url && /\.(jpeg|jpg|gif|png|webp|svg)$/i.test(property?.list_agent_office?.list_agent_url)) ? property?.list_agent_office?.list_agent_url : '/images.jpg',
+    image: (property?.list_agent_office?.list_agent_url && /\.(jpeg|jpg|gif|png|webp|svg)$/i.test(property?.list_agent_office?.list_agent_url)) ? property?.list_agent_office?.list_agent_url : '/avtar.jpg',
   };
 
   
@@ -664,7 +664,7 @@ export default function PropertyListing() {
               {/* Description */}
               <div className="mt-4 md:mt-8">
                 <h2 className="font-bold text-lg text-gray-800 sm:text-lg md:text-2xl flex items-center gap-2">
-                  PROPERTY DESCRIPTION
+                  Property Description
                 </h2>
               </div>
 
@@ -898,7 +898,7 @@ export default function PropertyListing() {
   rel="noopener noreferrer"
   className="flex flex-col items-center justify-center border p-2 hover:bg-gray-200 transition"
 >
-  <MessageCircle className="w-6 h-6 text-gray-700" />
+  <FaWhatsapp  className="w-6 h-6 text-gray-700" />
   <span className="text-[0.6rem] md:text-xs mt-1">WhatsApp</span>
 </a>
 
@@ -915,20 +915,54 @@ export default function PropertyListing() {
                 {/* File */}
                 <button
   onClick={() => {
-    const agentData = {
-      name: property?.list_agent_office?.list_agent_full_name || property?.list_agent_full_name || '',
-      fullName: property?.list_agent_office?.list_agent_full_name || property?.list_agent_full_name || '',
-      email: property?.list_agent_office?.list_office_email || property?.agent_email || '',
-      phone: property?.list_agent_office?.list_agent_preferred_phone || property?.agent_phone || '',
-      image: (property?.list_agent_office?.list_agent_url && /\.(jpeg|jpg|gif|png|webp|svg)$/i.test(property?.list_agent_office?.list_agent_url)) 
-        ? property?.list_agent_office?.list_agent_url 
-        : '/images.jpg',
-      city: property?.list_address?.city || property?.city || '',
-      office: property?.list_agent_office?.list_office_name || '',
-      kw_id: property?.kw_id || property?.list_id || property?.id || ''
-    };
-    localStorage.setItem('selectedAgent', JSON.stringify(agentData));
-    router.push('/agent/newdetails');
+    // Get agent ID from property data - try multiple possible fields
+    const agentId = property?.list_agent_office?.list_agent_id || 
+                   property?.list_agent_office?.kw_uid || 
+                   property?.list_agent_office?.agent_id ||
+                   property?.agent_id || 
+                   property?.list_agent_id ||
+                   property?.listing_agent_kw_uid ||
+                   property?.agent_kw_uid ||
+                   property?.kw_id || 
+                   property?.list_id || 
+                   property?.id;
+    
+    if (agentId) {
+      // Store agent data in localStorage for the agent details page to use
+      const agentData = {
+        name: property?.list_agent_office?.list_agent_full_name || property?.list_agent_full_name || '',
+        fullName: property?.list_agent_office?.list_agent_full_name || property?.list_agent_full_name || '',
+        email: property?.list_agent_office?.list_office_email || property?.agent_email || '',
+        phone: property?.list_agent_office?.list_agent_preferred_phone || property?.agent_phone || '',
+        image: (property?.list_agent_office?.list_agent_url && /\.(jpeg|jpg|gif|png|webp|svg)$/i.test(property?.list_agent_office?.list_agent_url)) 
+          ? property?.list_agent_office?.list_agent_url 
+          : '/avtar.jpg',
+        city: property?.list_address?.city || property?.city || '',
+        office: property?.list_agent_office?.list_office_name || '',
+        kw_id: property?.kw_id || property?.list_id || property?.id || '',
+        _id: agentId
+      };
+      localStorage.setItem('selectedAgent', JSON.stringify(agentData));
+      
+      // Navigate directly to agent details page using the ID
+      router.push(`/agent/${agentId}`);
+    } else {
+      // Fallback: store agent data and navigate to newdetails page
+      const agentData = {
+        name: property?.list_agent_office?.list_agent_full_name || property?.list_agent_full_name || '',
+        fullName: property?.list_agent_office?.list_agent_full_name || property?.list_agent_full_name || '',
+        email: property?.list_agent_office?.list_office_email || property?.agent_email || '',
+        phone: property?.list_agent_office?.list_agent_preferred_phone || property?.agent_phone || '',
+        image: (property?.list_agent_office?.list_agent_url && /\.(jpeg|jpg|gif|png|webp|svg)$/i.test(property?.list_agent_office?.list_agent_url)) 
+          ? property?.list_agent_office?.list_agent_url 
+          : '/avtar.jpg',
+        city: property?.list_address?.city || property?.city || '',
+        office: property?.list_agent_office?.list_office_name || '',
+        kw_id: property?.kw_id || property?.list_id || property?.id || ''
+      };
+      localStorage.setItem('selectedAgent', JSON.stringify(agentData));
+      router.push('/agent/newdetails');
+    }
   }}
   className="flex flex-col items-center justify-center border p-2 hover:bg-gray-200 transition"
 >

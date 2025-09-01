@@ -81,7 +81,7 @@ export const getExternalListings = async (req, res) => {
     // 4. Apply strict filtering - REMOVE unwanted listings completely
     // Define exactly what we want to KEEP
     const allowedListStatuses = ['Active', 'Sold', 'Rented/Leased'];
-    const allowedListCategories = ['For Sale', 'Sold', 'Rented/Leased'];
+    const allowedListCategories = ['For Sale', 'For Rent', 'To Let', 'Sold', 'Rented/Leased'];
     
     // Define what we want to EXCLUDE (remove completely)
     const blockedStatuses = ['Expired', 'Pending', 'Withdrawn', 'Cancelled', 'Off Market'];
@@ -130,27 +130,67 @@ export const getExternalListings = async (req, res) => {
 
     // 5. Apply new optional filters
     
+    // Debug: Log the filter values
+    console.log('Filter values received:', {
+      forSale,
+      forRent,
+      propertyType,
+      minPrice,
+      maxPrice,
+      locationFilter,
+      propertySubtypeFilter
+    });
+    
+    // Debug: Log sample properties before filtering
+    if (allListings.length > 0) {
+      console.log('=== SAMPLE PROPERTIES BEFORE FILTERING ===');
+      allListings.slice(0, 3).forEach((item, idx) => {
+        console.log(`Property ${idx + 1}:`, {
+          id: item._kw_meta?.id,
+          list_category: item.list_category,
+          category: item.category,
+          prop_type: item.prop_type,
+          city: item.list_address?.city
+        });
+      });
+      console.log('=== END DEBUG ===');
+    }
+    
     // 1) For Sale filter - if forsale is true, only show "For Sale" listings
     if (forSale === 'true' || forSale === true) {
+      console.log('Applying For Sale filter');
       allListings = allListings.filter(item => {
-        const category = item.list_category || '';
-        return category === 'For Sale';
+        const raw = item.list_category || item.category || '';
+        const category = String(raw).toLowerCase();
+        const matches = category.includes('sale');
+        if (item._kw_meta?.id) {
+          console.log(`Property ${item._kw_meta.id}: list_category="${raw}" (${category}) - matches sale: ${matches}`);
+        }
+        return matches;
       });
+      console.log(`After For Sale filter: ${allListings.length} properties`);
     }
     
     // 2) For Rent filter - if forrent is true, only show "For Rent" listings  
     if (forRent === 'true' || forRent === true) {
+      console.log('Applying For Rent filter');
       allListings = allListings.filter(item => {
-        const category = item.list_category || '';
-        return category === 'For Rent';
+        const raw = item.list_category || item.category || '';
+        const category = String(raw).toLowerCase();
+        const matches = category.includes('rent') || category.includes('lease') || category.includes('let');
+        if (item._kw_meta?.id) {
+          console.log(`Property ${item._kw_meta.id}: list_category="${raw}" (${category}) - matches rent: ${matches}`);
+        }
+        return matches;
       });
+      console.log(`After For Rent filter: ${allListings.length} properties`);
     }
     
     // 3) Property Type filter - Residential or Commercial
     if (propertyType === 'Residential' || propertyType === 'Commercial') {
       allListings = allListings.filter(item => {
-        const propType = item.prop_type || item.property_type || '';
-        return propType === propertyType;
+        const propType = (item.prop_type || item.property_type || '').toString().toLowerCase();
+        return propType === propertyType.toLowerCase();
       });
     }
     
@@ -159,7 +199,7 @@ export const getExternalListings = async (req, res) => {
       const min = Number(minPrice);
       if (!isNaN(min) && min > 0) {
         allListings = allListings.filter(item => {
-          const price = Number(item.current_list_price ?? 0);
+          const price = Number(item.current_list_price ?? item.price ?? item.rental_price ?? 0);
           return price >= min;
         });
       }
@@ -169,7 +209,7 @@ export const getExternalListings = async (req, res) => {
       const max = Number(maxPrice);
       if (!isNaN(max) && max > 0) {
         allListings = allListings.filter(item => {
-          const price = Number(item.current_list_price ?? 0);
+          const price = Number(item.current_list_price ?? item.price ?? item.rental_price ?? 0);
           return price <= max;
         });
       }
@@ -215,9 +255,20 @@ export const getExternalListings = async (req, res) => {
     // New: location filter
     if (locationFilter !== undefined) {
       const loc = String(locationFilter).toLowerCase();
+      const getCandidates = (it) => {
+        const candidates = [];
+        if (it.location) candidates.push(it.location);
+        if (it.city) candidates.push(it.city);
+        if (it.region) candidates.push(it.region);
+        if (it.municipality) candidates.push(it.municipality);
+        if (it.list_address?.city) candidates.push(it.list_address.city);
+        if (it.list_address?.address) candidates.push(it.list_address.address);
+        if (it.property_address?.city) candidates.push(it.property_address.city);
+        if (it.property_address?.address) candidates.push(it.property_address.address);
+        return candidates;
+      };
       allListings = allListings.filter(item => {
-        const val = item.location || item.list_address?.city || item.list_address?.address || '';
-        return String(val).toLowerCase().includes(loc);
+        return getCandidates(item).some(v => String(v ?? '').toLowerCase().includes(loc));
       });
     }
 
@@ -225,6 +276,20 @@ export const getExternalListings = async (req, res) => {
     // 7. Calculate pagination details
     const totalFiltered = allListings.length;
     const totalPages = Math.ceil(totalFiltered / perPage);
+    
+    // Debug: Log final results
+    console.log('=== FILTERING RESULTS ===');
+    console.log(`Total properties after all filters: ${totalFiltered}`);
+    console.log(`Applied filters:`, {
+      forSale: forSale === 'true' || forSale === true,
+      forRent: forRent === 'true' || forRent === true,
+      propertyType,
+      minPrice,
+      maxPrice,
+      locationFilter,
+      propertySubtypeFilter
+    });
+    console.log('=== END RESULTS ===');
     
     // Check if requested page exceeds total pages
     if (page > totalPages && totalPages > 0) {

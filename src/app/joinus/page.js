@@ -34,7 +34,7 @@ const Joinus = (props) => {
           </div>
         </div>
       </main> */}
-      <div className=" px-10 md:px-20">
+      <div className=" px-10 md:pl-20">
       <div className="grid md:grid-cols-2 gap-0 items-start ">
         {/* Left Column */}
         <div className="space-y-8">

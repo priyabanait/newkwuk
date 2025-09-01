@@ -116,7 +116,7 @@ export default function CeoTeam() {
       <div className="text-center px-4">
         <h2 className="text-3xl md:text-4xl md:font-normal font-semibold mb-2">OUR TEAM</h2>
         <div className="w-30 h-0.5 bg-[rgb(206,32,39,255)] border-0 mb-2 mx-auto mt-4 md:mt-10"></div>
-        <p className="text-sm tracking-wider mt-4 md:mt-10">Regional Team</p>
+        <p className="text-lg tracking-wider mt-4 md:mt-10">Regional Team</p>
       </div>
     </div>
 

@@ -6,7 +6,12 @@ import NewFooter from '@/components/newfooter'
 import { FaArrowLeft,FaQuoteLeft ,FaChevronRight,FaChevronLeft } from 'react-icons/fa';
 import Header from '@/components/header';
 import { dancing } from '@/app/layout';
+import { useParams, useRouter } from 'next/navigation';
+
 const AgentProfile = (props) => {
+  const params = useParams();
+  const router = useRouter();
+  const agentId = params?.id;
   
   const [agent, setAgent] = useState(null);
   const [properties, setProperties] = useState([]);
@@ -16,10 +21,18 @@ const AgentProfile = (props) => {
   const [imgSrc, setImgSrc] = useState(null);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
+  const [retryCount, setRetryCount] = useState(0);
   
   // Icon URLs
   const bedIconUrl = "/bed.png";
   const bathIconUrl = "/bath.png";
+  
+  // Function to retry fetching properties
+  const retryFetchProperties = () => {
+    setRetryCount(prev => prev + 1);
+    setError(null);
+    // The useEffect will run again due to retryCount change
+  };
   const agentBios = {
     1: {
       text: `
@@ -163,77 +176,210 @@ const AgentProfile = (props) => {
   };
 
   useEffect(() => {
-    // Load agent from localStorage
-    try {
-      const agentData = localStorage.getItem('selectedAgent');
-      if (agentData) {
-        const parsed = JSON.parse(agentData);
-        setAgent(parsed);
-        if (parsed.image) setImgSrc(parsed.image);
-      } else {
-        setError('No agent selected.');
+    // Fetch agent data using ID from URL params
+    const fetchAgentData = async () => {
+      if (!agentId) {
+        setError('No agent ID provided.');
+        setLoading(false);
+        return;
       }
-    } catch (e) {
-      setError('Failed to load agent data.');
+      
+      setLoading(true);
+      setError(null);
+      
+      try {
+        console.log('Fetching agent data for ID:', agentId);
+        
+        // First check if agent data is available in localStorage (from property details page)
+        const storedAgent = localStorage.getItem('selectedAgent');
+        if (storedAgent) {
+          try {
+            const agentData = JSON.parse(storedAgent);
+            // Check if the stored agent matches the current agentId (handle both string and number comparisons)
+            const storedId = String(agentData._id || '');
+            const storedKwId = String(agentData.kw_id || '');
+            const storedId2 = String(agentData.id || '');
+            const currentId = String(agentId);
+            
+            console.log('Comparing IDs:', {
+              storedId,
+              storedKwId, 
+              storedId2,
+              currentId,
+              match: storedId === currentId || storedKwId === currentId || storedId2 === currentId
+            });
+            
+            if (storedId === currentId || storedKwId === currentId || storedId2 === currentId) {
+              console.log('Using stored agent data:', agentData);
+              setAgent(agentData);
+              if (agentData.image) setImgSrc(agentData.image);
+              setLoading(false);
+              return;
+            }
+          } catch (e) {
+            console.log('Error parsing stored agent data:', e);
+          }
+        }
+        
+        // If no stored data or no match, fetch from API
+        const agentRes = await fetch(`https://kw-backend-q6ej.vercel.app/api/agents/merge?name=&page=1&limit=100`);
+        
+        if (agentRes.ok) {
+          const agentData = await agentRes.json();
+          console.log('Agents API response:', agentData);
+          
+          if (agentData.success && agentData.data) {
+            // Find the specific agent by ID
+            const foundAgent = agentData.data.find(a => 
+              a._id === agentId || 
+              a.kwId === agentId || 
+              a.slug === agentId
+            );
+            
+            if (foundAgent) {
+              const mappedAgent = {
+                name: foundAgent.fullName || foundAgent.name,
+                phone: foundAgent.phone || foundAgent.phoneNumber,
+                email: foundAgent.email || foundAgent.emailAddress,
+                city: foundAgent.city,
+                image: foundAgent.photo || foundAgent.profileImage || foundAgent.image ,
+                _id: foundAgent._id || foundAgent.id,
+                marketCenter: foundAgent.marketCenter || foundAgent.market || "",
+                kw_id: foundAgent.kwId || foundAgent.kw_id || ""
+              };
+              
+              setAgent(mappedAgent);
+              if (mappedAgent.image) setImgSrc(mappedAgent.image);
+              console.log('Agent found and set:', mappedAgent);
+            } else {
+              setError('Agent not found.');
+            }
+          } else {
+            setError('Failed to load agent data.');
+          }
+        } else {
+          throw new Error(`Failed to fetch agent data: ${agentRes.status}`);
+        }
+      } catch (e) {
+        console.error('Error fetching agent data:', e);
+        setError(`Failed to load agent data: ${e.message}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    if (agentId) {
+      fetchAgentData();
     }
-  }, []);
+  }, [agentId]);
   
   // Update filteredProperties when properties change
   useEffect(() => {
     setFilteredProperties(properties);
   }, [properties]);
 
-  // useEffect(() => {
-  //   // Fetch all properties and filter for this agent
-  //   const fetchProperties = async () => {
-  //     if (!agent) return;
-  //     setLoading(true);
-  //     try {
-  //       const res = await fetch('https://kw-backend-q6ej.vercel.app/api/listings/list/properties', {
-  //         method: 'POST',
-  //         headers: { 'Content-Type': 'application/json' },
-  //       });
-  //       const data = await res.json();
-  //       console.log(agent.email);
+  useEffect(() => {
+    // Fetch all properties and filter for this agent
+    const fetchProperties = async () => {
+      if (!agent) return;
+      setLoading(true);
+      setError(null);
+      
+      try {
+        console.log('Fetching properties for agent:', agent);
+        console.log('Agent kw_id:', agent.kw_id || agent.kwId);
         
-  //       let all = Array.isArray(data.data) ? data.data : [];
-  //       // Filter by agent email if available, else by name
-  //       let filtered = all.filter((prop) => {
-  //         if (agent.email && (prop.agent_email || prop.agent?.email)) {
-  //           return (
-  //             prop.agent_email === agent.email ||
-  //             (prop.agent && prop.agent.email === agent.email)
-  //           );
-  //         } else if (agent.name || agent.fullName) {
-  //           const agentName = agent.name || agent.fullName;
-  //           return (
-  //             prop.agent_name === agentName ||
-  //             (prop.agent && prop.agent.name === agentName)
-  //           );
-  //         }
-  //         return false;
-  //       });
-  //       setProperties(filtered);
-  //     } catch (e) {
-  //       setError('Failed to load properties.');
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchProperties();
-  // }, [agent]);
+        // First try the main properties API endpoint
+        let res = await fetch('http://localhost:5000/api/properties', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            org_id :"",
+            singleAgent: agent.kw_id || agent.kwId || agent.id,
+            page: 1,
+            limit: 50
+          })
+        });
+        
+        console.log('Main API Response status:', res.status);
+        
+        if (res.ok) {
+          const data = await res.json();
+          console.log('Properties API response:', data);
+          
+          if (data.success && data.properties && data.properties.data) {
+            setProperties(data.properties.data);
+            console.log('Properties set successfully:', data.properties.data.length);
+            return;
+          } else if (data.success && data.listings) {
+            setProperties(data.listings);
+            console.log('Listings set successfully:', data.listings.length);
+            return;
+          }
+        }
+        
+        // If main API fails or returns no data, set empty properties
+        console.log('Main API failed or no data, setting empty properties');
+        setProperties([]);
+        
+      } catch (e) {
+        console.error('Error fetching properties:', e);
+        
+        // Show a more user-friendly error message
+        if (e.message.includes('Failed to fetch')) {
+          setError('Unable to connect to the server. Please check your internet connection and try again.');
+        } else if (e.message.includes('API failed')) {
+          setError('Server is currently unavailable. Please try again later.');
+        } else {
+          setError(`Failed to load properties: ${e.message}`);
+        }
+        
+        setProperties([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    if (agent) {
+      fetchProperties();
+    }
+  }, [agent, retryCount]);
 
-  // if (error) {
-  //   return (
-  //     <div className='relative p-6 md:p-8'>
-  //       <Header />
-  //       <div className='text-center bg-[rgb(206,32,39,255)] py-20'>{error}</div>
-  //       <Footer />
-  //     </div>
-  //   );
-  // }
+  if (error) {
+    return (
+      <div className='relative p-6 md:p-8'>
+        <Header />
+        <div className='text-center bg-[rgb(206,32,39,255)] py-20'>{error}</div>
+        <NewFooter />
+      </div>
+    );
+  }
+  
+  if (loading && !agent) {
+    return (
+      <div className='relative p-6 md:p-8'>
+        <Header />
+        <div className='flex justify-center items-center h-60'>
+          <div className='animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-red-600'></div>
+        </div>
+        <NewFooter />
+      </div>
+    );
+  }
+  
   if (!agent) {
-    return null;
+    return (
+      <div className='relative p-6 md:p-8'>
+        <Header />
+        <div className='text-center bg-[rgb(206,32,39,255)] py-20'>
+          {error || 'Agent not found'}
+        </div>
+        <NewFooter />
+      </div>
+    );
   }
 
   return (
@@ -246,18 +392,20 @@ const AgentProfile = (props) => {
   {/* Top Header */}
   <div className="w-full flex flex-col md:flex-row items-start md:px-10 md:items-center justify-between gap-4 md:gap-0">
     {/* Back Button */}
-    {/* <div className="flex items-center gap-2 md:mt-30  mt-20 px-4 border rounded-full border-[rgb(206,32,39,255)] py-1 bg-[rgb(206,32,39,255)] h-10">
-      <a href="/properties" className="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center rounded-full bg-white border border-white text-[rgb(206,32,39,255)] hover:bg-gray-100">
-        <FaArrowLeft className="w-2 h-2 md:w-3 md:h-3" />
-      </a>
-      <a href={props.nav} className="text-[0.6rem] md:text-xs text-white font-medium">Back to Search</a>
-      </div> */}
-                
-              
-            
-  
-   
-    
+    {/* <div className="flex items-center gap-2 md:mt-30 mt-20 px-4 border rounded-full border-[rgb(206,32,39,255)] py-1 bg-[rgb(206,32,39,255)] h-10">
+      <button 
+        onClick={() => router.push('/agent')}
+        className="w-4 h-4 md:w-5 md:h-5 flex items-center justify-center rounded-full bg-white border border-white text-[rgb(206,32,39,255)] hover:bg-gray-100 cursor-pointer"
+      >
+        <FaArrowLeft className="w-2 h-2 md:w-3 md:w-3" />
+      </button>
+      <button 
+        onClick={() => router.push('/agent')}
+        className="text-[0.6rem] md:text-xs text-white font-medium cursor-pointer hover:text-gray-200 transition-colors"
+      >
+        Back to Agents
+      </button>
+    </div> */}
   </div>
   <p className="font-semibold  pt-20 text-[rgb(206,32,39,255)] text-2xl md:px-10"> {agent.name || agent.fullName || '-'}</p>
   <p className="font-semibold text-gray-600 text-lg md:px-10"> Keller Williams {agent.city || '-'}</p>
@@ -325,7 +473,7 @@ const AgentProfile = (props) => {
   <div className="w-40 h-40 mx-auto mt-4 rounded-full overflow-hidden border-4 border-white shadow-md bg-gray-100">
   
       <Image
-       src={agent.image||'/images.jpg'}
+       src={agent.image||'/avtar.jpg'}
         alt={agent.name || agent.fullName || 'Agent'}
         width={160}
         height={160}
@@ -574,7 +722,7 @@ const AgentProfile = (props) => {
       </div>
     </div>
 
-    <p className="flex justify-center items-center text-2xl font-semibold">
+    <p className="flex justify-center items-center text-2xl font-semibold mb-10 md:mb-12">
   Properties from {agent.name || agent.fullName || '-'}
 </p>
 
@@ -583,10 +731,27 @@ const AgentProfile = (props) => {
     <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-red-600"></div>
   </div>
 ) : error ? (
-  <div className="text-red-500">{error}</div>
+  <div className="flex flex-col items-center justify-center h-60 text-center px-4">
+    <div className="text-red-500 text-lg font-medium mb-2">{error}</div>
+    <div className="text-gray-500 text-sm mb-4">
+      {error.includes('Failed to fetch') ? 
+        'Please check your internet connection and try again.' :
+        'There was an issue loading the properties. Please try again.'
+      }
+    </div>
+    <button 
+      onClick={retryFetchProperties} 
+      className="px-6 py-2 bg-[rgb(206,32,39,255)] text-white rounded-lg hover:bg-red-700 transition-colors"
+    >
+      Retry
+    </button>
+  </div>
 ) : filteredProperties.length === 0 ? (
-  <div className="flex justify-center items-center h-60 text-xl font-medium text-gray-500">
-    Not available
+  <div className="flex flex-col items-center justify-center h-60 text-center px-4">
+    <div className="text-gray-500 text-xl font-medium mb-2">
+      No properties found for this agent
+    </div>
+   
   </div>
 ) : (
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -665,16 +830,22 @@ const AgentProfile = (props) => {
           </p>
 
           <div className="flex justify-start items-center">
-            <span className="font-medium text-base text-gray-700">
-              {property.price
-                ? `£${formatPrice(property.price)}`
-                : property.current_list_price
-                ? `£${formatPrice(property.current_list_price)}`
-                : ""}
-              {property.rental_price
-                ? `SAR${formatPrice(property.rental_price)} `
-                : ""}
-            </span>
+          <span className="relative w-4 h-4 mr-2">
+    <Image 
+      src="/currency.png"   // 👈 replace with your currency image path
+      alt="currency"
+      fill
+      className="object-contain"
+    />
+  </span>
+
+  <span>
+    {property.price
+      ? formatPrice(property.price)
+      : property.current_list_price
+      ? formatPrice(property.current_list_price)
+      : ""}
+  </span>
           </div>
 
           {property.price_qualifier && (
@@ -694,152 +865,7 @@ const AgentProfile = (props) => {
   </div>
 )}
 
-{/* Load More button */}
-{/* {visibleCount < filteredProperties.length && !loading && !error && (
-  <div className="flex justify-center items-center my-10 md:my-5">
-    <button
-      className="md:w-80 w-50 md:py-2 py-2 mb-10 md:mb-0 px-4 bg-[rgba(202,3,32,255)] hover:bg-red-950 text-white text-base md:text-lg font-semibold transition whitespace-nowrap"
-      onClick={() => setVisibleCount((c) => c + 6)}
-    >
-      View More Properties..
-    </button>
-  </div>
-)} */}
 
-  
-
-
-  {/* Properties by Agent Section */}
-  {/* <div className="w-full flex justify-center my-4">
-        <div className="w-full bg-gray-100 rounded-3xl p-6 md:p-12 shadow flex flex-col">
-         
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-           
-              <span className="text-3xl text-[rgb(206,32,39,255)]">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-8 h-8"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10l9-7 9 7v7a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 01-2 2H5a2 2 0 01-2-2v-7z" /></svg>
-              </span>
-              <h2 className="text-lg md:text-2xl font-semibold text-gray-700">
-                Properties by <span className="text-[rgb(206,32,39,255)]">{agent.name || agent.fullName || '-'}</span>
-              </h2>
-            </div>
-            <span className="text-gray-500 text-sm md:text-lg font-semibold">Property Count : {loading ? '...' : properties.length}</span>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {loading ? (
-              <div className="col-span-3 text-center text-gray-500 py-10">Loading properties...</div>
-            ) : properties.length === 0 ? (
-              <div className="col-span-3 text-center text-gray-500 py-10">No properties found for this agent.</div>
-            ) : (
-              properties.map((prop, idx) => (
-                <div key={idx} className="bg-white rounded-2xl shadow p-4 flex flex-col">
-                  <div className="relative w-full h-48 mb-4">
-                    <Image
-                      src={
-                        prop.image ||
-                        (Array.isArray(prop.images) && prop.images[0]) ||
-                        (Array.isArray(prop.photos) && prop.photos[0]?.ph_url) ||
-                        '/home2.jpg'
-                      }
-                      alt="Property"
-                      fill
-                      className="object-cover rounded-xl"
-                    />
-                  </div>
-                  <div className="text-left text-lg font-bold text-gray-700 mb-2">
-                    {prop.price ? `ر.س ${prop.price.toLocaleString()}` : prop.current_list_price || '-'}
-                  </div>
-                  <div className="flex justify-between text-xs text-gray-600 mb-2">
-                    <span>{prop.bedrooms || prop.total_bed || '-'} bd</span>
-                    <span>{prop.bathrooms || prop.total_bath || '-'} ba</span>
-                    <span>{prop.areaSize || prop.lot_size_area || '-'} sq m</span>
-                    <span>{prop.areaSize ? (prop.areaSize * 1.07639).toFixed(2) : (prop.lot_size_area ? (prop.lot_size_area * 1.07639).toFixed(2) : '-')} sq m</span>
-                  </div>
-                  <div className="text-xs text-gray-500">
-                    {prop.address || prop.location || (prop.property_address && prop.property_address.address) || '-'}
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      </div> */}
-     
-      {/* {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-md rounded-3xl p-6 relative shadow-2xl border border-gray-200">
-          
-            <button
-              onClick={() => setShowModal(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl"
-            >
-              &times;
-            </button>
-
-            
-            <div className="flex items-center space-x-4 mb-6">
-              <Image
-                src={imgSrc || '/images.jpg'}
-                alt={agent.name || agent.fullName || 'Agent'}
-                width={50}
-                height={50}
-                className="w-18 h-16 rounded-xl"
-              />
-              <h2 className="text-lg font-bold bg-[rgb(206,32,39,255)] text-white px-4 py-1 rounded-full">
-                {agent.name || agent.fullName || '-'}
-              </h2>
-            </div>
-
-          
-            <form className="space-y-4">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
-              />
-              <input
-                type="tel"
-                placeholder="Phone"
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
-              />
-              <input
-                type="email"
-                placeholder="Email"
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
-              />
-              <textarea
-                rows="3"
-                className="w-full text-sm md:text-base px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400"
-                defaultValue={`Hi ${agent.name || agent.fullName || ''}, I saw your profile on Keller Williams and wanted to see if I can get some help`}
-              ></textarea>
-              <select className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-400">
-                <option>Select</option>
-                <option>Buy</option>
-                <option>Rent</option>
-                <option>Sell</option>
-              </select>
-
-              <label className="flex items-center space-x-2 text-sm">
-                <input type="checkbox" className="w-4 h-4" />
-                <span>
-                  By submitting this form I agree to{' '}
-                  <a href="#" className="text-blue-600 underline">
-                    Terms of Use
-                  </a>
-                </span>
-              </label>
-
-              <button
-                type="submit"
-                className="w-full py-3 bg-[rgb(206,32,39,255)] hover:bg-red-800 text-white font-bold rounded-full"
-              >
-                SUBMIT
-              </button>
-            </form>
-          </div>
-        </div>
-      )} */}
       </div>
       <NewFooter />
     </div>

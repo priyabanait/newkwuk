@@ -103,7 +103,7 @@ const Riyadh = () => {
         <div>
         <Header></Header>
           <Box
-       h3="Jasmin Contact Us"
+       h3="KW Market Center - Jasmin"
       src="/bgriyadh.jpg"
          image={
            'https://static.wixstatic.com/media/36a881_3c5b1d5faca941ea915b39acfedf52ee~mv2.png/v1/fill/w_271,h_180,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2-removebg-preview.png'
@@ -200,7 +200,7 @@ const Riyadh = () => {
             <div className="text-center px-4">
               <h2 className="md:text-3xl text-2xl font-semibold mb-2">OUR TEAM</h2>
               <div className="w-30 h-0.5 bg-[rgb(206,32,39,255)] mb-2 mx-auto border-0 mt-4 md:mt-10"></div>
-              <p className="text-sm tracking-wider mt-4 md:mt-10 text-gray-600">JASMIN</p>
+              <p className="text-lg tracking-wider mt-4 md:mt-10">Jasmin</p>
             </div>
           </div>
       
@@ -290,7 +290,7 @@ const Riyadh = () => {
         </div>
         </div>
        
-             <div className="flex justify-center py:4 md:py-16">
+             <div className="flex justify-center py:4 md:py-0">
                     <Image
                       src="/howwillyouthink.png"
                       alt="How Will You Thrive"

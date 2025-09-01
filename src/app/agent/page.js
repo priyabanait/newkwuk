@@ -1,15 +1,16 @@
 'use client'
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, Suspense } from 'react';
 import Header from '@/components/header';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { FaPhoneAlt,FaChevronRight, FaEnvelope, FaSearch } from 'react-icons/fa';
 import { MdPhone } from "react-icons/md";
 
 const Footer = dynamic(() => import('@/components/newfooter'), { ssr: false });
 
-const Agent = () => {
+// Wrapper component that uses useSearchParams
+const AgentContent = () => {
   const [agents, setAgents] = useState([]);
   const [filter, setFilter] = useState("agent");
   const [loading, setLoading] = useState(true);
@@ -22,16 +23,41 @@ const Agent = () => {
   const [filterName, setFilterName] = useState("");
   const [filterMarket, setFilterMarket] = useState("");
   const [filterCity, setFilterCity] = useState("");
+  const searchTimeoutRef = useRef(null);
+  const [searchTrigger, setSearchTrigger] = useState(0);
 
-  const [debouncedName, setDebouncedName] = useState("");
-  const debounceTimeout = useRef(null);
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
+  // Read URL parameters and pre-fill search fields
   useEffect(() => {
-    if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
-    debounceTimeout.current = setTimeout(() => {
-      setDebouncedName(filterName);
-    }, 350);
-    return () => clearTimeout(debounceTimeout.current);
+    const searchParam = searchParams.get('search');
+    if (searchParam && searchParam !== filterName) {
+      // Ensure filter is set to "agent" for search to work
+      setFilter("agent");
+      setFilterName(searchParam);
+      // Force search to trigger by incrementing search trigger
+      setSearchTrigger(prev => prev + 1);
+    }
+  }, [searchParams, filterName]);
+
+  // Simple timeout-based search when user stops typing
+  useEffect(() => {
+    if (searchTimeoutRef.current) {
+      clearTimeout(searchTimeoutRef.current);
+    }
+    
+    const timeout = setTimeout(() => {
+      if (filterName.trim()) {
+        setSearchTrigger(prev => prev + 1);
+      }
+    }, 500); // Wait 500ms after user stops typing
+    
+    searchTimeoutRef.current = timeout;
+    
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
   }, [filterName]);
 
   useEffect(() => {
@@ -42,20 +68,21 @@ const Agent = () => {
 
       try {
         let query = `?page=${currentPage}&limit=${agentsPerPage}`;
-        if (debouncedName.trim()) query += `&name=${encodeURIComponent(debouncedName.trim())}`;
+        if (filterName.trim()) query += `&name=${encodeURIComponent(filterName.trim())}`;
         if (filterMarket && filterMarket !== "MARKET CENTER") query += `&marketCenter=${encodeURIComponent(filterMarket)}`;
         if (filterCity && filterCity !== "CITY" && filterCity !== "RESET_ALL") query += `&city=${encodeURIComponent(filterCity)}`;
 
+        // Use the correct API endpoint for agents
         const response = await fetch(`https://kw-backend-q6ej.vercel.app/api/agents/merge${query}`);
         if (!response.ok) throw new Error('Failed to fetch agents');
         const data = await response.json();
 
         const mappedAgents = Array.isArray(data.data) ? data.data.map(agent => ({
           name: agent.fullName || agent.name,
-          phone: agent.phoneNumber || agent.phone,
-          email: agent.emailAddress || agent.email,
+          phone: agent.phone || agent.phoneNumber,
+          email: agent.email || agent.emailAddress,
           city: agent.city,
-          image: agent.photo || agent.image,
+          image: agent.photo || agent.profileImage || agent.image,
           _id: agent._id || agent.id,
           marketCenter: agent.marketCenter || agent.market || "",
           kw_id: agent.kwId || agent.kw_id || ""
@@ -76,18 +103,25 @@ const Agent = () => {
       }
     };
     fetchAgents();
-  }, [currentPage, debouncedName, filterMarket, filterCity, filter]);
+  }, [currentPage, filterName, filterMarket, filterCity, filter]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [debouncedName, filterMarket, filterCity]);
+  }, [filterName, filterMarket, filterCity]);
 
-  const router = useRouter();
+  // Handle search trigger changes
+  useEffect(() => {
+    if (searchTrigger > 0) {
+      // Reset to page 1 when search changes
+      setCurrentPage(1);
+    }
+  }, [searchTrigger]);
 
   const handleAgentClick = (agent) => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('selectedAgent', JSON.stringify(agent));
-      router.push(`/agent/newdetails`);
+      // Navigate to dynamic route with agent ID
+      const agentId = agent._id || agent.kw_id || agent.kwId || agent.id;
+      router.push(`/agent/${agentId}`);
     }
   };
 
@@ -144,9 +178,27 @@ const Agent = () => {
                       placeholder={filter === "agent" ? "Enter Name" : "Enter City"}
                       className="flex-1 px-2 sm:px-3 py-2 sm:py-3 outline-none text-sm sm:text-base"
                       value={filterName}
-                      onChange={(e) => setFilterName(e.target.value)}
+                      onChange={(e) => {
+                        setFilterName(e.target.value);
+                        // Clear any existing timeout when user types
+                        if (searchTimeoutRef.current) {
+                          clearTimeout(searchTimeoutRef.current);
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          // Trigger search immediately on Enter key
+                          setSearchTrigger(prev => prev + 1);
+                        }
+                      }}
                     />
-                    <button className="bg-[rgb(206,32,39,255)] text-white px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-center">
+                    <button 
+                      className="bg-[rgb(206,32,39,255)] text-white px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-center"
+                      onClick={() => {
+                        // Force search by incrementing search trigger
+                        setSearchTrigger(prev => prev + 1);
+                      }}
+                    >
                       <FaSearch size={20} className="sm:w-6 sm:h-6" />
                     </button>
                   </div>
@@ -179,7 +231,10 @@ const Agent = () => {
                     )}
 
                     {!loading && !error && agents.map((agent, idx) => (
-                      <article key={agent._id || idx} className="p-3 sm:p-4 flex flex-row items-start gap-3 sm:gap-4 relative border-b border-gray-300">
+                      <article key={agent._id || idx}  className={`p-3 sm:p-4 flex flex-row items-start gap-3 sm:gap-4 relative ${
+      idx !== agents.length - 1 ? 'border-b border-gray-300' : ''
+    }`}
+                       >
                         <div className="w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 relative">
                           <Image
                             src={agent.image || "/avtar.jpg"}
@@ -189,8 +244,8 @@ const Agent = () => {
                             className="object-cover w-full h-full"
                             onClick={(e) => {
                               e.stopPropagation();
-                              localStorage.setItem("selectedAgent", JSON.stringify(agent));
-                              window.location.href = "/agent/newdetails";
+                              const agentId = agent._id || agent.kw_id || agent.kwId || agent.id;
+                              router.push(`/agent/${agentId}`);
                             }}
                           />
                         </div>
@@ -292,6 +347,19 @@ const Agent = () => {
       </div>
     
     </div>
+  );
+};
+
+// Main component that wraps AgentContent in Suspense
+const Agent = () => {
+  return (
+    <Suspense fallback={
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-[rgb(206,32,39,255)]"></div>
+      </div>
+    }>
+      <AgentContent />
+    </Suspense>
   );
 };
 

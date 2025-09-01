@@ -1,23 +1,25 @@
 
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaSearch, FaBars, FaTimes, FaBuilding, FaChevronDown, FaChevronRight, FaChevronLeft,FaCheck  } from "react-icons/fa";
 import {motion} from 'framer-motion'
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useRef } from 'react';
 
 import PropertyType from '@/components/propertype'
 import NewFooter from '@/components/newfooter';
 import Header from '@/components/header';
-const Properties = () => {
+
+// Wrapper component that uses useSearchParams
+const PropertiesContent = () => {
   const [price, setPrice] = useState(750000);
   const [visibleCount, setVisibleCount] = useState(6);
   const [prevHeroIndex, setPrevHeroIndex] = useState(null);
   const [propertyType, setPropertyType] = useState('PROPERTY TYPE');
   const [marketCenter, setMarketCenter] = useState('MARKET CENTER');
-  const [propertySubType, setPropertySubType] = useState('PROPERTY SUBTYPE');
+  const [propertySubType, setPropertySubType] = useState('');
   const [city, setCity] = useState('CITY');
 
   const [properties, setProperties] = useState([]);
@@ -25,6 +27,11 @@ const Properties = () => {
   const [error, setError] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
   const [showMap, setShowMap] = useState(false);
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  
+
+  
   const formatPrice = (price) => {
     if (typeof price === 'number') {
       return price.toLocaleString('en-US');
@@ -69,6 +76,22 @@ const Properties = () => {
           fetched = data.data;
         }
         console.log('Fetched properties:', fetched.slice(0, 2)); // Debug: log first 2 properties
+        
+        // Debug: Log sample properties to see list_category values
+        if (fetched.length > 0) {
+          console.log('=== SAMPLE PROPERTIES FOR DEBUG ===');
+          fetched.slice(0, 3).forEach((prop, idx) => {
+            console.log(`Property ${idx + 1}:`, {
+              id: prop._kw_meta?.id || prop.id,
+              list_category: prop.list_category,
+              category: prop.category,
+              prop_type: prop.prop_type,
+              city: prop.list_address?.city
+            });
+          });
+          console.log('=== END DEBUG ===');
+        }
+        
         setProperties(fetched);
       } catch (err) {
         setError('Failed to load properties');
@@ -79,12 +102,21 @@ const Properties = () => {
     }
     fetchProperties();
   }, []);
+  
+  // Preselect city from query parameter and apply filter
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    const qpCity = searchParams?.get('city');
+    if (qpCity) {
+      setCity(qpCity);
+    }
+  }, [searchParams]);
   const [includeNewHomes, setIncludeNewHomes] = useState(true);
   const [showSSTC, setShowSSTC] = useState(true);
 
-  // Filtering logic inside the component
+  // Enhanced filtering logic
   const filterBy = (property, key, value) => {
-    if (!value || value === key || value === 'All') return true;
+    if (!value || value === key || value === 'All' || value === '') return true;
     const v = value.toLowerCase().trim();
     
     if (key === 'PROPERTY TYPE') {
@@ -120,19 +152,47 @@ const Properties = () => {
   const filteredProperties = properties.filter(property => {
     // Filter by price
     const propPrice = property.price || property.current_list_price || 0;
-    if (propPrice > price) return false;
+    if (minPrice && propPrice < minPrice) return false;
+    if (maxPrice && propPrice > maxPrice) return false;
     
-    // Filter by property type
-    if (!filterBy(property, 'PROPERTY TYPE', propertyType)) return false;
+    // Filter by property type - only if a type is selected
+    if (propertyType && propertyType !== 'PROPERTY TYPE') {
+      const propType = String(property.prop_type || property.type || '').toLowerCase().trim();
+      const selectedType = String(propertyType).toLowerCase().trim();
+      if (propType !== selectedType) return false;
+    }
     
-    // Filter by market center
-    if (!filterBy(property, 'MARKET CENTER', marketCenter)) return false;
+    // Filter by market center - only if a market center is selected
+    if (marketCenter && marketCenter !== 'MARKET CENTER') {
+      const propMarketCenter = String(property.market_center || property.center || '').toLowerCase().trim();
+      const selectedMarketCenter = String(marketCenter).toLowerCase().trim();
+      if (propMarketCenter !== selectedMarketCenter) return false;
+    }
     
-    // Filter by property subtype
-    if (!filterBy(property, 'PROPERTY SUBTYPE', propertySubType)) return false;
+    // Filter by property subtype - only if a subtype is selected
+    if (propertySubType && propertySubType !== '') {
+      const propSubType = String(property.prop_subtype || property.property_subtype || property.subtype || '').toLowerCase().trim();
+      const selectedSubType = String(propertySubType).toLowerCase().trim();
+      
+      // Debug logging for property subtype filtering
+      console.log(`Property: ${property.id || 'unknown'}, Subtype: "${propSubType}", Selected: "${selectedSubType}", Match: ${propSubType === selectedSubType}`);
+      
+      if (propSubType !== selectedSubType) return false;
+    }
     
-    // Filter by city
-    if (!filterBy(property, 'CITY', city)) return false;
+    // Filter by city - only if a city is selected
+    if (city && city !== 'CITY') {
+      const cityValues = [
+        property.city,
+        property.region,
+        property.municipality,
+        property.list_address?.city,
+        property.property_address?.city
+      ].filter(val => val != null && val !== undefined).map(val => String(val).toLowerCase().trim());
+      
+      const selectedCity = String(city).toLowerCase().trim();
+      if (!cityValues.some(cityVal => cityVal === selectedCity)) return false;
+    }
     
     return true;
   });
@@ -145,12 +205,36 @@ const Properties = () => {
         marketCenter,
         propertySubType,
         city,
-        price,
+        minPrice,
+        maxPrice,
         totalProperties: properties.length,
         filteredCount: filteredProperties.length
       });
+      
+      // Log when filters are applied
+      if (propertyType !== 'PROPERTY TYPE') {
+        console.log(`Filtering by property type: ${propertyType}`);
+      }
+      if (city !== 'CITY') {
+        console.log(`Filtering by city: ${city}`);
+      }
+      if (propertySubType !== '') {
+        console.log(`Filtering by property subtype: ${propertySubType}`);
+      }
+      
+      // Debug: Log available property subtypes
+      const availableSubtypes = Array.from(
+        new Set(
+          properties.map(
+            (p) => p.prop_subtype || p.property_subtype || p.subtype
+          )
+        )
+      ).filter(Boolean);
+      console.log('Available property subtypes:', availableSubtypes);
     }
-  }, [propertyType, marketCenter, propertySubType, city, price, properties, filteredProperties]);
+  }, [propertyType, marketCenter, propertySubType, city, minPrice, maxPrice, properties, filteredProperties]);
+
+
 
  
   return (
@@ -180,7 +264,12 @@ const Properties = () => {
              {/* Content */}
              <div className={`absolute ${showFilters ? 'bottom-0' : 'bottom-20'}  md:bottom-0 left-0 w-full z-10 flex flex-col items-center text-center text-white py-2 md:py-14 px-4`}>
   {/* Title */}
-  <h2 className="text-3xl font-semibold md:pb-8 pb-4"> {loading ? 'Loading...' : `${properties.length} `} Properties</h2>
+  <h2 className="text-3xl font-semibold md:pb-8 pb-4">
+  {loading
+    ? 'Loading...'
+    : `${filteredProperties.length} Properties`}
+</h2>
+
 
   {/* Line 1 - For Sale + To Rent */}
   <div className="flex md:gap-4 gap-2 md:pb-4 pb-2">
@@ -252,11 +341,19 @@ const Properties = () => {
     </button>
   </div>
 
-  {/* Line 3 - Residential Dropdown */}
+  {/* Line 3 - Property Type Dropdown */}
   <div className="mb-6 w-full max-w-sm">
-  <select className="w-full px-4 py-2 text-black border bg-white border-gray-300 outline-none">
+  <select 
+    className="w-full px-4 py-2 text-black border bg-white border-gray-300 outline-none"
+    value={propertyType === 'PROPERTY TYPE' ? '' : propertyType}
+    onChange={(e) => setPropertyType(e.target.value || 'PROPERTY TYPE')}
+  >
   <option value="">Select Type</option>
-  {[...new Set(properties.map((p) => p.prop_subtype))].map((type, idx) => (
+  {Array.from(
+    new Set(
+      properties.map((p) => p.prop_type)
+    )
+  ).filter(Boolean).map((type, idx) => (
     <option key={idx} value={type}>
       {type}
     </option>
@@ -269,9 +366,15 @@ const Properties = () => {
   <label className="flex justify-start text-base">Location</label>
   <select
     className="w-full bg-white px-4 py-2 text-black outline-none border border-gray-300"
+    value={city === 'CITY' ? '' : city}
+    onChange={(e) => setCity(e.target.value || 'CITY')}
   >
   <option value="">Select Location</option>
-{[...new Set(properties.map((loc) => loc.list_address.city))].map((city, idx) => (
+{Array.from(
+  new Set(
+    properties.map((loc) => loc.list_address?.city)
+  )
+).filter(Boolean).map((city, idx) => (
   <option key={idx} value={city}>
     {city}
   </option>
@@ -337,12 +440,16 @@ const Properties = () => {
   <label className="flex justify-start text-sm font-medium mb-1">
     Type
   </label>
-  <select className="border border-gray-300 p-2 w-full bg-white text-black">
-    <option>No Preference</option>
+  <select 
+    className="border border-gray-300 p-2 w-full bg-white text-black"
+    value={propertySubType}
+    onChange={(e) => setPropertySubType(e.target.value)}
+  >
+    <option value="">No Preference</option>
     {Array.from(
       new Set(
         properties.map(
-          (p) => p.type || p.prop_type || p.property_type || "Other"
+          (p) => p.prop_subtype || p.property_subtype || p.subtype || "Other"
         )
       )
     )
@@ -360,8 +467,12 @@ const Properties = () => {
   <label className="flex justify-start text-sm font-medium mb-1">
     Min Price
   </label>
-  <select className="border border-gray-300 p-2 w-full bg-white text-black">
-    <option>No Preference</option>
+  <select 
+    className="border border-gray-300 p-2 w-full bg-white text-black"
+    value={minPrice}
+    onChange={(e) => setMinPrice(e.target.value)}
+  >
+    <option value="">No Preference</option>
     {Array.from(
       new Set(
         properties.map(
@@ -384,8 +495,12 @@ const Properties = () => {
   <label className="flex justify-start text-sm font-medium mb-1">
     Max Price
   </label>
-  <select className="border border-gray-300 p-2 w-full bg-white text-black">
-    <option>No Preference</option>
+  <select 
+    className="border border-gray-300 p-2 w-full bg-white text-black"
+    value={maxPrice}
+    onChange={(e) => setMaxPrice(e.target.value)}
+  >
+    <option value="">No Preference</option>
     {Array.from(
       new Set(
         properties.map(
@@ -473,13 +588,52 @@ const Properties = () => {
     </div>
       {/* Search button */}
       <div className="text-center">
-        <button className="bg-[rgb(206,32,39,255)] text-white px-8 py-2 text-xl font-semibold hover:bg-red-700">
+        <button
+          className="bg-[rgb(206,32,39,255)] text-white px-8 py-2 text-xl font-semibold hover:bg-red-700"
+          onClick={async () => {
+            setLoading(true);
+            setError(null);
+            try {
+              const body = {
+                limit: 2000,
+              
+              };
+              if (city && city !== 'CITY') body.location = city;
+              if (selected?.sale) body.forsale = true;
+              if (selected?.rent) body.forrent = true;
+              if (selected?.commercial) body.property_type = 'Commercial';
+              if (propertyType && propertyType !== 'PROPERTY TYPE') body.property_category = propertyType;
+              if (propertySubType && propertySubType !== '' && propertySubType !== 'No Preference') body.property_subtype = propertySubType;
+              if (minPrice && minPrice !== '' && minPrice !== 'No Preference') body.min_price = minPrice;
+              if (maxPrice && maxPrice !== '' && maxPrice !== 'No Preference') body.max_price = maxPrice;
+              if (includeNewHomes !== undefined) body.include_new_homes = includeNewHomes;
+              
+              console.log('Selected filters:', selected);
+              console.log('Sending to backend:', body);
+
+              const res = await fetch('https://kw-backend-q6ej.vercel.app/api/listings/list/properties', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+              });
+              const data = await res.json();
+              const fetched = Array.isArray(data?.data) ? data.data : [];
+              setProperties(fetched);
+              console.log('Search filters applied:', body);
+              console.log('Filtered results:', fetched.length);
+            } catch (err) {
+              console.error('Error fetching filtered properties:', err);
+              setError('Failed to load properties');
+            } finally {
+              setLoading(false);
+            }
+          }}
+        >
           Search
         </button>
       
   </div>
 </div>
-
   
     </section>
     
@@ -566,12 +720,14 @@ const Properties = () => {
 
                     <div className="flex flex-col items-center">
                       <span className="relative w-5 h-5">
-                        <Image
-                          src={bathIconUrl}
-                          alt="bath"
-                          fill
-                          className="object-contain invert"
-                        />
+                        <span className="relative w-5 h-5">
+                          <Image
+                            src={bathIconUrl}
+                            alt="bath"
+                            fill
+                            className="object-contain invert"
+                          />
+                        </span>
                       </span>
                       <span className="text-xs mt-1">
                         {property.total_bath ||
@@ -665,17 +821,7 @@ const Properties = () => {
 </div>
 
 
-      {/* <div className="hidden md:flex justify-center py-4 md:py-16">
-        <Image
-          src="/howwillyouthink.png"
-          alt="How Will You Thrive"
-          width={800}
-          height={400}
-          className="w-70 h-20 md:w-[950px] md:h-[400px] object-contain"
-        />
-      </div>
-
-      <hr className="hidden md:block w-6/12 mx-auto bg-[rgb(206,32,39,255)] border-0 h-[1.5px] mt-5 md:mt-20 mb-16" /> */}
+      
     
    
     </div>
@@ -683,5 +829,18 @@ const Properties = () => {
     </div>
   );
 }
+
+// Main component that wraps PropertiesContent in Suspense
+const Properties = () => {
+  return (
+    <Suspense fallback={
+      <div className="flex justify-center items-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-[rgb(206,32,39,255)]"></div>
+      </div>
+    }>
+      <PropertiesContent />
+    </Suspense>
+  );
+};
 
 export default Properties;

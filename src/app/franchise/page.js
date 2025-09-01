@@ -64,7 +64,7 @@ const Franchise = () => {
 
     <hr className="w-32 sm:w-48 md:w-60 lg:w-72 border-0 mx-auto bg-[rgb(206,32,39,255)] h-[2px] mt-6 md:mt-14" />
 
-    <div className="mt-6 sm:mt-10 px-2 sm:px-6 md:px-10">
+    <div className="mt-6 sm:mt-10 px-2 sm:px-6 md:px-34">
       <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-700">
         Our Mission Is To Help You To Build Careers Worth Having, Businesses Worth Owning, 
         Lives Worth Living, Experiences Worth Giving And Legacies Worth Leaving. 

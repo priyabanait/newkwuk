@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
 import { FaTiktok, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
@@ -45,12 +46,12 @@ export default function Home() {
     <div>
       <h3 className="text-black font-semibold mb-3">OUR CULTURE</h3>
       <ul className="space-y-2 text-sm text-gray-700">
-        <li><a href="/aboutus">About Us</a></li>
-        <li><a href="/ourCulture/whyKW">Why KW</a></li>
-        <li><a href="/training">Training</a></li>
-        <li><a href="/ourCulture/technology">Technology</a></li>
-        <li><a href="/ourCulture/news">News</a></li>
-        <li><a href="/ourCulture/events">Events</a></li>
+        <li><Link href="/aboutus">About Us</Link></li>
+        <li><Link href="/ourCulture/whyKW">Why KW</Link></li>
+        <li><Link href="/training">Training</Link></li>
+        <li><Link href="/ourCulture/technology">Technology</Link></li>
+        <li><Link href="/ourCulture/news">News</Link></li>
+        <li><Link href="/ourCulture/events">Events</Link></li>
       </ul>
     </div>
 
@@ -58,9 +59,9 @@ export default function Home() {
     <div>
       <h3 className="text-black font-semibold mb-3">SEARCH</h3>
       <ul className="space-y-2 text-sm text-gray-700">
-        <li><a href="/buyer">Properties</a></li>
-        <li><a href="/agent">Agent</a></li>
-        <li><a href="/marketCenter">Market Center</a></li>
+        <li><Link href="/buyer">Properties</Link></li>
+        <li><Link href="/agent">Agent</Link></li>
+        <li><Link href="/marketCenter">Market Center</Link></li>
         <li>
           <a 
             href="https://www.kw.com/search/sale?viewport=56.41671222773751%2C120.63362495324327%2C-14.684966046563696%2C-6.807781296756721" 
@@ -77,9 +78,9 @@ export default function Home() {
     <div>
       <h3 className="text-black font-semibold mb-3">OTHERS</h3>
       <ul className="space-y-2 text-sm text-gray-700">
-        <li><a href="/contactUs">Contact</a></li>
-        <li><a href="/instantvaluation">Instant Valuation</a></li>
-        <li><a href="/franchise">Open a Franchise</a></li>
+        <li><Link href="/contactUs">Contact</Link></li>
+        <li><Link href="/instantvaluation">Instant Valuation</Link></li>
+        <li><Link href="/franchise">Open a Franchise</Link></li>
       </ul>
     </div>
 
@@ -87,9 +88,9 @@ export default function Home() {
     <div>
       <h3 className="text-black font-semibold mb-3">KNOWLEDGE</h3>
       <ul className="space-y-2 text-sm text-gray-700">
-        <li><a href="/seller/sellerguid">Seller Guide</a></li>
-        <li><a href="/buyer/buyerguid">Buyer Guide</a></li>
-        <li><a href="/seller">Five Steps to Sell</a></li>
+        <li><Link href="/seller/sellerguid">Seller Guide</Link></li>
+        <li><Link href="/buyer/buyerguid">Buyer Guide</Link></li>
+        <li><Link href="/seller">Five Steps to Sell</Link></li>
       </ul>
     </div>
 
@@ -118,9 +119,9 @@ export default function Home() {
           />
         </button>
       </div>
-      <a href='/signinagent' className="w-full flex justify-center bg-white text-[rgb(206,32,39,255)] py-2 text-sm font-medium hover:bg-gray-800 px-4">
+                <Link href='/signinagent' className="w-full flex justify-center bg-white text-[rgb(206,32,39,255)] py-2 text-sm font-medium hover:bg-gray-800 px-4">
         Sign In
-      </a>
+      </Link>
     </div>
   </div>
 
@@ -186,12 +187,12 @@ export default function Home() {
       </button>
       {open === "culture" && (
         <ul className="pl-4 mt-2 text-md space-y-2">
-          <li><a href="/aboutus">About Us</a></li>
-          <li><a href="/ourCulture/whyKW">Why KW</a></li>
-          <li><a href="/training">Training</a></li>
-          <li><a href="/ourCulture/technology">Technology</a></li>
-          <li><a href="/ourCulture/news">News</a></li>
-          <li><a href="/ourCulture/events">Events</a></li>
+          <li><Link href="/aboutus">About Us</Link></li>
+          <li><Link href="/ourCulture/whyKW">Why KW</Link></li>
+          <li><Link href="/training">Training</Link></li>
+          <li><Link href="/ourCulture/technology">Technology</Link></li>
+          <li><Link href="/ourCulture/news">News</Link></li>
+          <li><Link href="/ourCulture/events">Events</Link></li>
         </ul>
       )}
     </div>
@@ -211,9 +212,9 @@ export default function Home() {
       </button>
       {open === "search" && (
         <ul className="pl-4 mt-2  text-md space-y-2">
-          <li><a href="/buyer">Properties</a></li>
-          <li><a href="/agent">Agent</a></li>
-          <li><a href="/marketCenter">Market Center</a></li>
+          <li><Link href="/buyer">Properties</Link></li>
+          <li><Link href="/agent">Agent</Link></li>
+          <li><Link href="/marketCenter">Market Center</Link></li>
           <li>
             <a
               href="https://www.kw.com/search/sale?viewport=56.41671222773751%2C120.63362495324327%2C-14.684966046563696%2C-6.807781296756721"
@@ -242,9 +243,9 @@ export default function Home() {
       </button>
       {open === "others" && (
         <ul className="pl-4 mt-2  text-md space-y-2">
-          <li><a href="/contactUs">Contact</a></li>
-          <li><a href="/instantvaluation">Instant Valuation</a></li>
-          <li><a href="/franchise">Open a Franchise</a></li>
+          <li><Link href="/contactUs">Contact</Link></li>
+          <li><Link href="/instantvaluation">Instant Valuation</Link></li>
+          <li><Link href="/franchise">Open a Franchise</Link></li>
         </ul>
       )}
     </div>
@@ -264,9 +265,9 @@ export default function Home() {
       </button>
       {open === "knowledge" && (
         <ul className="pl-4 mt-2  text-md space-y-2">
-          <li><a href="/seller/sellerguid">Seller Guide</a></li>
-          <li><a href="/buyer/buyerguid">Buyer Guide</a></li>
-          <li><a href="/seller">Five Steps to Sell</a></li>
+          <li><Link href="/seller/sellerguid">Seller Guide</Link></li>
+          <li><Link href="/buyer/buyerguid">Buyer Guide</Link></li>
+          <li><Link href="/seller">Five Steps to Sell</Link></li>
         </ul>
       )}
     </div>
@@ -308,12 +309,12 @@ export default function Home() {
               />
             </button>
           </div>
-          <a
+          <Link
             href="/signinagent"
             className="w-full flex justify-center bg-white text-[rgb(206,32,39,255)] py-2 text-sm font-medium hover:bg-gray-800 px-4"
           >
             Sign In
-          </a>
+          </Link>
         </div>
       )}
     </div>
