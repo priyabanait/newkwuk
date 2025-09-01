@@ -39,3 +39,34 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Large files and archives
+*.rar
+*.zip
+*.tar.gz
+*.7z
+*.iso
+*.dmg
+*.pkg
+
+# Specific large files
+KW-Admin-Backend-master.rar
+KW-Admin-Backend-master/
+
+# Large media files
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.mkv
+*.webm
+
+# Large documents
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
