@@ -170,7 +170,7 @@ const Home = () => {
     const fetchProperties = async () => {
       setLoadingProperties(true);
       try {
-        const response = await axios.post('https://kw-backend-q6ej.vercel.app/api/listings/list/properties', {});
+        const response = await axios.post('https://kwbackend.jc2g.in/api/listings/list/properties', {});
         setProperties(response.data.data || []);
       } catch (error) {
         setProperties([]);
@@ -543,13 +543,13 @@ const Home = () => {
 
     {/* Buttons stay side by side */}
     
-      <button className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-2 py-3 text-base font-normal">
+      <button className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-2 py-3 text-base font-semibold">
         Sale
       </button>
-      <button className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-2 py-3 text-base font-normal ">
+      <button className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-2 py-3 text-base font-semibold ">
         Rent
       </button>
-      <button
+      {/* <button
         className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-2 py-3 text-base font-normal"
         onClick={() =>
           router.push(
@@ -558,7 +558,7 @@ const Home = () => {
         }
       >
         Search
-      </button>
+      </button> */}
  
   </>
 ) : (
@@ -1058,10 +1058,10 @@ we hope to become your go-to property adviser for life. As we are also part of t
 
     {/* Buttons stay side by side */}
     
-      <button className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-2 py-3 text-base font-normal">
+      <button className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-2 py-3 text-base font-semibold">
         Sale
       </button>
-      <button className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-2 py-3 text-base font-normal ">
+      <button className="bg-[rgb(206,32,39,255)] hover:bg-red-950 text-white px-2 py-3 text-base font-semibold ">
         Rent
       </button>
   

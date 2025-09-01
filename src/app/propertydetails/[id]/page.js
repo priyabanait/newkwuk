@@ -264,7 +264,7 @@ export default function PropertyListing() {
       const minPrice = Math.max(0, currentPrice * 0.8);
       const maxPrice = currentPrice * 1.2;
 
-      const response = await fetch('https://kw-backend-q6ej.vercel.app/api/listings/list/properties', {
+      const response = await fetch('https://kwbackend.jc2g.in/api/listings/list/properties', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

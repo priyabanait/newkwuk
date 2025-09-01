@@ -61,7 +61,7 @@ const PropertiesContent = () => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            limit: 2000,
+            limit: 1000,
            
             page: 1,
           
@@ -611,7 +611,7 @@ const PropertiesContent = () => {
               console.log('Selected filters:', selected);
               console.log('Sending to backend:', body);
 
-              const res = await fetch('https://kw-backend-q6ej.vercel.app/api/listings/list/properties', {
+              const res = await fetch('https://kwbackend.jc2g.in/api/listings/list/properties', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(body)

@@ -28,7 +28,7 @@ const AgentProfile = () => {
     async function fetchAgentData() {
       try {
         // You can modify this to fetch a specific agent by slug
-        const agentRes = await fetch('https://kw-backend-q6ej.vercel.app/api/agents/agents');
+        const agentRes = await fetch('https://kwbackend.jc2g.in/api/agents/agents');
         if (agentRes.ok) {
           const agents = await agentRes.json();
           // Find the specific agent (you can modify this logic)
@@ -78,7 +78,7 @@ const AgentProfile = () => {
       setLoading(true);
       setError(null);
       try {
-        const res = await fetch('https://kw-backend-q6ej.vercel.app/api/listings/list/properties', {
+        const res = await fetch('https://kwbackend.jc2g.in/api/listings/list/properties', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

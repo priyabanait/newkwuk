@@ -17,7 +17,7 @@ useEffect(() => {
     setLoadingProperties(true);
     try {
       const response = await axios.post(
-        'https://kw-backend-q6ej.vercel.app/api/listings/list/properties',
+        'https://kwbackend.jc2g.in/api/listings/list/properties',
         {}
       );
 

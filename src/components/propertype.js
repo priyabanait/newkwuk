@@ -378,7 +378,7 @@ import {
             filters.location = location;
           }
 
-          const response = await axios.post('https://kw-backend-q6ej.vercel.app/api/listings/list/properties', filters);
+          const response = await axios.post('https://kwbackend.jc2g.in/api/listings/list/properties', filters);
           if (currentPage === 1) {
             setProperties(response.data.data);
           } else {

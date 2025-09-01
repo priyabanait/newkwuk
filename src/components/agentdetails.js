@@ -54,7 +54,7 @@ const AgentProfile = (props) => {
   //     if (!agent) return;
   //     setLoading(true);
   //     try {
-  //       const res = await fetch('https://kw-backend-q6ej.vercel.app/api/listings/list/properties', {
+  //       const res = await fetch('https://kwbackend.jc2g.in/api/listings/list/properties', {
   //         method: 'POST',
   //         headers: { 'Content-Type': 'application/json' },
   //       });

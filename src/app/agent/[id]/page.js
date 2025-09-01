@@ -222,7 +222,7 @@ const AgentProfile = (props) => {
         }
         
         // If no stored data or no match, fetch from API
-        const agentRes = await fetch(`https://kw-backend-q6ej.vercel.app/api/agents/merge?name=&page=1&limit=100`);
+        const agentRes = await fetch(`https://kwbackend.jc2g.in/api/agents/merge?name=&page=1&limit=100`);
         
         if (agentRes.ok) {
           const agentData = await agentRes.json();
@@ -290,7 +290,7 @@ const AgentProfile = (props) => {
         console.log('Agent kw_id:', agent.kw_id || agent.kwId);
         
         // First try the main properties API endpoint
-        let res = await fetch('http://localhost:5000/api/properties', {
+        let res = await fetch('https://kwbackend.jc2g.in/api/properties', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -754,7 +754,7 @@ const AgentProfile = (props) => {
    
   </div>
 ) : (
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div className="grid grid-cols-1  md:grid-cols-3 gap-6 md:mx-20">
     {filteredProperties.slice(0, visibleCount).map((property, idx) => (
       <div
         key={property._kw_meta?.id || property.id || idx}
